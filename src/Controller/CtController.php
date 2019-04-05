@@ -12,8 +12,14 @@ class CtController extends AbstractController
      */
     public function index()
     {
-        return $this->render('ct/index.html.twig', [
-            'controller_name' => 'CtController',
-        ]);
+        if(!empty($_SESSION['username']))
+        {
+            return $this->render('ct/index.html.twig', [
+                'controller_name' => 'CtController',
+            ]);
+        } else 
+        {
+            return $this->redirectToRoute('app_login');
+        }
     }
 }
