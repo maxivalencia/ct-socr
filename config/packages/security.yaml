@@ -7,6 +7,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
+        in_memory: { memory: ~ }
         app_user_provider:
             entity:
                 class: App\Entity\User
@@ -20,7 +21,17 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+            
+            provider: app_user_provider
 
+            form_login:
+                login_path: app_login
+                check_path: app_login
+
+
+            logout:
+                path: app_logout
+                target: app_login
             # activate different ways to authenticate
 
             # http_basic: true
