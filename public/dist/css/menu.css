@@ -32,7 +32,7 @@
 .kl-titre {
     text-align: center;
     align-content: center;
-    font-size: 50px;
+    font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
@@ -43,4 +43,8 @@
     margin-left: 0px;
     margin-right: 0px;
     max-width: 1280px;
+}
+
+.kl-fond-entete {    
+    background-color: rgb(86, 98, 133);
 }
