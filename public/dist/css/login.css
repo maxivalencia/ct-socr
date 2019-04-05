@@ -1,0 +1,18 @@
+.kl-largeur {
+    width: 614px;
+    align-content: center;
+    background-color: darkgray;
+}
+
+.kl-texte-header {
+    text-align: center;
+    margin: 25px;
+}
+
+.kl-taille-container{
+    width: 614px;
+}
+
+.kl-bouton-droite{
+    text-align: right;
+}
