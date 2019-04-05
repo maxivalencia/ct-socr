@@ -5,14 +5,14 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-3 kl-fond-menu">
                 <img src="dist/images/header.png" class="img-fluid" alt="Image en-tête de la DGSR">
                 <div class="vertical-menu kl-menu">
                     <a href="#">Ajouter Vérificateur</a>
                     <a href="#">Ajouter Véhicule</a>
                     <a href="#">Liste Véhicule</a>
                     <a href="#">Liste Vérificateur</a>
-                    <a href="#">Déconnexion</a>
+                    <a href="{{ path('app_logout') }}">Déconnexion</a>
                 </div>
             </div>            
             

@@ -8,11 +8,18 @@
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
             <link rel="stylesheet" href="dist/css/login.css">
             <link rel="stylesheet" href="dist/css/menu.css">
+            <link rel="stylesheet" href="dist/css/pied.css">
         {% endblock %}
     </head>
     <body>
         <div class="container">
-            {% block body %}{% endblock %}
+            <div class="row">
+                {% block body %}{% endblock %}
+            </div>
+            <hr>
+            <div class="row">
+                <span class="kl-copyright">Copyright © 2019 DGSR.</span>
+            </div>
         </div>
         {% block javascripts %}
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

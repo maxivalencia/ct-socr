@@ -20,5 +20,10 @@
 }
 
 .kl-menu {
+    margin-top: 50px;
     width: 100%;
+}
+
+.kl-fond-menu {
+    background-color: rgb(41, 46, 51);    
 }
