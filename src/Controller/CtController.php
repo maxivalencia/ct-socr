@@ -22,4 +22,18 @@ class CtController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
+    /**
+     * @Route("/", name="ct_base")
+     */
+    public function rediriger()
+    {
+        if(!empty($_SESSION['username']))
+        {
+            return $this->redirectToRoute('ct_homepage');
+        } else 
+        {
+            return $this->redirectToRoute('app_login');
+        }
+    }
 }
