@@ -1,10 +1,13 @@
 .kl-largeur {
     width: 614px;
     align-content: center;
-    background-color: darkgray;
     margin: auto;
     padding: auto;
     margin-top: 50px;
+}
+
+.kl-fond-login {
+    background-color: darkgray;
 }
 
 .kl-texte-header {

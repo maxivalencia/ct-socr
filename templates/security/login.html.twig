@@ -4,10 +4,10 @@
 
 {% block body %}
     <div class="container">
-        <div class="row kl-largeur">
+        <div class="row kl-largeur container-fluid justify-content-center">
             <div class="center-block">
                 <form method="post">
-                    <div class="form-group align-items-center">
+                    <div class="form-group align-items-center kl-fond-login">
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
