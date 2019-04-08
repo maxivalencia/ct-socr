@@ -1,5 +1,5 @@
 .kl-largeur {
-    width: 614px;
+    width: 610px;
     align-content: center;
     margin: auto;
     padding: auto;
@@ -25,4 +25,16 @@
     margin-right: 10px;
     padding-left: auto;
     padding-right: 10px;
+}
+
+.kl-bordure-form {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.kl-bordure-bouton {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
