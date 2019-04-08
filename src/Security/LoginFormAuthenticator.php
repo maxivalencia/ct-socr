@@ -89,6 +89,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         // redirect to some "app_homepage" route - of wherever you want
         $_SESSION['username'] = "user";
+        //$_SESSION['username'] = $this->utilisateur;
         return new RedirectResponse($this->urlGenerator->generate('ct_homepage'));
     }
 
