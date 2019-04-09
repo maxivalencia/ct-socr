@@ -9,12 +9,11 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="row justify-content-center align-items-center kl-sous-titre">
+        <h1>Ajout Nouveau Role</h1>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'H:/socr/ct-socr/src/Controller/RoleController.php'|file_link(0) }}">src/Controller/RoleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'H:/socr/ct-socr/templates/role/index.html.twig'|file_link(0) }}">templates/role/index.html.twig</a></code></li>
-    </ul>
+    {{ form(form) }}
+    
 </div>
 {% endblock %}

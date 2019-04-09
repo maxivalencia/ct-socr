@@ -6,25 +6,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Province;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\ProvinceFormType;
 
 class ProvinceController extends AbstractController
 {
     /**
      * @Route("/province", name="province")
      */
-    public function province()
+    public function province(Request $request)
     {
-        //$entityManager = $this->getDoctrine()->getManager();
+        $province = new Province();
+        $province->setProvince('province');
 
-        //$province = new Province();
-        //$province->setProvince("ANTANANARIVO");
+        $form = $this->createForm(ProvinceFormType::class, $province);
 
-        //$entityManager->persist($province);
+        $form->handleRequest($request);
 
-        //$entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $province = $form->getData();
+            return $this->redirectToRoute('province');
+        }
 
         return $this->render('province/province.html.twig', [
-            'controller_name' => 'ProvinceController',
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -9,12 +9,11 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="row justify-content-center align-items-center kl-sous-titre">
+        <h1>Ajout Nouveau Province</h1>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'H:/socr/ct-socr/src/Controller/ProvinceController.php'|file_link(0) }}">src/Controller/ProvinceController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'H:/socr/ct-socr/templates/province/index.html.twig'|file_link(0) }}">templates/province/index.html.twig</a></code></li>
-    </ul>
+    {{ form(form) }}
+    
 </div>
 {% endblock %}
