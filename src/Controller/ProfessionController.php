@@ -12,7 +12,7 @@ class ProfessionController extends AbstractController
      */
     public function index()
     {
-        return $this->render('profession/index.html.twig', [
+        return $this->render('profession/profession.html.twig', [
             'controller_name' => 'ProfessionController',
         ]);
     }

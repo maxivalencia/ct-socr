@@ -12,7 +12,7 @@ class RoleController extends AbstractController
      */
     public function index()
     {
-        return $this->render('role/index.html.twig', [
+        return $this->render('role/role.html.twig', [
             'controller_name' => 'RoleController',
         ]);
     }

@@ -14,7 +14,7 @@ class CtController extends AbstractController
     {
         if(!empty($_SESSION['username']))
         {
-            return $this->render('ct/index.html.twig', [
+            return $this->render('ct/ct.html.twig', [
                 'controller_name' => 'CtController',
             ]);
         } else 

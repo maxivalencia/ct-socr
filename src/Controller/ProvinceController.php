@@ -14,16 +14,16 @@ class ProvinceController extends AbstractController
      */
     public function province()
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        //$entityManager = $this->getDoctrine()->getManager();
 
-        $province = new Province();
-        $province->setProvince("ANTANANARIVO");
+        //$province = new Province();
+        //$province->setProvince("ANTANANARIVO");
 
-        $entityManager->persist($province);
+        //$entityManager->persist($province);
 
-        $entityManager->flush();
+        //$entityManager->flush();
 
-        return $this->render('province/index.html.twig', [
+        return $this->render('province/province.html.twig', [
             'controller_name' => 'ProvinceController',
         ]);
     }
