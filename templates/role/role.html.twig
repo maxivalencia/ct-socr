@@ -16,23 +16,21 @@
     <div class="container">
         <div class="row container-fluid justify-content-center">
             <div class="center-block">
-                <form method="post">
-                    <div class="form-group align-items-center">
-                        <div class="kl-bordure-form">
+                <form method="post" class="form-inline">
+                    <div class="form-group">
+                        <div class="kl-bordure-form  align-items-center">
                             <span>Role : </span>
                             <label for="inputRole" class="sr-only">Role : </label>
                             <input type="text" value=" " name="role" id="inputRole" class="form-control" placeholder="Role" required autofocus>
+                            <button class="btn btn-lg btn-primary" type="submit">
+                                Ajouter
+                            </button>
                         </div>
-                    </div>
-                    <div class="text-right kl-bordure-bouton">
-                        <button class="btn btn-lg btn-primary" type="submit">
-                            Ajouter
-                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>    
-    
+    <hr>
 </div>
 {% endblock %}
