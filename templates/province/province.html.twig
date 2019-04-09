@@ -13,7 +13,26 @@
         <h1>Ajout Nouveau Province</h1>
     </div>
 
-    {{ form(form) }}
+    <div class="container">
+        <div class="row container-fluid justify-content-center">
+            <div class="center-block">
+                <form method="post">
+                    <div class="form-group align-items-center">
+                        <div class="kl-bordure-form">
+                            <span>Province : </span>
+                            <label for="inputProvince" class="sr-only">Province : </label>
+                            <input type="text" value=" " name="province" id="inputProvince" class="form-control" placeholder="Province" required autofocus>
+                        </div>
+                    </div>
+                    <div class="text-right kl-bordure-bouton">
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            Ajouter
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     
 </div>
 {% endblock %}
