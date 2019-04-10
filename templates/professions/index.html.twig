@@ -1,0 +1,39 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Contrôle Technique - Profession - Vision{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des professions</h1>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Profession</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for profession in professions %}
+                <tr>
+                    <td>{{ profession.id }}</td>
+                    <td>{{ profession.profession }}</td>
+                    <td>
+                        <a href="{{ path('professions_show', {'id': profession.id}) }}">show</a>
+                        <a href="{{ path('professions_edit', {'id': profession.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('professions_new') }}">Create new</a>
+    </div>
+{% endblock %}
