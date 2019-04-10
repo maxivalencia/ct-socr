@@ -4,12 +4,12 @@
 
 {% block contenue %}
     <div class="container">
-        <div class="row">
-            <h1>Create new Professions</h1>
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Ajouter une nouvelle profession</h1>
         </div>
 
         {{ include('professions/_form.html.twig') }}
-
-        <a href="{{ path('professions_index') }}">back to list</a>
+        <br>
+        <a href="{{ path('professions_index') }}" class="btn btn-primary">Retour vers la liste</a>
     </div>
 {% endblock %}

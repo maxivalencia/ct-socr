@@ -1,29 +1,29 @@
 {% extends "ct/ct.html.twig" %}
 
-{% block title %}Contrôle Technique - Profession - Vision{% endblock %}
+{% block title %}Contrôle Technique - Role - Vision{% endblock %}
 
 {% block contenue %}
     <div class="container">
         <div class="row justify-content-center align-items-center kl-sous-titre">
-            <h1>Liste des professions</h1>
+            <h1>Liste des roles</h1>
         </div>
 
         <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Profession</th>
+                    <th>Role</th>
                     <th>actions</th>
                 </tr>
             </thead>
             <tbody>
-            {% for profession in professions %}
+            {% for role in roles %}
                 <tr>
-                    <td>{{ profession.id }}</td>
-                    <td>{{ profession.profession }}</td>
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.role }}</td>
                     <td>
-                        <a href="{{ path('professions_show', {'id': profession.id}) }}" class="btn btn-success">Voir</a>
-                        <a href="{{ path('professions_edit', {'id': profession.id}) }}" class="btn btn-danger">Modifier</a>
+                        <a href="{{ path('roles_show', {'id': role.id}) }}" class="btn btn-success">Voir</a>
+                        <a href="{{ path('roles_edit', {'id': role.id}) }}" class="btn btn-danger">Modifier</a>
                     </td>
                 </tr>
             {% else %}
@@ -34,6 +34,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('professions_new') }}" class="btn btn-primary">Ajouter une nouvelle profession</a>
+        <a href="{{ path('roles_new') }}" class="btn btn-primary">Ajouter un nouveau role</a>
     </div>
 {% endblock %}
