@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProvincesController extends AbstractController
 {
     /**
-     * @Route("/provinces/", name="provinces_index", methods={"GET"})
+     * @Route("/", name="provinces_index", methods={"GET"})
      */
     public function index(ProvincesRepository $provincesRepository): Response
     {
@@ -26,7 +26,7 @@ class ProvincesController extends AbstractController
     }
 
     /**
-     * @Route("/provinces/new", name="provinces_new", methods={"GET","POST"})
+     * @Route("/new", name="provinces_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class ProvincesController extends AbstractController
     }
 
     /**
-     * @Route("/provinces/{id}", name="provinces_show", methods={"GET"})
+     * @Route("/{id}", name="provinces_show", methods={"GET"})
      */
     public function show(Provinces $province): Response
     {
@@ -59,7 +59,7 @@ class ProvincesController extends AbstractController
     }
 
     /**
-     * @Route("/provinces/{id}/edit", name="provinces_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="provinces_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Provinces $province): Response
     {
@@ -81,7 +81,7 @@ class ProvincesController extends AbstractController
     }
 
     /**
-     * @Route("/provinces/{id}", name="provinces_delete", methods={"DELETE"})
+     * @Route("/{id}", name="provinces_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Provinces $province): Response
     {
