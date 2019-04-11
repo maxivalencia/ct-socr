@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centres{% endblock %}
+
+{% block body %}
+    <h1>Centres</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ centre.id }}</td>
+            </tr>
+            <tr>
+                <th>Centre</th>
+                <td>{{ centre.centre }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ centre.code }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('centres_index') }}">back to list</a>
+
+    <a href="{{ path('centres_edit', {'id': centre.id}) }}">edit</a>
+
+    {{ include('centres/_delete_form.html.twig') }}
+{% endblock %}
