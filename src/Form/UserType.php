@@ -18,6 +18,8 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('date_inscription')
+            ->add('profession')
+            ->add('centre')
         ;
     }
 
