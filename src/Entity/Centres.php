@@ -72,4 +72,13 @@ class Centres
 
         return $this;
     }
+
+    /**
+    * toString
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->getCentre();
+    }
 }
