@@ -28,12 +28,12 @@ class Provinces
 
     public function getProvince(): ?string
     {
-        return $this->province;
+        return strtoupper($this->province);
     }
 
     public function setProvince(string $province): self
     {
-        $this->province = $province;
+        $this->province = strtoupper($province);
 
         return $this;
     }

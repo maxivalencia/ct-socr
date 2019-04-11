@@ -27,6 +27,7 @@ class UserFixtures extends Fixture
             $user,
             'sitadmin19'
         ));
+        $user->setRoles(['ROLE_SUPER_ADMIN']);
 
         $manager->persist($user);
 

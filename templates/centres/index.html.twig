@@ -1,37 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends "ct/ct.html.twig" %}
 
-{% block title %}Centres index{% endblock %}
+{% block title %}Contrôle Technique - Profession - Vision{% endblock %}
 
-{% block body %}
-    <h1>Centres index</h1>
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des centres</h1>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Centre</th>
-                <th>Code</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for centre in centres %}
-            <tr>
-                <td>{{ centre.id }}</td>
-                <td>{{ centre.centre }}</td>
-                <td>{{ centre.code }}</td>
-                <td>
-                    <a href="{{ path('centres_show', {'id': centre.id}) }}">show</a>
-                    <a href="{{ path('centres_edit', {'id': centre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Centre</th>
+                    <th>Code</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for centre in centres %}
+                <tr>
+                    <td>{{ centre.id }}</td>
+                    <td>{{ centre.centre }}</td>
+                    <td>{{ centre.code }}</td>
+                    <td>
+                        <a href="{{ path('centres_show', {'id': centre.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i> Voir</a>
+                        <a href="{{ path('centres_edit', {'id': centre.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('centres_new') }}">Create new</a>
+        <a href="{{ path('centres_new') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau centre</a>
+    </div>
 {% endblock %}

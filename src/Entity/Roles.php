@@ -28,13 +28,22 @@ class Roles
 
     public function getRole(): ?string
     {
-        return $this->role;
+        return strtoupper($this->role);
     }
 
     public function setRole(string $role): self
     {
-        $this->role = $role;
+        $this->role = strtoupper($role);
 
         return $this;
+    }
+
+    /**
+    * toString
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->getRole();
     }
 }

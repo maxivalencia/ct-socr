@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,13 +30,22 @@ class Professions
 
     public function getProfession(): ?string
     {
-        return $this->profession;
+        return strtoupper($this->profession);
     }
 
     public function setProfession(string $profession): self
     {
-        $this->profession = $profession;
+        $this->profession = strtoupper($profession);
 
         return $this;
+    }
+
+    /**
+    * toString
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->getProfession();
     }
 }

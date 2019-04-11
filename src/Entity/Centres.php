@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,24 +41,24 @@ class Centres
 
     public function getCentre(): ?string
     {
-        return $this->centre;
+        return strtoupper($this->centre);
     }
 
     public function setCentre(string $centre): self
     {
-        $this->centre = $centre;
+        $this->centre = strtoupper($centre);
 
         return $this;
     }
 
     public function getCode(): ?string
     {
-        return $this->code;
+        return strtoupper($this->code);
     }
 
     public function setCode(string $code): self
     {
-        $this->code = $code;
+        $this->code = strtoupper($code);
 
         return $this;
     }
@@ -81,4 +83,5 @@ class Centres
     {
         return $this->getCentre();
     }
+
 }
