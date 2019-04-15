@@ -1,17 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends "ct/ct.html.twig" %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Contrôle Technique - User - Vision{% endblock %}
 
-{% block body %}
-    <h1>User index</h1>
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des utilisateurs</h1>
+        </div>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Username</th>
-                <th>Roles</th>
-                <th>Password</th>
+                <th>Role</th>
+                <th>Profession</th>
+                <th>Centre</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Date_inscription</th>
@@ -23,23 +27,25 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.profession }}</td>
+                <td>{{ user.centre }}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.dateInscription ? user.dateInscription|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i> Voir</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucun enregistrement trouver</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a href="{{ path('user_new') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un utilisateur</a>
+    </div>
 {% endblock %}

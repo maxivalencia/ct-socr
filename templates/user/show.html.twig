@@ -1,46 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends "ct/ct.html.twig" %}
 
-{% block title %}User{% endblock %}
+{% block title %}Contrôle Technique - User - Details{% endblock %}
 
-{% block body %}
-    <h1>User</h1>
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Utilisateur</h1>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Date_inscription</th>
-                <td>{{ user.dateInscription ? user.dateInscription|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Role</th>
+                    <td>{{ user.role }}</td>
+                </tr>
+                <tr>
+                    <th>Profession</th>
+                    <td>{{ user.profession }}</td>
+                </tr>
+                <tr>
+                    <th>Centre</th>
+                    <td>{{ user.centre }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prenom</th>
+                    <td>{{ user.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Date_inscription</th>
+                    <td>{{ user.dateInscription ? user.dateInscription|date('Y-m-d') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+        <a href="{{ path('user_index') }}" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+        <br><br>
+        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+        <br><br>
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
