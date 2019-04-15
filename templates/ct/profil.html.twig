@@ -1,0 +1,35 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Contrôle Technique - Profession - Vision{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Profil de l'utilisateur actuel</h1>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <td>{{ app.user.id }}</td>
+            </tr><tr>
+                <th>Username</th>
+                <td>{{ app.user.username }}</td>
+            </tr><tr>
+                <th>Role</th>
+                <td>{{ app.user.role }}</td>
+            </tr><tr>
+                <th>Profession</th>
+                <td>{{ app.user.profession }}</td>
+            </tr><tr>
+                <th>Centre</th>
+                <td>{{ app.user.centre }}</td>
+            </tr><tr>
+                <th>Nom</th>
+                <td>{{ app.user.nom }}</td>
+            </tr><tr>
+                <th>Prenom</th>
+                <td>{{ app.user.prenom }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
