@@ -20,6 +20,7 @@ class UserType extends AbstractType
             //->add('date_inscription')
             ->add('profession')
             ->add('centre')
+            ->add('role')
         ;
     }
 

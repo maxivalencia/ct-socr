@@ -64,6 +64,11 @@ class User implements UserInterface
      */
     private $centre;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Roles", inversedBy="users")
+     */
+    private $role;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -201,6 +206,18 @@ class User implements UserInterface
     public function setCentre(?Centres $centre): self
     {
         $this->centre = $centre;
+
+        return $this;
+    }
+
+    public function getRole(): ?Roles
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Roles $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
