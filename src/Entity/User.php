@@ -93,14 +93,16 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        //$roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_USER';
 
-        //return array_unique($roles);
-        return array_unique(array_merge(['ROLE_USER'], $this->roles));
+        return array_unique($roles);
+        //return array_unique(array_merge(['ROLE_USER'], $this->roles));
     }
 
     public function setRoles(array $roles): self
     {
+        //resetRoles();
+        //$role1 = "[\"".roles."\"]";
         $this->roles = $roles;
 
         return $this;
