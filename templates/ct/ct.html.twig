@@ -5,23 +5,25 @@
 {% block body %}
     <div class="container kl-ajustement kl-largeur-ecran mw-100">
         <div class="row">
-            <div class="col-3 kl-fond-menu">
+            <div class="col-2 kl-fond-menu">
                 <img src="/dist/images/header.png" class="img-fluid" alt="Image en-tête de la DGSR">
                 <div class="vertical-menu kl-menu">
                     <a href="#" class="active">Tableau de bord : {{ app.user.username }}</a>
                     <a href="{{ path('ct_profil') }}"><span class="fa fa-user"></span> Profil</a>
                     <a href="#"><span class="fa fa-car"></span> Ajouter Véhicule</a>
                     <a href="#"><span class="fa fa-bus"></span> Liste Véhicule</a>
-                    <a href="{{ path('user_index') }}"><span class="fa fa-users"></span> Utilisateur</a>
-                    <a href="{{ path('centres_index') }}"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Centre</a>
-                    <a href="{{ path('provinces_index') }}"><span class="fa fa-area-chart"></span> Province </a>
-                    <a href="{{ path('professions_index') }}"><span class="fa fa-graduation-cap"></span> Profession </a>
-                    <a href="{{ path('roles_index') }}"><span class="fa fa-university"></span> Role </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('user_index') }}"><span class="fa fa-users"></span> Utilisateur</a>
+                        <a href="{{ path('centres_index') }}"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Centre</a>
+                        <a href="{{ path('provinces_index') }}"><span class="fa fa-area-chart"></span> Province </a>
+                        <a href="{{ path('professions_index') }}"><span class="fa fa-graduation-cap"></span> Profession </a>
+                        <a href="{{ path('roles_index') }}"><span class="fa fa-university"></span> Role </a>
+                    {% endif %}
                     <a href="{{ path('app_logout') }}"><span class="fa fa-sign-out"></span> Déconnexion</a>
                 </div>
             </div>            
             
-            <div class="col-9">
+            <div class="col-10">
                 <div class="row kl-fond-entete justify-content-center align-items-center">
                     <div class="kl-titre">
                         <div class="kl-titre mb-3 font-weight-normal justify-content-center align-items-center">Contrôle Technique</div>
