@@ -1,18 +1,18 @@
 {% extends "ct/ct.html.twig" %}
 
-{% block title %}Contrôle Technique - Role - Vision{% endblock %}
+{% block title %}Rôle - Vision{% endblock %}
 
 {% block contenue %}
     <div class="container">
         <div class="row justify-content-center align-items-center kl-sous-titre">
-            <h1>Liste des roles</h1>
+            <h1>Liste des rôles</h1>
         </div>
 
         <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Role</th>
+                    <th>Rôle</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -22,8 +22,8 @@
                     <td>{{ role.id }}</td>
                     <td>{{ role.role }}</td>
                     <td>
-                        <a href="{{ path('roles_show', {'id': role.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i> Voir</a>
-                        <a href="{{ path('roles_edit', {'id': role.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+                        <a href="{{ path('roles_show', {'id': role.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
+                        <a href="{{ path('roles_edit', {'id': role.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             {% else %}
@@ -34,6 +34,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('roles_new') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau role</a>
+        <a href="{{ path('roles_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un rôle</a>
     </div>
 {% endblock %}

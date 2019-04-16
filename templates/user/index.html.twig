@@ -34,8 +34,8 @@
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.dateInscription ? user.dateInscription|date('Y-m-d') : '' }}</td>
                     <td>
-                        <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i> Voir</a>
-                        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+                        <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
+                        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             {% else %}
@@ -46,6 +46,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('user_new') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un utilisateur</a>
+        <a href="{{ path('user_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un utilisateur</a>
     </div>
 {% endblock %}

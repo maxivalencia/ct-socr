@@ -1,6 +1,6 @@
 {% extends "ct/ct.html.twig" %}
 
-{% block title %}Contrôle Technique - Role - Nouveau{% endblock %}
+{% block title %}Rôle - Nouveau{% endblock %}
 
 {% block contenue %}
     <div class="container">
@@ -10,6 +10,6 @@
 
         {{ include('roles/_form.html.twig') }}
         <br>
-        <a href="{{ path('roles_index') }}" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+        <a href="{{ path('roles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
     </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "ct/ct.html.twig" %}
 
-{% block title %}Contrôle Technique - Role - Edition{% endblock %}
+{% block title %}Rôle - Edition{% endblock %}
 
 {% block contenue %}
     <div class="container">
@@ -10,7 +10,7 @@
         <br>
         {{ include('roles/_form.html.twig', {'button_label': 'Modifier'}) }}
         <br>
-        <a href="{{ path('roles_index') }}" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour ver la liste</a>
+        <a href="{{ path('roles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour ver la liste</a>
         <br><br>
         {{ include('roles/_delete_form.html.twig') }}
     </div>
