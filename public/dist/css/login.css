@@ -1,9 +1,8 @@
 .kl-largeur {
     width: 615px;
     align-content: center;
-    margin: auto;
-    padding: auto;
-    margin-top: 50px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .kl-fond-login {
