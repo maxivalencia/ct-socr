@@ -69,6 +69,16 @@ class User implements UserInterface
      */
     private $role;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Controles", mappedBy="verificateur")
+     */
+    private $controles;
+
+    public function __construct()
+    {
+        $this->controles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -220,5 +230,45 @@ class User implements UserInterface
         $this->role = $role;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Controles[]
+     */
+    public function getControles(): Collection
+    {
+        return $this->controles;
+    }
+
+    public function addControle(Controles $controle): self
+    {
+        if (!$this->controles->contains($controle)) {
+            $this->controles[] = $controle;
+            $controle->setVerificateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControle(Controles $controle): self
+    {
+        if ($this->controles->contains($controle)) {
+            $this->controles->removeElement($controle);
+            // set the owning side to null (unless already changed)
+            if ($controle->getVerificateur() === $this) {
+                $controle->setVerificateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+    * toString
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->getNom().''.$this->getPrenom();
     }
 }

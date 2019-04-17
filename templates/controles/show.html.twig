@@ -1,0 +1,74 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Controles - Details{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Controles</h1>
+        </div>
+
+        <table class="table">
+            <tbody>
+                <!--<tr>
+                    <th>Id</th>
+                    <td>{{ controle.id }}</td>
+                </tr>-->
+                <tr>
+                    <th>Immatriculation du véhicule</th>
+                    <td>{{ controle.Immatriculation }}</td>
+                </tr>
+                <tr>
+                    <th>Usage effectif</th>
+                    <td>{{ controle.Usages }}</td>
+                </tr>
+                <tr>
+                    <th>Numéro d'enregistrement à la visite</th>
+                    <td>{{ controle.Enregistrement }}</td>
+                </tr>
+                <tr>
+                    <th>Nom du vérificateur</th>
+                    <td>{{ controle.verificateur }}</td>
+                </tr>
+                <tr>
+                    <th>CENSERO ayant effectué la dernière visite</th>
+                    <td>{{ controle.centre }}</td>
+                </tr>
+                <tr>
+                    <th>Nom du propriétaire</th>
+                    <td>{{ controle.proprietaire }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse du propriétaire</th>
+                    <td>{{ controle.adresse }}</td>
+                </tr>
+                <tr>
+                    <th>Telephone du propriétaire</th>
+                    <td>{{ controle.telephone }}</td>
+                </tr>
+                <tr>
+                    <th>Anomalies constatées</th>
+                    <td>{{ controle.anomalies }}</td>
+                </tr>
+                <tr>
+                    <th>Date expiration de visite technique</th>
+                    <td>{{ controle.dateExpiration ? controle.dateExpiration|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Papiers retirés</th>
+                    <td>{{ controle.papiersRetirers ? 'Oui' : 'Non' }}</td>
+                </tr>
+                <tr>
+                    <th>Date du contrôle</th>
+                    <td>{{ controle.CreatedAt ? controle.CreatedAt|date('Y-m-d') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('controles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+        <br><br>
+        <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+        <br><br>
+        {{ include('controles/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

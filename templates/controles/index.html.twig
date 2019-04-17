@@ -1,0 +1,55 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Controles - Vision{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des Controles</h1>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <!--<th>Id</th>-->
+                    <th>Immatriculation du véhicule</th>
+                    <th>Usage effectif</th>
+                    <th>N° enregistrement à la visite</th>                    
+                    <th>Nom du vérificateur</th>
+                    <th>CENSERO ayant effectué la dernière visite</th>
+                    <th>Nom et Adresse du propriétaire et numéro de téléphone</th>
+                    <th>Anomalies constatées</th>
+                    <th>Date expiration de visite technique</th>
+                    <th>Papiers retirés</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for controle in controles %}
+                <tr>
+                    <!--<td>{{ controle.id }}</td>-->
+                    <td>{{ controle.Immatriculation }}</td>
+                    <td>{{ controle.Usages }}</td>
+                    <td>{{ controle.Enregistrement }}</td>
+                    <td>{{ controle.verificateur }}</td>
+                    <td>{{ controle.centre }}</td>
+                    <td>{{ controle.proprietaire }}<br>{{ controle.adresse }}<br>{{ controle.telephone }}</td>
+                    <td>{{ controle.anomalies }}</td>
+                    <td>{{ controle.dateExpiration ? controle.dateExpiration|date('Y-m-d') : '' }}</td>
+                    <td>{{ controle.papiersRetirers ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        <a href="{{ path('controles_show', {'id': controle.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
+                        <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('controles_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un contrôle</a>
+    </div>
+{% endblock %}

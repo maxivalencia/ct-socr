@@ -10,8 +10,8 @@
                 <div class="vertical-menu kl-menu">
                     <a href="#" class="active">Tableau de bord : {{ app.user.username }}</a>
                     <a href="{{ path('ct_profil') }}"><span class="fa fa-user"></span> Profil</a>
-                    <a href="#"><span class="fa fa-car"></span> Ajouter Véhicule</a>
-                    <a href="#"><span class="fa fa-bus"></span> Liste Véhicule</a>
+                    <a href="{{ path('controles_new') }}"><span class="fa fa-car"></span> Ajouter Véhicule</a>
+                    <a href="{{ path('controles_index') }}"><span class="fa fa-bus"></span> Liste Véhicule</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('user_index') }}"><span class="fa fa-users"></span> Utilisateur</a>
                         <a href="{{ path('centres_index') }}"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Centre</a>

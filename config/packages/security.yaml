@@ -50,10 +50,12 @@ security:
         - { path: ^/roles, roles: ROLE_ADMIN }
         - { path: ^/centres, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/utilisations, roles: ROLE_ADMIN }
+        - { path: ^/controles, roles: ROLE_SECRETAIRE }
+        - { path: ^/profil, roles: ROLE_SECRETAIRE }
 
     role_hierarchy:
         ROLE_SECRETAIRE: ROLE_USER
-        ROLE_VERIFICATEUR: [ROLE_SECRETAIRE, ROLE_ALLOWED_TO_SWITCH]
-        ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_VERIFICATEUR: ROLE_SECRETAIRE
+        ROLE_ADMIN: ROLE_VERIFICATEUR
         ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

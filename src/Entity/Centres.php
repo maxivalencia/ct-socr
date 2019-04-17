@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 //use Doctrine\Common\Collections\ArrayCollection;
 //use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -33,6 +35,16 @@ class Centres
      * @ORM\JoinColumn(nullable=false)
      */
     private $province;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Controles", mappedBy="centre")
+     */
+    private $controles;
+
+    public function __construct()
+    {
+        $this->controles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,6 +94,37 @@ class Centres
     public function __toString()
     {
         return $this->getCode();
+    }
+
+    /**
+     * @return Collection|Controles[]
+     */
+    public function getControles(): Collection
+    {
+        return $this->controles;
+    }
+
+    public function addControle(Controles $controle): self
+    {
+        if (!$this->controles->contains($controle)) {
+            $this->controles[] = $controle;
+            $controle->setCentre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControle(Controles $controle): self
+    {
+        if ($this->controles->contains($controle)) {
+            $this->controles->removeElement($controle);
+            // set the owning side to null (unless already changed)
+            if ($controle->getCentre() === $this) {
+                $controle->setCentre(null);
+            }
+        }
+
+        return $this;
     }
 
 }

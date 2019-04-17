@@ -1,0 +1,227 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ControlesRepository")
+ */
+class Controles
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Immatriculation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisations", inversedBy="controles")
+     */
+    private $usages;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Enregistrement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="controles")
+     */
+    private $verificateur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Centres", inversedBy="controles")
+     */
+    private $centre;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $proprietaire;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $anomalies;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_expiration;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $papiers_retirers;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $CreatedAt;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getImmatriculation(): ?string
+    {
+        return $this->Immatriculation;
+    }
+
+    public function setImmatriculation(string $Immatriculation): self
+    {
+        $this->Immatriculation = $Immatriculation;
+
+        return $this;
+    }
+
+    public function getUsages(): ?Utilisations
+    {
+        return $this->usages;
+    }
+
+    public function setUsages(?Utilisations $usages): self
+    {
+        $this->usages = $usages;
+
+        return $this;
+    }
+
+    public function getEnregistrement(): ?string
+    {
+        return $this->Enregistrement;
+    }
+
+    public function setEnregistrement(string $Enregistrement): self
+    {
+        $this->Enregistrement = $Enregistrement;
+
+        return $this;
+    }
+
+    public function getVerificateur(): ?User
+    {
+        return $this->verificateur;
+    }
+
+    public function setVerificateur(?User $verificateur): self
+    {
+        $this->verificateur = $verificateur;
+
+        return $this;
+    }
+
+    public function getCentre(): ?Centres
+    {
+        return $this->centre;
+    }
+
+    public function setCentre(?Centres $centre): self
+    {
+        $this->centre = $centre;
+
+        return $this;
+    }
+
+    public function getProprietaire(): ?string
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(string $proprietaire): self
+    {
+        $this->proprietaire = $proprietaire;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getAnomalies(): ?string
+    {
+        return $this->anomalies;
+    }
+
+    public function setAnomalies(string $anomalies): self
+    {
+        $this->anomalies = $anomalies;
+
+        return $this;
+    }
+
+    public function getDateExpiration(): ?\DateTimeInterface
+    {
+        return $this->date_expiration;
+    }
+
+    public function setDateExpiration(\DateTimeInterface $date_expiration): self
+    {
+        $this->date_expiration = $date_expiration;
+
+        return $this;
+    }
+
+    public function getPapiersRetirers(): ?bool
+    {
+        return $this->papiers_retirers;
+    }
+
+    public function setPapiersRetirers(bool $papiers_retirers): self
+    {
+        $this->papiers_retirers = $papiers_retirers;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+}
