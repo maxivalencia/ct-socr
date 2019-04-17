@@ -69,6 +69,8 @@
         <br><br>
         <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
         <br><br>
-        {{ include('controles/_delete_form.html.twig') }}
+        {% if is_granted('ROLE_ADMIN') %}
+            {{ include('controles/_delete_form.html.twig') }}
+        {% endif %}
     </div>
 {% endblock %}

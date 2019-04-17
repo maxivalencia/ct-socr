@@ -10,7 +10,9 @@
         <br>
         {{ include('controles/_form.html.twig', {'button_label': 'Enregistrer'}) }}
         <br>
-        <a href="{{ path('controles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('controles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+        {% endif %}
         <br><br>
         {{ include('controles/_delete_form.html.twig') }}
     </div>
