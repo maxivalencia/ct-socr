@@ -18,11 +18,19 @@ class ControlesController extends AbstractController
     /**
      * @Route("/", name="controles_index", methods={"GET"})
      */
-    public function index(ControlesRepository $controlesRepository): Response
+    public function index(ControlesRepository $controlesRepository, Request $request): Response
     {
-        return $this->render('controles/index.html.twig', [
-            'controles' => $controlesRepository->findAll(),
-        ]);
+        $recherche = $request->query->get('recherche');
+        if($recherche){
+            return $this->render('controles/index.html.twig', [
+                'controles' => $controlesRepository->findBy(['Immatriculation' => $recherche]),
+            ]);
+        }
+        else{
+            return $this->render('controles/index.html.twig', [
+                'controles' => $controlesRepository->findAll(),
+            ]);
+        }
     }
 
     /**
