@@ -1,0 +1,39 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Utilisations - Vision{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des Utilisations</h1>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Utilisation</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for utilisation in utilisations %}
+                <tr>
+                    <td>{{ utilisation.id }}</td>
+                    <td>{{ utilisation.utilisation }}</td>
+                    <td>
+                        <a href="{{ path('utilisations_show', {'id': utilisation.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
+                        <a href="{{ path('utilisations_edit', {'id': utilisation.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('utilisations_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter une utilisation</a>
+    </div>
+{% endblock %}
