@@ -47,9 +47,13 @@
                     <td>{{ controle.verificateur }}</td>
                     <td>{{ controle.centre }}</td>
                     <td>{{ controle.proprietaire }}<br>{{ controle.adresse }}<br>{{ controle.telephone }}</td>
-                    <td>{{ controle.anomalies }}</td>
+                    <td>
+                        {% for anomalie in controle.anomalies_collections %}
+                            {{ anomalie.anomalie }}
+                        {% endfor %}
+                    </td>
                     <td>{{ controle.dateExpiration ? controle.dateExpiration|date('Y-m-d') : '' }}</td>
-                    <td>{{ controle.papiersRetirers ? 'Oui' : 'Non' }}</td>
+                    <td>{{ controle.papiers_collection }}</td>
                     <td>
                         <a href="{{ path('controles_show', {'id': controle.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
                         <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

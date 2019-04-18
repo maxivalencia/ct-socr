@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -75,6 +77,32 @@ class Controles
      * @ORM\Column(type="date")
      */
     private $CreatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="controleajout")
+     */
+    private $ajouteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="controlesretire")
+     */
+    private $retireur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Anomalies", inversedBy="controles")
+     */
+    private $anomalies_collections;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Papiers", inversedBy="controles")
+     */
+    private $papiers_collection;
+
+    public function __construct()
+    {
+        $this->anomalies_collections = new ArrayCollection();
+        $this->papiers_collection = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -221,6 +249,82 @@ class Controles
     public function setCreatedAt(\DateTimeInterface $CreatedAt): self
     {
         $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    public function getAjouteur(): ?User
+    {
+        return $this->ajouteur;
+    }
+
+    public function setAjouteur(?User $ajouteur): self
+    {
+        $this->ajouteur = $ajouteur;
+
+        return $this;
+    }
+
+    public function getRetireur(): ?User
+    {
+        return $this->retireur;
+    }
+
+    public function setRetireur(?User $retireur): self
+    {
+        $this->retireur = $retireur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Anomalies[]
+     */
+    public function getAnomaliesCollections(): Collection
+    {
+        return $this->anomalies_collections;
+    }
+
+    public function addAnomaliesCollection(Anomalies $anomaliesCollection): self
+    {
+        if (!$this->anomalies_collections->contains($anomaliesCollection)) {
+            $this->anomalies_collections[] = $anomaliesCollection;
+        }
+
+        return $this;
+    }
+
+    public function removeAnomaliesCollection(Anomalies $anomaliesCollection): self
+    {
+        if ($this->anomalies_collections->contains($anomaliesCollection)) {
+            $this->anomalies_collections->removeElement($anomaliesCollection);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Papiers[]
+     */
+    public function getPapiersCollection(): Collection
+    {
+        return $this->papiers_collection;
+    }
+
+    public function addPapiersCollection(Papiers $papiersCollection): self
+    {
+        if (!$this->papiers_collection->contains($papiersCollection)) {
+            $this->papiers_collection[] = $papiersCollection;
+        }
+
+        return $this;
+    }
+
+    public function removePapiersCollection(Papiers $papiersCollection): self
+    {
+        if ($this->papiers_collection->contains($papiersCollection)) {
+            $this->papiers_collection->removeElement($papiersCollection);
+        }
 
         return $this;
     }

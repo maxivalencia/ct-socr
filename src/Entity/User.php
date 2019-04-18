@@ -74,9 +74,21 @@ class User implements UserInterface
      */
     private $controles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Controles", mappedBy="retireur")
+     */
+    private $controleajout;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Controles", mappedBy="retireur")
+     */
+    private $controlesretire;
+
     public function __construct()
     {
         $this->controles = new ArrayCollection();
+        $this->controleajout = new ArrayCollection();
+        $this->controlesretire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -270,5 +282,67 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getNom().' '.$this->getPrenom();
+    }
+
+    /**
+     * @return Collection|Controles[]
+     */
+    public function getControleajout(): Collection
+    {
+        return $this->controleajout;
+    }
+
+    public function addControleajout(Controles $controleajout): self
+    {
+        if (!$this->controleajout->contains($controleajout)) {
+            $this->controleajout[] = $controleajout;
+            $controleajout->setRetireur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControleajout(Controles $controleajout): self
+    {
+        if ($this->controleajout->contains($controleajout)) {
+            $this->controleajout->removeElement($controleajout);
+            // set the owning side to null (unless already changed)
+            if ($controleajout->getRetireur() === $this) {
+                $controleajout->setRetireur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Controles[]
+     */
+    public function getControlesretire(): Collection
+    {
+        return $this->controlesretire;
+    }
+
+    public function addControlesretire(Controles $controlesretire): self
+    {
+        if (!$this->controlesretire->contains($controlesretire)) {
+            $this->controlesretire[] = $controlesretire;
+            $controlesretire->setRetireur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControlesretire(Controles $controlesretire): self
+    {
+        if ($this->controlesretire->contains($controlesretire)) {
+            $this->controlesretire->removeElement($controlesretire);
+            // set the owning side to null (unless already changed)
+            if ($controlesretire->getRetireur() === $this) {
+                $controlesretire->setRetireur(null);
+            }
+        }
+
+        return $this;
     }
 }

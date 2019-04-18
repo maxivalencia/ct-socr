@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Controles;
 use App\Form\ControlesType;
 use App\Repository\ControlesRepository;
+use App\Repository\AnomaliesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,7 @@ class ControlesController extends AbstractController
     /**
      * @Route("/", name="controles_index", methods={"GET"})
      */
-    public function index(ControlesRepository $controlesRepository, Request $request): Response
+    public function index(AnomaliesRepository $anomaliesRepository, ControlesRepository $controlesRepository, Request $request): Response
     {
         $recherche = $request->query->get('recherche');
         if($recherche){
@@ -29,6 +30,7 @@ class ControlesController extends AbstractController
         else{
             return $this->render('controles/index.html.twig', [
                 'controles' => $controlesRepository->findAll(),
+                //'anomaliescol' => $anomaliesRepository->findABy('id' => ),
             ]);
         }
     }

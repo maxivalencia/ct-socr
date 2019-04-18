@@ -26,9 +26,11 @@ class ControlesType extends AbstractType
             ->add('proprietaire', TextType::class, ['label' => 'Nom du prorpiétaire'])
             ->add('adresse', TextType::class, ['label' => 'Adresse du propriétaire'])
             ->add('telephone', TextType::class, ['label' => 'Téléphone du propriétaire'])
-            ->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
+            //->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
             ->add('date_expiration', DateType::class, ['label' => 'Date expiration de visite technique'])
-            ->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
+            //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
+            ->add('anomalies_collections', null, ['label' => 'Anomalies'])
+            ->add('papiers_collection', null, ['label' => 'Papiers'])
             //->add('CreatedAt')
         ;
     }

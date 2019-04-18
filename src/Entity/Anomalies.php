@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class Anomalies
      * @ORM\ManyToOne(targetEntity="App\Entity\AnomaliesType", inversedBy="anomalies")
      */
     private $type_anomalie;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Controles", mappedBy="anomalies_collections")
+     */
+    private $controles;
+
+    public function __construct()
+    {
+        $this->controles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -79,5 +91,33 @@ class Anomalies
     public function __toString()
     {
         return $this->getCodeAnomalie();
+    }
+
+    /**
+     * @return Collection|Controles[]
+     */
+    public function getControles(): Collection
+    {
+        return $this->controles;
+    }
+
+    public function addControle(Controles $controle): self
+    {
+        if (!$this->controles->contains($controle)) {
+            $this->controles[] = $controle;
+            $controle->addAnomaliesCollection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControle(Controles $controle): self
+    {
+        if ($this->controles->contains($controle)) {
+            $this->controles->removeElement($controle);
+            $controle->removeAnomaliesCollection($this);
+        }
+
+        return $this;
     }
 }
