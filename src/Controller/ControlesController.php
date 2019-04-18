@@ -24,12 +24,16 @@ class ControlesController extends AbstractController
         $recherche = $request->query->get('recherche');
         if($recherche){
             return $this->render('controles/index.html.twig', [
-                'controles' => $controlesRepository->findBy(['Immatriculation' => $recherche]),
+                'controles' => $controlesRepository->findBy(['Immatriculation' => strtoupper($recherche), 'retireur' => null]),
             ]);
         }
         else{
+            //$controles=$controlesRepository->findAll();
+            //foreach($controle as $controles){
+
+            //}
             return $this->render('controles/index.html.twig', [
-                'controles' => $controlesRepository->findAll(),
+                'controles' => $controlesRepository->findBy(['retireur' => null]),
                 //'anomaliescol' => $anomaliesRepository->findABy('id' => ),
             ]);
         }
@@ -43,10 +47,14 @@ class ControlesController extends AbstractController
         $controle = new Controles();
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $controle->setCreatedAt(new \DateTime());
+            $controle->setAnomalies('source');
+            $controle->setPapiersRetirers(true);
+            $controle->setAjouteur($user);
             $entityManager->persist($controle);
             $entityManager->flush();
 
@@ -76,8 +84,12 @@ class ControlesController extends AbstractController
     {
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //$controle->setAnomalies('source');
+            //$controle->setPapiersRetirers(true);
+            //$controle->setAjouteur($user);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('controles_index', [
@@ -103,5 +115,30 @@ class ControlesController extends AbstractController
         }
 
         return $this->redirectToRoute('controles_index');
+    }
+
+    /**
+     * @Route("/{id}/retirer", name="controles_retirer", methods={"GET","POST"})
+     */
+    public function retirer(Controles $controle): Response
+    {
+        //$form = $this->createForm(ControlesType::class, $controle);
+        //$form->handleRequest($request);
+        $user = $this->getUser();
+
+        //if ($form->isSubmitted() && $form->isValid()) {
+            //$controle->setAnomalies('source');
+            //$controle->setPapiersRetirers(true);
+            //$controle->setAjouteur($user);
+            $controle->setRetireur($user);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('controles_index');
+        //}
+
+        /*return $this->render('controles/edit.html.twig', [
+            'controle' => $controle,
+            'form' => $form->createView(),
+        ]);*/
     }
 }

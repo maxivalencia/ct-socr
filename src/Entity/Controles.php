@@ -111,12 +111,12 @@ class Controles
 
     public function getImmatriculation(): ?string
     {
-        return $this->Immatriculation;
+        return strtoupper($this->Immatriculation);
     }
 
     public function setImmatriculation(string $Immatriculation): self
     {
-        $this->Immatriculation = $Immatriculation;
+        $this->Immatriculation = strtoupper($Immatriculation);
 
         return $this;
     }
@@ -135,12 +135,12 @@ class Controles
 
     public function getEnregistrement(): ?string
     {
-        return $this->Enregistrement;
+        return strtoupper($this->Enregistrement);
     }
 
     public function setEnregistrement(string $Enregistrement): self
     {
-        $this->Enregistrement = $Enregistrement;
+        $this->Enregistrement = strtoupper($Enregistrement);
 
         return $this;
     }

@@ -48,15 +48,21 @@
                     <td>{{ controle.centre }}</td>
                     <td>{{ controle.proprietaire }}<br>{{ controle.adresse }}<br>{{ controle.telephone }}</td>
                     <td>
-                        {% for anomalie in controle.anomalies_collections %}
-                            {{ anomalie.anomalie }}
+                        {% for anomalies_collection in controle.getAnomaliesCollections %}
+                            {{ anomalies_collection }}
                         {% endfor %}
                     </td>
                     <td>{{ controle.dateExpiration ? controle.dateExpiration|date('Y-m-d') : '' }}</td>
-                    <td>{{ controle.papiers_collection }}</td>
+                    <td>
+                        {% for papier_collection in controle.getPapiersCollection %}
+                            {{ papier_collection }}
+                        {% endfor %}
+                    </td>
                     <td>
                         <a href="{{ path('controles_show', {'id': controle.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
-                        <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}

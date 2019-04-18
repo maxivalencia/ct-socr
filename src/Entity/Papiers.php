@@ -40,12 +40,12 @@ class Papiers
 
     public function getPapier(): ?string
     {
-        return $this->papier;
+        return strtoupper($this->papier);
     }
 
     public function setPapier(string $papier): self
     {
-        $this->papier = $papier;
+        $this->papier = strtoupper($papier);
 
         return $this;
     }

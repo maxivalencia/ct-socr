@@ -48,7 +48,11 @@
                 </tr>
                 <tr>
                     <th>Anomalies constatées</th>
-                    <td>{{ controle.anomalies }}</td>
+                    <td>
+                        {% for anomalies_collection in controle.getAnomaliesCollections %}
+                            {{ anomalies_collection }}
+                        {% endfor %}
+                    </td>
                 </tr>
                 <tr>
                     <th>Date expiration de visite technique</th>
@@ -56,7 +60,11 @@
                 </tr>
                 <tr>
                     <th>Papiers retirés</th>
-                    <td>{{ controle.papiersRetirers ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        {% for papier_collection in controle.getPapiersCollection %}
+                            {{ papier_collection }}
+                        {% endfor %}
+                    </td>
                 </tr>
                 <tr>
                     <th>Date du contrôle</th>
@@ -64,12 +72,14 @@
                 </tr>
             </tbody>
         </table>
-
+       
+        <a href="{{ path('controles_retirer', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-sign-out" aria-hidden="true"></i> Retirer le Papier</a>
+        <br><br>
         <a href="{{ path('controles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
-        <br><br>
-        <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
-        <br><br>
+        <br><br>         
         {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+            <br><br>
             {{ include('controles/_delete_form.html.twig') }}
         {% endif %}
     </div>
