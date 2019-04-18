@@ -41,6 +41,11 @@ class Centres
      */
     private $controles;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $numero;
+
     public function __construct()
     {
         $this->controles = new ArrayCollection();
@@ -123,6 +128,18 @@ class Centres
                 $controle->setCentre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): self
+    {
+        $this->numero = $numero;
 
         return $this;
     }

@@ -2,27 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Centres;
+use App\Entity\Papiers;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CentresType extends AbstractType
+class PapiersType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('centre')
-            ->add('code')
-            ->add('numero')
-            ->add('province')
+            ->add('papier')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Centres::class,
+            'data_class' => Papiers::class,
         ]);
     }
 }
