@@ -1,0 +1,41 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Anomalie - Vision{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des Anomalies</h1>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Anomalie</th>
+                    <th>Code_anomalie</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for anomaly in anomalies %}
+                <tr>
+                    <td>{{ anomaly.id }}</td>
+                    <td>{{ anomaly.anomalie }}</td>
+                    <td>{{ anomaly.codeAnomalie }}</td>
+                    <td>
+                        <a href="{{ path('anomalies_show', {'id': anomaly.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
+                        <a href="{{ path('anomalies_edit', {'id': anomaly.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('anomalies_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un anomalie</a>
+    </div>
+{% endblock %}

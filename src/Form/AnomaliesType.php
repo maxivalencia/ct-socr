@@ -2,25 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Utilisations;
+use App\Entity\Anomalies;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UtilisationsType extends AbstractType
+class AnomaliesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('utilisation')
-            ->add('validite')
+            ->add('anomalie')
+            ->add('code_anomalie')
+            ->add('type_anomalie')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Utilisations::class,
+            'data_class' => Anomalies::class,
         ]);
     }
 }

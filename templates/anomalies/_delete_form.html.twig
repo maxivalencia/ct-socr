@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('anomalies_delete', {'id': anomaly.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cet anomaile?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ anomaly.id) }}">
+    <button class="btn btn-danger kl-bouton"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button>
+</form>

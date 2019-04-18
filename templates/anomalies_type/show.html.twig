@@ -1,0 +1,30 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Type Anomalie - Details{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Type Anomalie</h1>
+        </div>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ anomalies_type.id }}</td>
+                </tr>
+                <tr>
+                    <th>AnomalieType</th>
+                    <td>{{ anomalies_type.anomalieType }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('anomalies_type_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+        <br><br>
+        <a href="{{ path('anomalies_type_edit', {'id': anomalies_type.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+        <br><br>
+        {{ include('anomalies_type/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

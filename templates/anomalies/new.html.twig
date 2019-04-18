@@ -1,0 +1,15 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Anomalie - Nouveau{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Ajouter un nouveau Anomalies</h1>
+        </div>
+
+        {{ include('anomalies/_form.html.twig') }}
+        <br>
+        <a href="{{ path('anomalies_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Type Anomalie - Vision{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Liste des type d'anomalie</h1>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>AnomalieType</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for anomalies_type in anomalies_types %}
+                <tr>
+                    <td>{{ anomalies_type.id }}</td>
+                    <td>{{ anomalies_type.anomalieType }}</td>
+                    <td>
+                        <a href="{{ path('anomalies_type_show', {'id': anomalies_type.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
+                        <a href="{{ path('anomalies_type_edit', {'id': anomalies_type.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('anomalies_type_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un type</a>
+    </div>
+{% endblock %}

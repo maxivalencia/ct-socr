@@ -13,6 +13,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Utilisation</th>
+                    <th>Validité</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ utilisation.id }}</td>
                     <td>{{ utilisation.utilisation }}</td>
+                    <td>{{ utilisation.validite }}</td>
                     <td>
                         <a href="{{ path('utilisations_show', {'id': utilisation.id}) }}" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i></a>
                         <a href="{{ path('utilisations_edit', {'id': utilisation.id}) }}" class="btn btn-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

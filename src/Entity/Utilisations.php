@@ -28,6 +28,11 @@ class Utilisations
      */
     private $controles;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $validite;
+
     public function __construct()
     {
         $this->controles = new ArrayCollection();
@@ -40,12 +45,12 @@ class Utilisations
 
     public function getUtilisation(): ?string
     {
-        return $this->utilisation;
+        return strtoupper($this->utilisation);
     }
 
     public function setUtilisation(string $utilisation): self
     {
-        $this->utilisation = $utilisation;
+        $this->utilisation = strtoupper($utilisation);
 
         return $this;
     }
@@ -88,5 +93,17 @@ class Utilisations
     public function __toString()
     {
         return $this->getUtilisation();
+    }
+
+    public function getValidite(): ?int
+    {
+        return $this->validite;
+    }
+
+    public function setValidite(int $validite): self
+    {
+        $this->validite = $validite;
+
+        return $this;
     }
 }
