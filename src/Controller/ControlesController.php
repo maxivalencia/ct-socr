@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Controles;
+use App\Entity\Centres;
 use App\Form\ControlesType;
 use App\Repository\ControlesRepository;
+use App\Repository\CentresRepository;
 use App\Repository\AnomaliesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,9 +44,10 @@ class ControlesController extends AbstractController
     /**
      * @Route("/new", name="controles_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, CentresRepository $centresRepository): Response
     {
         $controle = new Controles();
+        $centre = new Centres();
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
@@ -55,6 +58,10 @@ class ControlesController extends AbstractController
             $controle->setAnomalies('source');
             $controle->setPapiersRetirers(true);
             $controle->setAjouteur($user);
+            $strnumero = explode("/", $controle->getEnregistrement());
+            $numero = (int)($strnumero[2]);
+            $centre = $centresRepository->findOneBy(['numero' => $numero]);
+            $controle->setCentre($centre);
             $entityManager->persist($controle);
             $entityManager->flush();
 
@@ -80,16 +87,17 @@ class ControlesController extends AbstractController
     /**
      * @Route("/{id}/edit", name="controles_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Controles $controle): Response
+    public function edit(Request $request, Controles $controle, CentresRepository $centresRepository): Response
     {
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$controle->setAnomalies('source');
-            //$controle->setPapiersRetirers(true);
-            //$controle->setAjouteur($user);
+            $strnumero = explode("/", $controle->getEnregistrement());
+            $numero = (int)($strnumero[2]);
+            $centre = $centresRepository->findOneBy(['numero' => $numero]);
+            $controle->setCentre($centre);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('controles_index', [
