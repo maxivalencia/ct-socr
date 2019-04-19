@@ -3,5 +3,5 @@ jQuery(document).ready(function($) {
         uiLibrary: 'bootstrap4'
     });
 
-    $('select').selectpicker(){};
+    $('.select').selectpicker();
 });

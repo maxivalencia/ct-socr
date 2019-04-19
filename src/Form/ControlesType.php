@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ControlesType extends AbstractType
 {
@@ -34,9 +35,20 @@ class ControlesType extends AbstractType
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', null, [
                 'label' => 'Anomalies', 
-                'attr' => ['class' => 'selectpicker', 'multiple', 'data-live-search' => 'true'],
-                ])
-            ->add('papiers_collection', null, ['label' => 'Papiers'])
+                //'attr' => [
+                //    'class' => 'selectpicker', 
+                //    'multiple' => true, 
+                //    'data-live-search' => true,
+                //],
+            ])
+            ->add('papiers_collection', null, [
+                'label' => 'Papiers',
+                //'attr' => [
+                //    'class' => 'selectpicker', 
+                //    'multiple' => true, 
+                //    'data-live-search' => true
+                //],
+            ])
             //->add('CreatedAt')
         ;
     }
