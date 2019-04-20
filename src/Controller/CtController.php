@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Controles;
 use App\Entity\Roles;
+use App\Entity\Centres;
 
 class CtController extends AbstractController
 {
@@ -69,11 +70,15 @@ class CtController extends AbstractController
         $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
         $papierrestant = count($controle);
         $papierretirer = $controlerealiser - $papierrestant;
+        $centre = new Centres();
+        $centre = $this->getDoctrine()->getRepository(Centres::class)->findAll();
+        $nombre_centre = count($centre);
         return $this->render('ct/stat.html.twig', [
             'controlerealiser' => $controlerealiser,
             'papierretirer' => $papierretirer,
             'papierrestant' => $papierrestant,
             'nombreverificateur' => $verificateur,
+            'nombrecentre' => $nombre_centre,
         ]);
     }
 }

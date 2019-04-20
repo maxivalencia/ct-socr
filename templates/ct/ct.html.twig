@@ -12,6 +12,7 @@
                     <a href="{{ path('ct_profil') }}"><span class="fa fa-user"></span> Profil</a>
                     <a href="{{ path('controles_new') }}"><span class="fa fa-car"></span> Ajouter Véhicule</a>
                     <a href="{{ path('controles_index') }}"><span class="fa fa-bus"></span> Liste Véhicule</a>
+                    <a href="{{ path('ct_statistique') }}"><span class="fas fa-chart-bar"></span> Statistique</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('user_index') }}"><span class="fa fa-users"></span> Utilisateur</a>
                         <a href="{{ path('centres_index') }}"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Centre</a>
@@ -19,7 +20,7 @@
                         <a href="{{ path('professions_index') }}"><span class="fa fa-graduation-cap"></span> Profession </a>
                         <a href="{{ path('utilisations_index') }}"><span class="fa fa-truck"></span> Utilisation </a>
                         <a href="{{ path('roles_index') }}"><span class="fa fa-university"></span> Role </a>                       
-                        <a href="{{ path('papiers_index') }}"><i class="fa fa-id-card-o"></i> Papiers </a>                         
+                        <a href="{{ path('papiers_index') }}"><i class="fas fa-copy"></i> Papiers </a>                         
                         <a href="{{ path('anomalies_index') }}"><i class="fa fa-gavel"></i> Anomalie </a>                        
                         <a href="{{ path('anomalies_type_index') }}"><i class="fa fa-wrench"></i> Type d'anomalie </a>
                     {% endif %}
@@ -32,7 +33,7 @@
                     <div class="col-9 kl-titre">
                         <div class="kl-titre mb-3 font-weight-normal justify-content-center align-items-center">Contrôle Technique</div>
                     </div>
-                    <div class="col-3"><a href="{{ path('app_logout') }}" type="button" class="btn btn-light"><i class="fa fa-sign-out"></i> Déconnexion</a></div>
+                    <div class="col-3"><a href="{{ path('app_logout') }}" type="button" class="btn btn-light"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></div>
                     <!--<div class="col-3 kl-fond-entete">
                         <nav class="navbar navbar-expand-sm bg-light kl-fond-entete">
                             <div class="collapse navbar-collapse kl-fond-entete" id="oNavigation">
