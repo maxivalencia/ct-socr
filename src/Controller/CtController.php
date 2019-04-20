@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Entity\Controles;
+use App\Entity\Roles;
 
 class CtController extends AbstractController
 {
@@ -41,8 +43,7 @@ class CtController extends AbstractController
     /**
      * @Route("/", name="ct_base")
      */
-    public function rediriger()
-    {
+    public function rediriger(){
         if(!empty($_SESSION['username']))
         {
             return $this->redirectToRoute('ct_profil');
@@ -50,5 +51,29 @@ class CtController extends AbstractController
         {
             return $this->redirectToRoute('app_login');
         }
+    }
+
+    /**
+     * @Route("/statistique", name="ct_statistique")
+     */
+    public function statistique(){
+        $role = new Roles();
+        $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
+        $role_id = $role->getId();
+        $user = new User();
+        $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
+        $verificateur = count($user);
+        $controle = new Controles();
+        $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
+        $controlerealiser = count($controle);
+        $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+        $papierrestant = count($controle);
+        $papierretirer = $controlerealiser - $papierrestant;
+        return $this->render('ct/stat.html.twig', [
+            'controlerealiser' => $controlerealiser,
+            'papierretirer' => $papierretirer,
+            'papierrestant' => $papierrestant,
+            'nombreverificateur' => $verificateur,
+        ]);
     }
 }

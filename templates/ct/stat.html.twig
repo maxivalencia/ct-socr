@@ -1,0 +1,32 @@
+{% extends "ct/ct.html.twig" %}
+
+{% block title %}Statistique - resultat{% endblock %}
+
+{% block contenue %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center kl-sous-titre">
+            <h1>Statistiques</h1>
+        </div>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>nombre de controle réaliser</th>
+                    <td>{{ controlerealiser }}</td>
+                </tr>                
+                <tr>
+                    <th>nombre de papier retirer</th>
+                    <td>{{ papierretirer }}</td>
+                </tr>                
+                <tr>
+                    <th>nombre de papier restant</th>
+                    <td>{{ papierrestant }}</td>
+                </tr>
+                <tr>
+                    <th>nombre de verificateur</th>
+                    <td>{{ nombreverificateur }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
