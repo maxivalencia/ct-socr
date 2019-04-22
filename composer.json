@@ -8,6 +8,7 @@
         "knplabs/knp-paginator-bundle": "^3.0",
         "sensio/framework-extra-bundle": "^5.2",
         "snapappointments/bootstrap-select": "^1.13",
+        "sonata-project/admin-bundle": "^3.48",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",

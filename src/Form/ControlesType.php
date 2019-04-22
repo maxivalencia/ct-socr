@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Controles;
+use App\Entity\Anomalies;
+use App\Entity\Papiers;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -58,24 +60,24 @@ class ControlesType extends AbstractType
                 'attr' => ['class' => 'js-datepicker col-8']
                 ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
-            ->add('anomalies_collections', null, [
+            ->add('anomalies_collections', EntityType::class, [
+                'class' => Anomalies::class,
                 'label' => 'Anomalies', 
                 'attr' => [
-                    'class' => 'multiselect', 
-                    'multiple' => 'multiple', 
-                    'data-live-search' => true,
-                    'data-select' => true,
-                    'class' => 'col-8'
-                ],
-            ])
-            ->add('papiers_collection', null, [
-                'label' => 'Papiers',
-                'attr' => [
-                    'class' => 'multiselect', 
+                    'class' => 'multiselect col-8', 
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
-                    'class' => 'col-8'
+                ],
+            ])
+            ->add('papiers_collection', EntityType::class, [
+                'class' => Papiers::class,
+                'label' => 'Papiers',
+                'attr' => [
+                    'class' => 'multiselect col-8', 
+                    'multiple' => true, 
+                    'data-live-search' => true,
+                    'data-select' => true,
                 ],
             ])
             //->add('CreatedAt')
