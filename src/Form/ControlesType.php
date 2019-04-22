@@ -32,7 +32,10 @@ class ControlesType extends AbstractType
             //->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
             ->add('date_expiration', DateType::class, [
                 'label' => 'Date expiration de visite technique',
-                'attr' => ['class' => 'datepicker']
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
+                //'html5' => false,
+                'attr' => ['class' => 'js-datepicker']
                 ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', null, [
