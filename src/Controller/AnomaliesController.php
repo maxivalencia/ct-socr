@@ -22,7 +22,7 @@ class AnomaliesController extends AbstractController
     {
         $anomalie = $this->getDoctrine()->getRepository(Anomalies::class)->findAll();
         $papierrestant = count($anomalie);
-        $nb_ligne_page = 20;
+        $nb_ligne_page = 10;
         $nombre_page = (int)(ceil($papierrestant / $nb_ligne_page));
         $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
         
