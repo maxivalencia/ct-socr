@@ -23,39 +23,39 @@ class ControlesType extends AbstractType
         $builder
             ->add('Immatriculation', TextType::class, [
                 'label' => 'Immatriculation du véhicule',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             ->add('usages', null, [
                 'label' => 'Usage effectif',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             ->add('Enregistrement', TextType::class, [
                 'label' => 'N° d\'enregistrement à la visite',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             ->add('verificateur', null, [
                 'label' => 'Nom du vérificateur',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             //->add('centre', null, ['label' => 'CENSERO ayant effectué la dernière visite'])
             ->add('proprietaire', TextType::class, [
                 'label' => 'Nom du prorpiétaire',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             ->add('adresse', TextType::class, [
                 'label' => 'Adresse du propriétaire',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             ->add('telephone', TextType::class, [
                 'label' => 'Téléphone du propriétaire',
-                'attr' => ['class' => 'col-6'],
+                'attr' => ['class' => 'col-8'],
                 ])
             //->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
             ->add('date_expiration', DateType::class, [
                 'label' => 'Date expiration de visite technique',
-                //'widget' => 'single_text',
+                'widget' => 'single_text',
                 //'input' => 'datetime_immutable',
-                'attr' => ['class' => 'js-datepicker col-6']
+                'attr' => ['class' => 'js-datepicker col-8']
                 ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', null, [
@@ -65,7 +65,7 @@ class ControlesType extends AbstractType
                     'multiple' => 'multiple', 
                     'data-live-search' => true,
                     'data-select' => true,
-                    'class' => 'col-6'
+                    'class' => 'col-8'
                 ],
             ])
             ->add('papiers_collection', null, [
@@ -75,7 +75,7 @@ class ControlesType extends AbstractType
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
-                    'class' => 'col-6'
+                    'class' => 'col-8'
                 ],
             ])
             //->add('CreatedAt')

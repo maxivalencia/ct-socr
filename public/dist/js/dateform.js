@@ -3,5 +3,7 @@ $(document).ready(function() {
         
     });   
     
-    $('.js-datepicker').datepicker();
+    $('.js-datepicker').datepicker({
+        format : "yyyy-MM-dd"
+    });
 });
