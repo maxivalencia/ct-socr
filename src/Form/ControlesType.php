@@ -38,17 +38,19 @@ class ControlesType extends AbstractType
             ->add('anomalies_collections', null, [
                 'label' => 'Anomalies', 
                 'attr' => [
-                    //'class' => 'selectpicker', 
-                    'multiple' => true, 
+                    'class' => 'multiselect', 
+                    'multiple' => 'multiple', 
                     'data-live-search' => true,
+                    'data-select' => true,
                 ],
             ])
             ->add('papiers_collection', null, [
                 'label' => 'Papiers',
                 'attr' => [
-                    //'class' => 'selectpicker', 
+                    'class' => 'multiselect', 
                     'multiple' => true, 
                     'data-live-search' => true,
+                    'data-select' => true,
                 ],
             ])
             //->add('CreatedAt')
