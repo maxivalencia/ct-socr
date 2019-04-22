@@ -21,21 +21,41 @@ class ControlesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Immatriculation', TextType::class, ['label' => 'Immatriculation du véhicule'])
-            ->add('usages', null, ['label' => 'Usage effectif'])
-            ->add('Enregistrement', TextType::class, ['label' => 'N° d\'enregistrement à la visite'])
-            ->add('verificateur', null, ['label' => 'Nom du vérificateur'])
+            ->add('Immatriculation', TextType::class, [
+                'label' => 'Immatriculation du véhicule',
+                'attr' => ['class' => 'col-6'],
+                ])
+            ->add('usages', null, [
+                'label' => 'Usage effectif',
+                'attr' => ['class' => 'col-6'],
+                ])
+            ->add('Enregistrement', TextType::class, [
+                'label' => 'N° d\'enregistrement à la visite',
+                'attr' => ['class' => 'col-6'],
+                ])
+            ->add('verificateur', null, [
+                'label' => 'Nom du vérificateur',
+                'attr' => ['class' => 'col-6'],
+                ])
             //->add('centre', null, ['label' => 'CENSERO ayant effectué la dernière visite'])
-            ->add('proprietaire', TextType::class, ['label' => 'Nom du prorpiétaire'])
-            ->add('adresse', TextType::class, ['label' => 'Adresse du propriétaire'])
-            ->add('telephone', TextType::class, ['label' => 'Téléphone du propriétaire'])
+            ->add('proprietaire', TextType::class, [
+                'label' => 'Nom du prorpiétaire',
+                'attr' => ['class' => 'col-6'],
+                ])
+            ->add('adresse', TextType::class, [
+                'label' => 'Adresse du propriétaire',
+                'attr' => ['class' => 'col-6'],
+                ])
+            ->add('telephone', TextType::class, [
+                'label' => 'Téléphone du propriétaire',
+                'attr' => ['class' => 'col-6'],
+                ])
             //->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
             ->add('date_expiration', DateType::class, [
                 'label' => 'Date expiration de visite technique',
-                'widget' => 'single_text',
-                'input' => 'datetime_immutable',
-                //'html5' => false,
-                'attr' => ['class' => 'js-datepicker']
+                //'widget' => 'single_text',
+                //'input' => 'datetime_immutable',
+                'attr' => ['class' => 'js-datepicker col-6']
                 ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', null, [
@@ -45,6 +65,7 @@ class ControlesType extends AbstractType
                     'multiple' => 'multiple', 
                     'data-live-search' => true,
                     'data-select' => true,
+                    'class' => 'col-6'
                 ],
             ])
             ->add('papiers_collection', null, [
@@ -54,6 +75,7 @@ class ControlesType extends AbstractType
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
+                    'class' => 'col-6'
                 ],
             ])
             //->add('CreatedAt')

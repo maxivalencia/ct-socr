@@ -1,0 +1,21 @@
+<nav aria-label="Page navigation example" class="text-center">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': premiere_page }) }}">Début</a></li>
+    <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': page_precedent }) }}">Précedent</a></li>
+    <li class="page-item"><a class="page-link" href="#"> ... </a></li>
+    {% for numero in numero_page - 2 .. numero_page + 2 %}
+        {% if numero > 0 and numero <= derniere_page %}        
+            <li class="page-item">
+                {% if numero != numero_page %}
+                    <a class="page-link" href="{{ path('controles_index', {'page': numero }) }}">{{ numero }}</a>
+                {% else %}
+                    <a class="page-link" href="#">{{ numero }}</a>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+    <li class="page-item"><a class="page-link" href="#"> ... </a></li>
+    <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': page_suivant }) }}">Suivant</a></li>
+    <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': derniere_page }) }}">Fin</a></li>
+  </ul>
+</nav>

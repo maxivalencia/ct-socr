@@ -29,10 +29,21 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, Request $request): Response
     {
+        $user = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $nombreuser = count($user);
+        $nb_ligne_page = 10;
+        $nombre_page = (int)(ceil($nombreuser / $nb_ligne_page));
+        $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findBy([],[], $nb_ligne_page*$numero_page, $numero_page-1),
+            'nombre_page' => $nombre_page,
+            'premiere_page' => 1,
+            'derniere_page' => $nombre_page,
+            'page_precedent' => ($numero_page-1)<1?1:($numero_page-1),
+            'page_suivant' => ($numero_page+1)>=$nombre_page?$nombre_page:($numero_page+1),
+            'numero_page' => $numero_page,
         ]);
     }
 

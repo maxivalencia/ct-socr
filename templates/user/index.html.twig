@@ -44,8 +44,10 @@
                 </tr>
             {% endfor %}
             </tbody>
-        </table>
-
+        </table>        
+        <div class="row center text-center text-justify">
+            {% include "ct/page.html.twig" %}
+        </div>
         <a href="{{ path('user_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un utilisateur</a>
     </div>
 {% endblock %}

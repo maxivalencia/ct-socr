@@ -18,10 +18,22 @@ class AnomaliesController extends AbstractController
     /**
      * @Route("/", name="anomalies_index", methods={"GET"})
      */
-    public function index(AnomaliesRepository $anomaliesRepository): Response
+    public function index(AnomaliesRepository $anomaliesRepository, Request $request): Response
     {
+        $anomalie = $this->getDoctrine()->getRepository(Anomalies::class)->findAll();
+        $papierrestant = count($anomalie);
+        $nb_ligne_page = 20;
+        $nombre_page = (int)(ceil($papierrestant / $nb_ligne_page));
+        $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
+        
         return $this->render('anomalies/index.html.twig', [
-            'anomalies' => $anomaliesRepository->findAll(),
+            'anomalies' => $anomaliesRepository->findAll([],[], $nb_ligne_page*$numero_page, $numero_page-1),
+            'nombre_page' => $nombre_page,
+            'premiere_page' => 1,
+            'derniere_page' => $nombre_page,
+            'page_precedent' => ($numero_page-1)<1?1:($numero_page-1),
+            'page_suivant' => ($numero_page+1)>=$nombre_page?$nombre_page:($numero_page+1),
+            'numero_page' => $numero_page,
         ]);
     }
 

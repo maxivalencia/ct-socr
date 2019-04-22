@@ -72,6 +72,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="row center text-center text-justify">
+            {% include "ct/page.html.twig" %}
+        </div>
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('controles_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un contrôle</a>
         {% endif %}

@@ -1,7 +1,7 @@
 $(document).ready(function() {    
-    $('select').select2();   
+    $('.multiselect').select2({
+        
+    });   
     
-    $('.js-datepicker').datepicker({
-        format: 'yyyy-MM-dd'
-    });
+    $('.js-datepicker').datepicker();
 });

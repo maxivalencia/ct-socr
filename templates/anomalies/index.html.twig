@@ -35,6 +35,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="row center text-center text-justify">
+            {% include "ct/page.html.twig" %}
+        </div>
 
         <a href="{{ path('anomalies_new') }}" class="btn btn-primary kl-bouton"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un anomalie</a>
     </div>

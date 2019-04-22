@@ -21,22 +21,40 @@ class ControlesController extends AbstractController
     /**
      * @Route("/", name="controles_index", methods={"GET"})
      */
-    public function index(AnomaliesRepository $anomaliesRepository, ControlesRepository $controlesRepository, Request $request): Response
+    public function index(ControlesRepository $controlesRepository, Request $request): Response
     {
         $recherche = $request->query->get('recherche');
         if($recherche){
+            $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+            $papierrestant = count($controle);
+            $nb_ligne_page = 20;
+            $nombre_page = (int)(ceil($papierrestant / $nb_ligne_page));
+            $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
             return $this->render('controles/index.html.twig', [
-                'controles' => $controlesRepository->findBy(['Immatriculation' => strtoupper($recherche), 'retireur' => null]),
+                'controles' => $controlesRepository->findBy(['Immatriculation' => strtoupper($recherche), 'retireur' => null], ['id' => 'DESC'], $nb_ligne_page*$numero_page, $numero_page-1),
+                'nombre_page' => $nombre_page,
+                'premiere_page' => 1,
+                'derniere_page' => $nombre_page,
+                'page_precedent' => ($numero_page-1)<1?1:($numero_page-1),
+                'page_suivant' => ($numero_page+1)>=$nombre_page?$nombre_page:($numero_page+1),
+                'numero_page' => $numero_page,
             ]);
         }
         else{
-            //$controles=$controlesRepository->findAll();
-            //foreach($controle as $controles){
-
-            //}
+            $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+            $papierrestant = count($controle);
+            $nb_ligne_page = 20;
+            $nombre_page = (int)(ceil($papierrestant / $nb_ligne_page));
+            $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
+            
             return $this->render('controles/index.html.twig', [
-                'controles' => $controlesRepository->findBy(['retireur' => null]),
-                //'anomaliescol' => $anomaliesRepository->findABy('id' => ),
+                'controles' => $controlesRepository->findBy(['retireur' => null], ['id' => 'DESC'], $nb_ligne_page*$numero_page, $numero_page-1),
+                'nombre_page' => $nombre_page,
+                'premiere_page' => 1,
+                'derniere_page' => $nombre_page,
+                'page_precedent' => ($numero_page-1)<1?1:($numero_page-1),
+                'page_suivant' => ($numero_page+1)>=$nombre_page?$nombre_page:($numero_page+1),
+                'numero_page' => $numero_page,
             ]);
         }
     }
