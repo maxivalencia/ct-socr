@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Controles;
 use App\Entity\Anomalies;
 use App\Entity\Papiers;
+use App\Entity\User;
+use App\Entity\Utilisations;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,45 +27,74 @@ class ControlesType extends AbstractType
         $builder
             ->add('Immatriculation', TextType::class, [
                 'label' => 'Immatriculation du véhicule',
-                'attr' => ['class' => 'col-8'],
-                ])
-            ->add('usages', null, [
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8',
+                ],
+            ])
+            ->add('usages', EntityType::class, [
+                'class' => Utilisations::class,
                 'label' => 'Usage effectif',
-                'attr' => ['class' => 'col-8'],
-                ])
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8',
+                    'data-live-search' => true,
+                ],
+            ])
             ->add('Enregistrement', TextType::class, [
                 'label' => 'N° d\'enregistrement à la visite',
-                'attr' => ['class' => 'col-8'],
-                ])
-            ->add('verificateur', null, [
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8'
+                ],
+            ])
+            ->add('verificateur', EntityType::class, [
+                'class' => User::class,
                 'label' => 'Nom du vérificateur',
-                'attr' => ['class' => 'col-8'],
-                ])
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8',
+                    'data-live-search' => true,
+                ],
+            ])
             //->add('centre', null, ['label' => 'CENSERO ayant effectué la dernière visite'])
             ->add('proprietaire', TextType::class, [
                 'label' => 'Nom du prorpiétaire',
-                'attr' => ['class' => 'col-8'],
-                ])
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8'
+                ],
+            ])
             ->add('adresse', TextType::class, [
                 'label' => 'Adresse du propriétaire',
-                'attr' => ['class' => 'col-8'],
-                ])
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8'
+                ],
+            ])
             ->add('telephone', TextType::class, [
                 'label' => 'Téléphone du propriétaire',
-                'attr' => ['class' => 'col-8'],
-                ])
+                'required'   => true,
+                'attr' => [
+                    'class' => 'col-8'
+                ],
+            ])
             //->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
             ->add('date_expiration', DateType::class, [
                 'label' => 'Date expiration de visite technique',
                 'widget' => 'single_text',
                 //'input' => 'datetime_immutable',
-                'attr' => ['class' => 'js-datepicker col-8'],
+                'attr' => [
+                    'class' => 'js-datepicker col-8'
+                ],
                 'data' => new \DateTime('now'),
-                ])
+                'required'   => true,
+            ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', EntityType::class, [
                 'class' => Anomalies::class,
                 'label' => 'Anomalies', 
+                'required'   => true,
                 'attr' => [
                     'class' => 'multiselect col-8', 
                     'multiple' => true, 
