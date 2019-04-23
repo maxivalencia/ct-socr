@@ -1,7 +1,7 @@
-$(document).ready(function() {    
+export default function() {    
     $('.multiselect').select2();   
     //$(".chosen-select").chosen(); 
-    $('.js-datepicker').datepicker({
+    /*$('.js-datepicker').datepicker({
         format : "yyyy-mm-dd"
-    });
-});
+    });*/
+};

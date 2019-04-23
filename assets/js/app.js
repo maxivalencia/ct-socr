@@ -6,9 +6,25 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.css');
+//require('../css/app.css');
+import '../css/app.css';
+//import '../css/global.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+// loads the jquery package from cnode_modules
+//var $ = require('jquery');
+import $ from 'jquery';
+
+import 'bootstrap';
+import 'select2';
+
+// import the function from style.js (the .js extension is optional)
+// ./ (or ../) means to look for a local file
+//var style = require('./style');
+//import style from './style';
+
+$(document).ready(function() {
+    $('.multiselect').select2();
+})
