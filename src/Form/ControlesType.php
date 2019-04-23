@@ -57,7 +57,8 @@ class ControlesType extends AbstractType
                 'label' => 'Date expiration de visite technique',
                 'widget' => 'single_text',
                 //'input' => 'datetime_immutable',
-                'attr' => ['class' => 'js-datepicker col-8']
+                'attr' => ['class' => 'js-datepicker col-8'],
+                'data' => new \DateTime('now'),
                 ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', EntityType::class, [
