@@ -100,6 +100,7 @@ class ControlesType extends AbstractType
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
+                    'choice' => true,
                 ],
             ])
             ->add('papiers_collection', EntityType::class, [
