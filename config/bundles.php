@@ -22,4 +22,5 @@ return [
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
     Sonata\AdminBundle\SonataAdminBundle::class => ['all' => true],
+    Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle::class => ['all' => true],
 ];
