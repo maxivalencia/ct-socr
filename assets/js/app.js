@@ -19,12 +19,20 @@ import $ from 'jquery';
 
 import 'bootstrap';
 import 'select2';
+import 'chosen-js';
+
 
 // import the function from style.js (the .js extension is optional)
 // ./ (or ../) means to look for a local file
 //var style = require('./style');
-//import style from './style';
+import styles from './styles';
 
 $(document).ready(function() {
     $('.multiselect').select2();
+    $('.chzn').chosen();
 })
+
+$(function() {
+    $('.multiselect').select2();
+    $(".chzn").chosen();
+});

@@ -83,7 +83,6 @@ class ControlesType extends AbstractType
             ->add('date_expiration', DateType::class, [
                 'label' => 'Date expiration de visite technique',
                 'widget' => 'single_text',
-                //'input' => 'datetime_immutable',
                 'attr' => [
                     'class' => 'js-datepicker col-8'
                 ],
@@ -96,21 +95,22 @@ class ControlesType extends AbstractType
                 'label' => 'Anomalies', 
                 'required'   => true,
                 'attr' => [
-                    'class' => 'multiselect col-8', 
+                    'class' => 'chosen-select-width chzn col-8', 
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
-                    'choice' => true,
+                    'required' => true,
                 ],
             ])
             ->add('papiers_collection', EntityType::class, [
                 'class' => Papiers::class,
                 'label' => 'Papiers',
                 'attr' => [
-                    'class' => 'multiselect col-8', 
+                    'class' => 'chosen-select-width chzn col-8', 
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
+                    'required' => true,
                 ],
             ])
             //->add('CreatedAt')
