@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Form\Type\ButtonType;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 class ControlesType extends AbstractType
 {

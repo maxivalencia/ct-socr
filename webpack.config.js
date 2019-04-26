@@ -1,3 +1,20 @@
+/**
+ * Webpack configuration.
+ *
+ * @requires composer-package:symfony/flex
+ * @requires composer-recipe:encore
+ *
+ * @requires module:babel-preset-env
+ * @requires module:babel-preset-es2015
+ * @requires module:babel-preset-react
+ * @requires module:babel-preset-stage-0
+ * @requires module:babel-plugin-syntax-dynamic-import
+ * @requires module:node-sass
+ * @requires module:sass-loader
+ * @requires module:webpack-notifier
+ *
+ * @author WebberTakken <webber@takken.io>.
+ */
 var Encore = require('@symfony/webpack-encore');
 
 Encore
@@ -20,6 +37,8 @@ Encore
     .addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
+
+    .addStyleEntry('css/app', './assets/css/global.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
