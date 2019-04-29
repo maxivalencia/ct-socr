@@ -16,6 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnomaliesController extends AbstractController
 {
     /**
+     * @Route("/anomaliesliste", name="anomalies_liste", methods={"GET"})
+     */
+    public function listeAnomalie(AnomaliesRepository $anomaliesRepository, Request $request): Array
+    {
+        $anomalies = new Anomalies();
+        $anomalies = $this->getDoctrine()->getRepository(Anomalies::class)->findAll();
+        $data = "[";
+        foreach ($anomalie as $anomalies) {
+            $data += "{" ;
+            $data += '"id":"'.$anomalie->getId().'"';
+            $data += '"text":"'.$anomalie->__toString().'"'; 
+            $data += "},";          
+        }
+        $data += "]";
+        return $data;
+    }
+
+    /**
      * @Route("/", name="anomalies_index", methods={"GET"})
      */
     public function index(AnomaliesRepository $anomaliesRepository, Request $request): Response
