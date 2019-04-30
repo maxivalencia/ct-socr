@@ -1,5 +1,5 @@
 <nav aria-label="Page navigation example" class="text-center">
-  <ul class="pagination">
+  <ul class="pagination" style="list-style-type:none;">
     <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': premiere_page }) }}">Début</a></li>
     <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': page_precedent }) }}">Précedent</a></li>
     <li class="page-item"><a class="page-link" href="#"> ... </a></li>
@@ -17,5 +17,6 @@
     <li class="page-item"><a class="page-link" href="#"> ... </a></li>
     <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': page_suivant }) }}">Suivant</a></li>
     <li class="page-item"><a class="page-link" href="{{ path('controles_index', {'page': derniere_page }) }}">Fin</a></li>
+    
   </ul>
 </nav>

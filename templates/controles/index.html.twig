@@ -5,10 +5,10 @@
 {% block contenue %}
     <div class="container">
         <div class="row">
-            <div class="offset-4 col-4 justify-content-center align-items-center kl-sous-titre">
+            <div class="offset-2 col-7 justify-content-center align-items-center kl-sous-titre">
                 <h1>Liste des Controles</h1>
             </div>
-            <div class="col-4 justify-content-end">
+            <div class="col-3 justify-content-end">
                 <div class="main">  
                     <!-- Actual search box -->
                     <form action={{ path('controles_index') }} method='GET'>
@@ -25,16 +25,16 @@
             <thead>
                 <tr>
                     <!--<th>Id</th>-->
-                    <th>Immatriculation</th>
-                    <th>Usage</th>
-                    <th>Enregistrement</th>                    
-                    <th>Vérificateur</th>
-                    <th>CENSERO</th>
-                    <th>Propriétaire</th>
-                    <th>Anomalies</th>
-                    <th>Expiration visite</th>
-                    <th>Papiers retirés</th>
-                    <th>actions</th>
+                    <th style="font-weight:bold">Immatriculation</th>
+                    <th style="font-weight:bold">Usage</th>
+                    <th style="font-weight:bold">Enregistrement</th>                    
+                    <th style="font-weight:bold">Vérificateur</th>
+                    <th style="font-weight:bold">CENSERO</th>
+                    <th style="font-weight:bold">Propriétaire</th>
+                    <th style="font-weight:bold">Anomalies</th>
+                    <th style="font-weight:bold">Expiration</th>
+                    <th style="font-weight:bold">Papiers</th>
+                    <th style="font-weight:bold">actions</th>
                 </tr>
             </thead>
             <tbody>

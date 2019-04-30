@@ -18,20 +18,19 @@ class AnomaliesController extends AbstractController
     /**
      * @Route("/anomaliesliste", name="anomalies_liste", methods={"GET"})
      */
-    public function listeAnomalie(AnomaliesRepository $anomaliesRepository, Request $request)
+    public function listeAnomalie(Request $request)
     {
-        //$anomalies = new Anomalies();
+        $anomalies = new Anomalies();
         $anomalies = $this->getDoctrine()->getRepository(Anomalies::class)->findAll();
         $data = array();
-        $i = 0;
-        foreach ($anomalie as $anomalies) {
-            $data[$i] = array(
-                "value" => $anomalie->getId(),
-                "text" => $anomalie->getCodeAnomalie(),
-            );    
-            $i++;       
+        //$i = 0;
+        foreach ($anomalies as $anomalie) {
+            $data[] = array(
+                "id" => $anomalie->getId(),
+                "text" => $anomalie->__toString(),
+            );      
         }
-        return json_encode($data);
+        return new Response(json_encode($data), 200, array('Content-Type' => 'application/json'));
     }
 
     /**
