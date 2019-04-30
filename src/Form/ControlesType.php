@@ -92,7 +92,7 @@ class ControlesType extends AbstractType
             ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', Select2EntityType::class, [
-                'class' => Anomalies::class,
+                //'class' => Anomalies::class,
                 'remote_route' => 'anomalies_liste',
                 'label' => 'Anomalies',
                 'required'   => true,
