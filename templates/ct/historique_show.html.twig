@@ -1,11 +1,11 @@
 {% extends "ct/ct.html.twig" %}
 
-{% block title %}Controles - Details{% endblock %}
+{% block title %}Historiques - Details{% endblock %}
 
 {% block contenue %}
     <div class="container">
         <div class="row justify-content-center align-items-center kl-sous-titre">
-            <h1>Controles</h1>
+            <h1>Historiques</h1>
         </div>
 
         <table class="table">
@@ -23,7 +23,7 @@
                     <td>{{ controle.Enregistrement }}</td>
                 </tr>
                 <tr>
-                    <th>Vérificateur ayant effectué le controle</th>
+                    <th>Vérificateur ayant effectué le controle inopiné</th>
                     <td>{{ controle.verificateur }}</td>
                 </tr>
                 <tr>
@@ -70,19 +70,25 @@
                     <th>Centre pour la récupération des papiers</th>
                     <td>{{ controle.verificateur.centre }}</td>
                 </tr>
+                <tr>
+                    <th>Personnel ayant ajouter ce véhicule dans la base</th>
+                    <td>{{ controle.ajouteur }}</td>
+                </tr>
+                <tr>
+                    <th>Date et heure de retrait du véhicule de la base de donnée</th>
+                    <td>{{ controle.getDateRetrait()|date('Y-m-d') }} {{ controle.getHeureRetrait()|date('H:m:s') }}</td>
+                </tr>
+                <tr>
+                    <th>Personnel ayant retirer ce véhicule de la base</th>
+                    <td>{{ controle.retireur }}</td>
+                </tr>
+                <tr>
+                    <th>Centre ayant retirer le véhicule de la base</th>
+                    <td>{% if controle.retireur %}{{ controle.retireur.centre }}{% endif %}</td>
+                </tr>
             </tbody>
         </table>
 
-        {% if is_granted('ROLE_VERIFICATEUR') %}
-        <a href="{{ path('controles_retirer', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-sign-out" aria-hidden="true"></i> Retirer le Papier</a>
-        <br><br>
-        {% endif %}
-        <a href="{{ path('controles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
-        <br><br>         
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('controles_edit', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
-            <br><br>
-            {{ include('controles/_delete_form.html.twig') }}
-        {% endif %}
+        <a href="{{ path('historique_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
     </div>
 {% endblock %}
