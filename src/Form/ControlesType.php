@@ -91,12 +91,13 @@ class ControlesType extends AbstractType
                 'required'   => true,
             ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
-            ->add('anomalies_collections', EntityType::class, [
+            ->add('anomalies_collections', Select2EntityType::class, [
                 'class' => Anomalies::class,
+                'remote_route' => 'anomalies_liste',
                 'label' => 'Anomalies',
                 'required'   => true,
                 'attr' => [
-                    'class' => 'col-8', 
+                    'class' => 'multi col-8',
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
@@ -109,6 +110,7 @@ class ControlesType extends AbstractType
                 'attr' => [
                     'class' => 'chosen-select-width chzn col-8', 
                     'multiple' => true, 
+                    'remote_route' => '',
                     'data-live-search' => true,
                     'data-select' => true,
                     'required' => true,
