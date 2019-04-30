@@ -108,7 +108,7 @@ class ControlesType extends AbstractType
                 'class' => Papiers::class,
                 'label' => 'Papiers',
                 'attr' => [
-                    'class' => 'chosen-select-width chzn col-8', 
+                    'class' => 'multi col-8', 
                     'multiple' => true, 
                     'remote_route' => '',
                     'data-live-search' => true,

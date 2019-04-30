@@ -70,11 +70,17 @@
                     <th>Date du contrôle</th>
                     <td>{{ controle.CreatedAt ? controle.CreatedAt|date('Y-m-d') : '' }}</td>
                 </tr>
+                <tr>
+                    <th>Centre pour la récupération des papiers</th>
+                    <td>{{ controle.verificateur.centre }}</td>
+                </tr>
             </tbody>
         </table>
-       
+
+        {% if is_granted('ROLE_VERIFICATEUR') %}
         <a href="{{ path('controles_retirer', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-sign-out" aria-hidden="true"></i> Retirer le Papier</a>
         <br><br>
+        {% endif %}
         <a href="{{ path('controles_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
         <br><br>         
         {% if is_granted('ROLE_ADMIN') %}

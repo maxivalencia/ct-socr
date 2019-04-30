@@ -98,6 +98,16 @@ class Controles
      */
     private $papiers_collection;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_retrait;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $heure_retrait;
+
     public function __construct()
     {
         $this->anomalies_collections = new ArrayCollection();
@@ -325,6 +335,30 @@ class Controles
         if ($this->papiers_collection->contains($papiersCollection)) {
             $this->papiers_collection->removeElement($papiersCollection);
         }
+
+        return $this;
+    }
+
+    public function getDateRetrait(): ?\DateTimeInterface
+    {
+        return $this->date_retrait;
+    }
+
+    public function setDateRetrait(?\DateTimeInterface $date_retrait): self
+    {
+        $this->date_retrait = $date_retrait;
+
+        return $this;
+    }
+
+    public function getHeureRetrait(): ?\DateTimeInterface
+    {
+        return $this->heure_retrait;
+    }
+
+    public function setHeureRetrait(?\DateTimeInterface $heure_retrait): self
+    {
+        $this->heure_retrait = $heure_retrait;
 
         return $this;
     }

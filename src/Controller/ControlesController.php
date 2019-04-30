@@ -157,6 +157,8 @@ class ControlesController extends AbstractController
             //$controle->setPapiersRetirers(true);
             //$controle->setAjouteur($user);
             $controle->setRetireur($user);
+            $controle->setDateRetrait(new \DateTime());
+            $controle->setHeureRetrait(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('controles_index');
