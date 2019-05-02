@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
 /**
  * @Route("/anomalies")
  */
@@ -18,8 +23,12 @@ class AnomaliesController extends AbstractController
     /**
      * @Route("/anomaliesliste", name="anomalies_liste", methods={"GET"})
      */
-    public function listeAnomalie(Request $request)
+    public function listeAnomalie(Request $request): Response
     {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
         $anomalies = new Anomalies();
         $anomalies = $this->getDoctrine()->getRepository(Anomalies::class)->findAll();
         $data = array();
@@ -30,7 +39,9 @@ class AnomaliesController extends AbstractController
                 "text" => $anomalie->__toString(),
             );      
         }
-        return new Response(json_encode($data), 200, array('Content-Type' => 'application/json'));
+        //return new Response(json_encode($data), 200, array('Content-Type' => 'application/json'));
+        //return new Response($serializer->serialize($data, 'json'));
+        return new Response(json_encode($data));
     }
 
     /**

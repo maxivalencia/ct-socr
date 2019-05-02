@@ -28,11 +28,6 @@ import 'chosen-js';
 import styles from './styles';
 
 $(document).ready(function() {
-    $('.multiselect').select2();
+    $('.multi').select2();
     $('.chzn').chosen();
 })
-
-$(function() {
-    $('.multiselect').select2();
-    $(".chzn").chosen();
-});
