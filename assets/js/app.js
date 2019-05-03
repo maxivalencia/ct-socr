@@ -30,4 +30,10 @@ import styles from './styles';
 $(document).ready(function() {
     $('.multi').select2();
     $('.chzn').chosen();
+    $('.essaye').append(new Option("teste", "valeur"));
+
+    /*$('.essaye').append($('<option>', {
+        value: 1,
+        text: 'My option'
+    }));*/
 })

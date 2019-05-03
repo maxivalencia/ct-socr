@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Form\Type\ButtonType;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
+use Tetranz\Select2EntityBundle\Form\Type\CollectionType;
 
 class ControlesType extends AbstractType
 {
@@ -29,32 +30,28 @@ class ControlesType extends AbstractType
             ->add('Immatriculation', TextType::class, [
                 'label' => 'Immatriculation du véhicule',
                 'required'   => true,
-                'attr' => [
-                    'class' => 'col-8',
-                ],
             ])
             ->add('usages', EntityType::class, [
                 'class' => Utilisations::class,
                 'label' => 'Usage effectif',
                 'required'   => true,
                 'attr' => [
-                    'class' => 'col-8',
+                    'class' => 'multi',
+                    'multiple' => false,
                     'data-live-search' => true,
                 ],
             ])
             ->add('Enregistrement', TextType::class, [
                 'label' => 'N° d\'enregistrement à la visite',
                 'required'   => true,
-                'attr' => [
-                    'class' => 'col-8'
-                ],
             ])
             ->add('verificateur', EntityType::class, [
                 'class' => User::class,
                 'label' => 'Nom du vérificateur',
                 'required'   => true,
                 'attr' => [
-                    'class' => 'col-8',
+                    'class' => 'multi',
+                    'multiple' => false,
                     'data-live-search' => true,
                 ],
             ])
@@ -62,42 +59,31 @@ class ControlesType extends AbstractType
             ->add('proprietaire', TextType::class, [
                 'label' => 'Nom du prorpiétaire',
                 'required'   => true,
-                'attr' => [
-                    'class' => 'col-8'
-                ],
             ])
             ->add('adresse', TextType::class, [
                 'label' => 'Adresse du propriétaire',
                 'required'   => true,
-                'attr' => [
-                    'class' => 'col-8'
-                ],
             ])
             ->add('telephone', TextType::class, [
                 'label' => 'Téléphone du propriétaire',
                 'required'   => true,
-                'attr' => [
-                    'class' => 'col-8'
-                ],
             ])
             //->add('anomalies', TextareaType::class, ['label' => 'Anomalies constatées'])
             ->add('date_expiration', DateType::class, [
                 'label' => 'Date expiration de visite technique',
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'js-datepicker col-8'
+                    'class' => 'js-datepicker'
                 ],
                 'data' => new \DateTime('now'),
                 'required'   => true,
             ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
-            ->add('anomalies_collections', EntityType::class, [
+            ->add('anomalies', EntityType::class, [
                 'class' => Anomalies::class,
-                //'remote_route' => 'anomalies_liste',
                 'label' => 'Anomalies',
-                'required'   => true,
                 'attr' => [
-                    'class' => 'multi col-8',
+                    'class' => 'multi',
                     'multiple' => true, 
                     'data-live-search' => true,
                     'data-select' => true,
@@ -108,9 +94,8 @@ class ControlesType extends AbstractType
                 'class' => Papiers::class,
                 'label' => 'Papiers',
                 'attr' => [
-                    'class' => 'multi col-8', 
-                    'multiple' => true, 
-                    'remote_route' => '',
+                    'class' => 'multi', 
+                    'multiple' => true,
                     'data-live-search' => true,
                     'data-select' => true,
                     'required' => true,

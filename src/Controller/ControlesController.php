@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Controles;
 use App\Entity\Centres;
+use App\Entity\Anomalies;
+use App\Entity\Papiers;
 use App\Form\ControlesType;
 use App\Repository\ControlesRepository;
 use App\Repository\CentresRepository;
@@ -62,16 +64,22 @@ class ControlesController extends AbstractController
     /**
      * @Route("/new", name="controles_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CentresRepository $centresRepository): Response
+    public function new(Request $request, CentresRepository $centresRepository, AnomaliesRepository $anomaliesRepository): Response
     {
         $controle = new Controles();
         $centre = new Centres();
+        $anomalies[] = new Anomalies();
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            /*foreach($form['anomalies_collections']->get() as $anomalie){
+                $anomalies[] = $anomaliesRepository->findOneBy(['anomalie' => $anomalie]);
+                //$anomalies[] = $controle->addAnomaliesCollection($anomalies);
+            }*/
+            //$controle->addAnomaliesCollection($anomalies);
             $controle->setCreatedAt(new \DateTime());
             $controle->setAnomalies('source');
             $controle->setPapiersRetirers(true);
