@@ -64,6 +64,11 @@ class Controles
     private $anomalies;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $papiers;
+
+    /**
      * @ORM\Column(type="date")
      */
     private $date_expiration;
@@ -223,6 +228,18 @@ class Controles
     public function setAnomalies(string $anomalies): self
     {
         $this->anomalies = $anomalies;
+
+        return $this;
+    }
+
+    public function getPapiers(): ?string
+    {
+        return $this->papiers;
+    }
+
+    public function setPapiers(string $papiers): self
+    {
+        $this->papiers = $papiers;
 
         return $this;
     }

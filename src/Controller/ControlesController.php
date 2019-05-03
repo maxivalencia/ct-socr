@@ -68,20 +68,23 @@ class ControlesController extends AbstractController
     {
         $controle = new Controles();
         $centre = new Centres();
-        $anomalies[] = new Anomalies();
+        $anomalies = new Anomalies();
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            /*foreach($form['anomalies_collections']->get() as $anomalie){
-                $anomalies[] = $anomaliesRepository->findOneBy(['anomalie' => $anomalie]);
-                //$anomalies[] = $controle->addAnomaliesCollection($anomalies);
+            /*$anom[] = $request->request->get('controles_anomalies[]');
+            foreach($anom as $anomalie){
+                $anomalies = $anomaliesRepository->findOneBy(['id' => $anomalie]);
+                $controle->addAnomaliesCollection($anomalies);
             }*/
-            //$controle->addAnomaliesCollection($anomalies);
+            //$controle->addAnomaliesCollection($anom);
+            //$controle->addPapiersCollection($request->request->get('controles_papiers'));
             $controle->setCreatedAt(new \DateTime());
-            $controle->setAnomalies('source');
+            $controle->setAnomalies($request->getContent('anomalies[]'));
+            $controle->setPapiers($request->getContent('papiers[]'));
             $controle->setPapiersRetirers(true);
             $controle->setAjouteur($user);
             $strnumero = explode("/", $controle->getEnregistrement());

@@ -5,4 +5,8 @@ $(document).ready(function() {
     $('.js-datepicker').datepicker({
         format : "yyyy-mm-dd"
     });
+
+    /*$('.anomalies').change(function(){
+        alert('changement');
+    });*/
 });
