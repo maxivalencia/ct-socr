@@ -113,10 +113,22 @@ class Controles
      */
     private $heure_retrait;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Anomalies", inversedBy="controles1")
+     */
+    private $anom;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Papiers", inversedBy="controles1")
+     */
+    private $pap;
+
     public function __construct()
     {
         $this->anomalies_collections = new ArrayCollection();
         $this->papiers_collection = new ArrayCollection();
+        $this->anom = new ArrayCollection();
+        $this->pap = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -376,6 +388,66 @@ class Controles
     public function setHeureRetrait(?\DateTimeInterface $heure_retrait): self
     {
         $this->heure_retrait = $heure_retrait;
+
+        return $this;
+    }
+
+    /**
+     * fonction ajouter pour résoudre le problème
+     */
+    public function setAnomaliesCollection(Array $anomaliesCollection)
+    {
+        $this->anomalies_collections = $anomaliesCollection;
+    }
+
+    /**
+     * @return Collection|Anomalies[]
+     */
+    public function getAnom(): Collection
+    {
+        return $this->anom;
+    }
+
+    public function addAnom(Anomalies $anom): self
+    {
+        if (!$this->anom->contains($anom)) {
+            $this->anom[] = $anom;
+        }
+
+        return $this;
+    }
+
+    public function removeAnom(Anomalies $anom): self
+    {
+        if ($this->anom->contains($anom)) {
+            $this->anom->removeElement($anom);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Papiers[]
+     */
+    public function getPap(): Collection
+    {
+        return $this->pap;
+    }
+
+    public function addPap(Papiers $pap): self
+    {
+        if (!$this->pap->contains($pap)) {
+            $this->pap[] = $pap;
+        }
+
+        return $this;
+    }
+
+    public function removePap(Papiers $pap): self
+    {
+        if ($this->pap->contains($pap)) {
+            $this->pap->removeElement($pap);
+        }
 
         return $this;
     }

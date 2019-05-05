@@ -38,9 +38,15 @@ class Anomalies
      */
     private $controles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Controles", mappedBy="anom")
+     */
+    private $controles1;
+
     public function __construct()
     {
         $this->controles = new ArrayCollection();
+        $this->controles1 = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +122,34 @@ class Anomalies
         if ($this->controles->contains($controle)) {
             $this->controles->removeElement($controle);
             $controle->removeAnomaliesCollection($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Controles[]
+     */
+    public function getControles1(): Collection
+    {
+        return $this->controles1;
+    }
+
+    public function addControles1(Controles $controles1): self
+    {
+        if (!$this->controles1->contains($controles1)) {
+            $this->controles1[] = $controles1;
+            $controles1->addAnom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControles1(Controles $controles1): self
+    {
+        if ($this->controles1->contains($controles1)) {
+            $this->controles1->removeElement($controles1);
+            $controles1->removeAnom($this);
         }
 
         return $this;

@@ -72,19 +72,26 @@ class ControlesController extends AbstractController
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
+        $anoma = "";
+        $parapa = "";
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            /*$anom[] = $request->request->get('controles_anomalies[]');
+            //$anom = $_POST['anomalies[]'];
+            $form = $request->request->get('controles');
+            $anom[] = $form['anomalies'];
             foreach($anom as $anomalie){
                 $anomalies = $anomaliesRepository->findOneBy(['id' => $anomalie]);
-                $controle->addAnomaliesCollection($anomalies);
-            }*/
-            //$controle->addAnomaliesCollection($anom);
-            //$controle->addPapiersCollection($request->request->get('controles_papiers'));
+                if($anomalies != null){
+                    $controle->addAnomaliesCollection($anomalies);
+                }
+                $anoma = $anoma.$anomalie." ";
+            }
+            //$controle->addAnomaliesCollection($request->request->get('controles_anomalies'));
+            //$controle->addPapiersCollection($request->request->get('papiers[]'));
             $controle->setCreatedAt(new \DateTime());
-            $controle->setAnomalies($request->getContent('anomalies[]'));
-            $controle->setPapiers($request->getContent('papiers[]'));
+            $controle->setAnomalies(implode(" ", $anom));
+            $controle->setPapiers($request->getContent('controles[papiers]'));
             $controle->setPapiersRetirers(true);
             $controle->setAjouteur($user);
             $strnumero = explode("/", $controle->getEnregistrement());
