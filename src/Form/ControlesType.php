@@ -79,7 +79,7 @@ class ControlesType extends AbstractType
                 'required'   => true,
             ])
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
-            ->add('anomalies', EntityType::class, [
+            ->add('anomalies_collections', EntityType::class, [
                 'class' => Anomalies::class,
                 'label' => 'Anomalies',
                 'attr' => [
@@ -90,7 +90,7 @@ class ControlesType extends AbstractType
                     'required' => true,
                 ],
             ])
-            ->add('papiers', EntityType::class, [
+            ->add('papiers_collection', EntityType::class, [
                 'class' => Papiers::class,
                 'label' => 'Papiers',
                 'attr' => [

@@ -10,6 +10,7 @@ use App\Form\ControlesType;
 use App\Repository\ControlesRepository;
 use App\Repository\CentresRepository;
 use App\Repository\AnomaliesRepository;
+use App\Repository\PapiersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,11 +65,12 @@ class ControlesController extends AbstractController
     /**
      * @Route("/new", name="controles_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CentresRepository $centresRepository, AnomaliesRepository $anomaliesRepository): Response
+    public function new(Request $request, CentresRepository $centresRepository, AnomaliesRepository $anomaliesRepository, PapiersRepository $papiersRepository): Response
     {
         $controle = new Controles();
         $centre = new Centres();
         $anomalies = new Anomalies();
+        $papiers = new Papiers();
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
@@ -78,20 +80,53 @@ class ControlesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             //$anom = $_POST['anomalies[]'];
-            $form = $request->request->get('controles');
+            /*$form = $request->request->get('controles');
             $anom[] = $form['anomalies'];
-            foreach($anom as $anomalie){
+            foreach($form['anomalies'] as $anomalie){
                 $anomalies = $anomaliesRepository->findOneBy(['id' => $anomalie]);
                 if($anomalies != null){
                     $controle->addAnomaliesCollection($anomalies);
                 }
-                $anoma = $anoma.$anomalie." ";
-            }
+            }*/
+            /*$j = 0;
+            $nb = 0;
+            foreach($anom as $an){
+                if($nb >= 8){
+                    if((int)$an <= $j){
+                        exit;
+                    }else{
+                        $j = (int)$an;
+                    }
+                }
+                $nb++;
+            }*/
+            /*$i = 0;
+            $a = true;
+            foreach($request->request->get('controles') as $anomalie){
+                if($i >= 8 && $a == true){
+                    $anomalies = $anomaliesRepository->findOneBy(['id' => (int)$anomalie]);
+                    if($anomalies != null){
+                        $controle->addAnomaliesCollection($anomalies);
+                    }
+                    if($anomalie == $anom){
+                        $a = false;
+                    }
+                }
+                //$t = 8 + $nb;
+                if($a == false){
+                    $papiers = $papiersRepository->findOneBy(['id' => (int)$anomalie]);
+                    if($papiers != null){
+                        $controle->addPapiersCollection($papiers);
+                    }
+                }
+                //$anoma = $anoma.$anomalie." ";
+                $i++;
+            }*/
             //$controle->addAnomaliesCollection($request->request->get('controles_anomalies'));
             //$controle->addPapiersCollection($request->request->get('papiers[]'));
             $controle->setCreatedAt(new \DateTime());
-            $controle->setAnomalies(implode(" ", $anom));
-            $controle->setPapiers($request->getContent('controles[papiers]'));
+            //$controle->setAnomalies($request->request->get('controles'));
+            //$controle->setPapiers($request->request->getContent('papiers'));
             $controle->setPapiersRetirers(true);
             $controle->setAjouteur($user);
             $strnumero = explode("/", $controle->getEnregistrement());
