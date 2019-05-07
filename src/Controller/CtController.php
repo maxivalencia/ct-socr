@@ -11,6 +11,8 @@ use App\Entity\Controles;
 use App\Entity\Roles;
 use App\Entity\Centres;
 use App\Repository\ControlesRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class CtController extends AbstractController
 {
@@ -133,6 +135,29 @@ class CtController extends AbstractController
     {
         return $this->render('ct/historique_show.html.twig', [
             'controle' => $controle,
+        ]);
+    }
+
+    /**
+     * @Route("/pdf", name="pdf", methods={"GET"})
+     */
+    public function pdf(): Response
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->render('ct/pdfsaisie.html.twig');
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        $dompdf->stream("controles.pdf", [
+            "Attachment" => false
         ]);
     }
 
