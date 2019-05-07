@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/anomalies")
@@ -41,7 +42,8 @@ class AnomaliesController extends AbstractController
         }
         //return new Response(json_encode($data), 200, array('Content-Type' => 'application/json'));
         //return new Response($serializer->serialize($data, 'json'));
-        return new Response(json_encode($data));
+        //return new Response(json_encode($data));
+        return new JsonResponse($data);
     }
 
     /**

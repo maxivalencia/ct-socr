@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * @Route("/controles")
@@ -71,18 +72,30 @@ class ControlesController extends AbstractController
         $centre = new Centres();
         $anomalies = new Anomalies();
         $papiers = new Papiers();
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $form = $this->createForm(ControlesType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
-        $anoma = "";
-        $parapa = "";
+        //$anoma = "";
+        //$parapa = "";
+        //$controle->getAnomaliesCollections()->add($anomalies);
+        //$controle->getPapiersCollection()->add($papiers);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             //$anom = $_POST['anomalies[]'];
             /*$form = $request->request->get('controles');
-            $anom[] = $form['anomalies'];
-            foreach($form['anomalies'] as $anomalie){
+            $datas = explode('\&', $form['anomalies']);
+            foreach($datas as $data){
+                //if($data == "anomalies"){
+                    $anomalies = $anomaliesRepository->findOneBy(['id' => $data]);
+                    if($anomalies != null){
+                        $controle->addAnomaliesCollection($anomalies);
+                    }
+                //}
+            }*/
+            /*$anom[] = $form['anomalies'];
+            foreach($anom as $anomalie){
                 $anomalies = $anomaliesRepository->findOneBy(['id' => $anomalie]);
                 if($anomalies != null){
                     $controle->addAnomaliesCollection($anomalies);
@@ -128,6 +141,8 @@ class ControlesController extends AbstractController
             //$controle->setAnomalies($request->request->get('controles'));
             //$controle->setPapiers($request->request->getContent('papiers'));
             $controle->setPapiersRetirers(true);
+            $controle->setAnomalies($controle->getAnomaliesCollections());
+            $controle->setPapiers($controle->getPapiersCollection());
             $controle->setAjouteur($user);
             $strnumero = explode("/", $controle->getEnregistrement());
             $numero = (int)($strnumero[2]);

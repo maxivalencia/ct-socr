@@ -59,6 +59,7 @@ class Controles
      */
     private $telephone;
 
+    
     /**
      * @ORM\Column(type="text")
      */
@@ -95,12 +96,12 @@ class Controles
     private $retireur;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Anomalies", inversedBy="controles")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Anomalies", inversedBy="controles", cascade={"persist", "remove"})
      */
     private $anomalies_collections;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Papiers", inversedBy="controles")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Papiers", inversedBy="controles", cascade={"persist", "remove"})
      */
     private $papiers_collection;
 
@@ -130,6 +131,7 @@ class Controles
         $this->papiers_collection = new ArrayCollection();
         $this->anom = new ArrayCollection();
         $this->pap = new ArrayCollection();
+        $this->translations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -324,6 +326,15 @@ class Controles
     {
         return $this->anomalies_collections;
     }
+    
+    public function setAnomaliesCollections(Anomalies $anomaliesCollection):self
+    {        
+        if (!$this->anomalies_collections->contains($anomaliesCollection)) {
+            $this->anomalies_collections[] = $anomaliesCollection;
+        }
+
+        return $this;
+    }
 
     public function addAnomaliesCollection(Anomalies $anomaliesCollection): self
     {
@@ -349,6 +360,15 @@ class Controles
     public function getPapiersCollection(): Collection
     {
         return $this->papiers_collection;
+    }
+
+    public function setPapiersCollection(Papiers $papiersCollection):self
+    {        
+        if (!$this->papiers_collection->contains($papiersCollection)) {
+            $this->papiers_collection[] = $papiersCollection;
+        }
+
+        return $this;
     }
 
     public function addPapiersCollection(Papiers $papiersCollection): self
@@ -391,14 +411,6 @@ class Controles
         $this->heure_retrait = $heure_retrait;
 
         return $this;
-    }
-
-    /**
-     * fonction ajouter pour résoudre le problème
-     */
-    public function setAnomaliesCollection(Array $anomaliesCollection)
-    {
-        $this->anomalies_collections = $anomaliesCollection;
     }
 
     /**
