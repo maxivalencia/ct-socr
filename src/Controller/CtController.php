@@ -13,9 +13,16 @@ use App\Entity\Centres;
 use App\Repository\ControlesRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class CtController extends AbstractController
 {
+    private $knpSnappy;
+
+    public function __construct(\Knp\Snappy\Pdf $knpSnappy) {
+        $this->knpSnappy = $knpSnappy;
+    }
+
     /**
      * @Route("/home", name="ct_homepage")
      */
@@ -139,26 +146,49 @@ class CtController extends AbstractController
     }
 
     /**
-     * @Route("/pdf", name="pdf", methods={"GET"})
+     * @Route("/{id}/pdf", name="pdf", methods={"GET"})
      */
-    public function pdf(): Response
+    public function pdf(Controles $controle): Response
     {
+        /*$html = $this->renderView('ct/pdfsaisie.html.twig');
+        $snappy = $this->get('knp_snappy.pdf');
+        $fichier = 'controle';
+
+        return new Response(
+            $this->KnpSnappy->getOutputFromHtml($html),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"',$fichier.'.pdf'),
+            ]
+        );*/
+        //$controle = 
+        // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-
+        
+        // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
-
-        $html = $this->render('ct/pdfsaisie.html.twig');
-
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('ct/pdfsaisie.html.twig', [
+            'controle' => $controle
+        ]);
+        
+        // Load HTML to Dompdf
         $dompdf->loadHtml($html);
-
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
         $dompdf->setPaper('A4', 'portrait');
 
+        // Render the HTML as PDF
         $dompdf->render();
 
-        $dompdf->stream("controles.pdf", [
-            "Attachment" => false
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
         ]);
+
     }
 
 }

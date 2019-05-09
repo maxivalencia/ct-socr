@@ -35,7 +35,8 @@
         "symfony/webpack-encore-bundle": "^1.5",
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "4.2.*",
-        "tetranz/select2entity-bundle": "^2.9"
+        "tetranz/select2entity-bundle": "^2.9",
+        "twig/extensions": "^1.5"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",

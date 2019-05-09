@@ -73,7 +73,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('pdf' }}" class="btn btn-success kl-bouton"><i class="fa fa-sign-out" aria-hidden="true"></i> Imprimer</a>
+        <a href="{{ path('pdf', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-sign-out" aria-hidden="true"></i> Imprimer</a>
         {% if is_granted('ROLE_VERIFICATEUR') %}
         <a href="{{ path('controles_retirer', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fa fa-sign-out" aria-hidden="true"></i> Retirer le Papier</a>
         <br><br>
