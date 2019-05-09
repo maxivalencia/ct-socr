@@ -16,6 +16,8 @@
                     <br>-----------------------------<br>
                     DIRECTION DES OPERATIONS ROUTIERE
                     <br>--------------------------<br>
+                    SERVICE DES OPERATIONS ET CONTROLE ROUTIER
+                    <br>--------------------------<br>
                     ALAROBIA – BP.784<br><br>
                     <!--img src="/dist/images/logo_dgsr.png" alt="logo" width=50px height=50px type="images/png"-->
                     <!-- fixer l'adresse du logo après déploiment -->
@@ -40,39 +42,39 @@
         <table style="font-size:14px; margin-left:50px">
             <tbody>
                 <tr>
-                    <th width="250">Immatriculation du véhicule</th>
+                    <th width="300">Immatriculation du véhicule</th>
                     <td>{{ controle.Immatriculation }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Usage effectif du véhicule</th>
+                    <th width="300">Usage effectif du véhicule</th>
                     <td>{{ controle.Usages }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Numéro d'enregistrement à la dernière visite</th>
+                    <th width="300">Numéro d'enregistrement à la dernière visite</th>
                     <td>{{ controle.Enregistrement }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Vérificateur ayant effectué le controle inopiné</th>
+                    <th width="300">Vérificateur ayant effectué le controle inopiné</th>
                     <td>{{ controle.verificateur }}</td>
                 </tr>
                 <tr>
-                    <th width="250">CENSERO ayant effectué la dernière visite</th>
+                    <th width="300">CENSERO ayant effectué la dernière visite</th>
                     <td>{{ controle.centre }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Nom du propriétaire du véhicule</th>
+                    <th width="300">Nom du propriétaire du véhicule</th>
                     <td>{{ controle.proprietaire }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Adresse du propriétaire du véhicule</th>
+                    <th width="300">Adresse du propriétaire du véhicule</th>
                     <td>{{ controle.adresse }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Telephone du propriétaire du véhicule</th>
+                    <th width="300">Telephone du propriétaire du véhicule</th>
                     <td>{{ controle.telephone }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Anomalies constatées sur le véhicule</th>
+                    <th width="300">Anomalies constatées sur le véhicule</th>
                     <td>
                         {% for anomalies_collection in controle.getAnomaliesCollections %}
                             {{ anomalies_collection }}
@@ -80,11 +82,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <th width="250">Date expiration de la dernière visite technique</th>
+                    <th width="300">Date expiration de la dernière visite technique</th>
                     <td>{{ controle.dateExpiration ? controle.dateExpiration|date('Y-m-d') : '' }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Papiers retirés concernant le véhicule</th>
+                    <th width="300">Papiers retirés concernant le véhicule</th>
                     <td>
                         {% for papier_collection in controle.getPapiersCollection %}
                             {{ papier_collection }}
@@ -92,27 +94,27 @@
                     </td>
                 </tr>
                 <tr>
-                    <th width="250">Date du contrôle inopiné effectué</th>
+                    <th width="300">Date du contrôle inopiné effectué</th>
                     <td>{{ controle.CreatedAt ? controle.CreatedAt|date('Y-m-d') : '' }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Centre pour la récupération des papiers</th>
+                    <th width="300">Centre pour la récupération des papiers</th>
                     <td>{{ controle.verificateur.centre }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Personnel ayant ajouter ce véhicule dans la base</th>
+                    <th width="300">Personnel ayant ajouter ce véhicule dans la base</th>
                     <td>{{ controle.ajouteur }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Date et heure de retrait du véhicule de la base de donnée</th>
+                    <th width="300">Date et heure de retrait du véhicule de la base de donnée</th>
                     <td>{{ controle.getDateRetrait()|date('Y-m-d') }} {{ controle.getHeureRetrait()|date('H:m:s') }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Personnel ayant retirer ce véhicule de la base</th>
+                    <th width="300">Personnel ayant retirer ce véhicule de la base</th>
                     <td>{{ controle.retireur }}</td>
                 </tr>
                 <tr>
-                    <th width="250">Centre ayant retirer le véhicule de la base</th>
+                    <th width="300">Centre ayant retirer le véhicule de la base</th>
                     <td>{% if controle.retireur %}{{ controle.retireur.centre }}{% endif %}</td>
                 </tr>
             </tbody>

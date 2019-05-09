@@ -5,7 +5,7 @@
 {% block contenue %}
     <div class="container">
         <div class="row justify-content-center align-items-center kl-sous-titre">
-            <h1>Statistiques</h1>
+            <h1>Statistiques Total</h1>
         </div>
 
         <table class="table">
@@ -32,5 +32,8 @@
                 </tr>
             </tbody>
         </table>
+        <a href="{{ path('ct_statistique', {'page': 'hebdo'}) }}" class="btn btn-success kl-bouton"><i class="fas fa-print" aria-hidden="true"></i> rapport hebdomadaire</a>
+        <a href="{{ path('ct_statistique', {'page': 'mensuel'}) }}" class="btn btn-success kl-bouton"><i class="fas fa-print" aria-hidden="true"></i> rapport mensuel</a>
+        <a href="{{ path('ct_statistique', {'page': 'annuel'}) }}" class="btn btn-success kl-bouton"><i class="fas fa-print" aria-hidden="true"></i> rapport annuel</a>
     </div>
 {% endblock %}

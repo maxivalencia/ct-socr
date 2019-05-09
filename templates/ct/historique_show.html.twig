@@ -88,7 +88,7 @@
                 </tr>
             </tbody>
         </table>
-
+        <a href="{{ path('pdf', {'id': controle.id}) }}" class="btn btn-success kl-bouton"><i class="fas fa-print" aria-hidden="true"></i> Imprimer</a>
         <a href="{{ path('historique_index') }}" class="btn btn-primary kl-bouton"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour vers la liste</a>
     </div>
 {% endblock %}

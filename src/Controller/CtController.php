@@ -69,35 +69,112 @@ class CtController extends AbstractController
     /**
      * @Route("/statistique", name="ct_statistique")
      */
-    public function statistique(){
-        $role = new Roles();
-        $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
-        $role_id = $role->getId();
-        $user = new User();
-        $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
-        $verificateur = count($user);
-        $controle = new Controles();
-        $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
-        $controlerealiser = count($controle);
-        $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
-        $papierrestant = count($controle);
-        $papierretirer = $controlerealiser - $papierrestant;
-        $centre = new Centres();
-        $centre = $this->getDoctrine()->getRepository(Centres::class)->findAll();
-        $nombre_centre = count($centre);
-        return $this->render('ct/stat.html.twig', [
-            'controlerealiser' => $controlerealiser,
-            'papierretirer' => $papierretirer,
-            'papierrestant' => $papierrestant,
-            'nombreverificateur' => $verificateur,
-            'nombrecentre' => $nombre_centre,
-        ]);
+    public function statistique(Request $request){
+        $parametre = $request->query->get('page');
+        switch($parametre) {
+            case "hebdo" :
+                $role = new Roles();
+                $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
+                $role_id = $role->getId();
+                $user = new User();
+                $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
+                $verificateur = count($user);
+                $controle = new Controles();
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll(['CreatedAt' => '']);
+                $controlerealiser = count($controle);
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+                $papierrestant = count($controle);
+                $papierretirer = $controlerealiser - $papierrestant;
+                $centre = new Centres();
+                $centre = $this->getDoctrine()->getRepository(Centres::class)->findAll();
+                $nombre_centre = count($centre);
+                return $this->render('ct/stat.html.twig', [
+                    'controlerealiser' => $controlerealiser,
+                    'papierretirer' => $papierretirer,
+                    'papierrestant' => $papierrestant,
+                    'nombreverificateur' => $verificateur,
+                    'nombrecentre' => $nombre_centre,
+                ]);
+                break;
+            case "mensuel" :
+                $role = new Roles();
+                $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
+                $role_id = $role->getId();
+                $user = new User();
+                $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
+                $verificateur = count($user);
+                $controle = new Controles();
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
+                $controlerealiser = count($controle);
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+                $papierrestant = count($controle);
+                $papierretirer = $controlerealiser - $papierrestant;
+                $centre = new Centres();
+                $centre = $this->getDoctrine()->getRepository(Centres::class)->findAll();
+                $nombre_centre = count($centre);
+                return $this->render('ct/stat.html.twig', [
+                    'controlerealiser' => $controlerealiser,
+                    'papierretirer' => $papierretirer,
+                    'papierrestant' => $papierrestant,
+                    'nombreverificateur' => $verificateur,
+                    'nombrecentre' => $nombre_centre,
+                ]);
+                break;
+            case "annuel" :
+                $role = new Roles();
+                $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
+                $role_id = $role->getId();
+                $user = new User();
+                $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
+                $verificateur = count($user);
+                $controle = new Controles();
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
+                $controlerealiser = count($controle);
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+                $papierrestant = count($controle);
+                $papierretirer = $controlerealiser - $papierrestant;
+                $centre = new Centres();
+                $centre = $this->getDoctrine()->getRepository(Centres::class)->findAll();
+                $nombre_centre = count($centre);
+                return $this->render('ct/stat.html.twig', [
+                    'controlerealiser' => $controlerealiser,
+                    'papierretirer' => $papierretirer,
+                    'papierrestant' => $papierrestant,
+                    'nombreverificateur' => $verificateur,
+                    'nombrecentre' => $nombre_centre,
+                ]);
+                break;
+            default :
+                $role = new Roles();
+                $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
+                $role_id = $role->getId();
+                $user = new User();
+                $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
+                $verificateur = count($user);
+                $controle = new Controles();
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
+                $controlerealiser = count($controle);
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
+                $papierrestant = count($controle);
+                $papierretirer = $controlerealiser - $papierrestant;
+                $centre = new Centres();
+                $centre = $this->getDoctrine()->getRepository(Centres::class)->findAll();
+                $nombre_centre = count($centre);
+                return $this->render('ct/stat.html.twig', [
+                    'controlerealiser' => $controlerealiser,
+                    'papierretirer' => $papierretirer,
+                    'papierrestant' => $papierrestant,
+                    'nombreverificateur' => $verificateur,
+                    'nombrecentre' => $nombre_centre,
+                ]);
+                break;
+        }
     }
 
     /**
      * @Route("/historique", name="historique_index", methods={"GET"})
      */
-    public function historique(ControlesRepository $controlesRepository, Request $request): Response
+    public function historique(\App\Repository\ControlesRepository $controlesRepository, Request $request): Response
     {
         $recherche = $request->query->get('recherche');
         if($recherche){
@@ -150,42 +227,17 @@ class CtController extends AbstractController
      */
     public function pdf(Controles $controle): Response
     {
-        /*$html = $this->renderView('ct/pdfsaisie.html.twig');
-        $snappy = $this->get('knp_snappy.pdf');
-        $fichier = 'controle';
-
-        return new Response(
-            $this->KnpSnappy->getOutputFromHtml($html),
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => sprintf('attachment; filename="%s"',$fichier.'.pdf'),
-            ]
-        );*/
-        //$controle = 
-        // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-        
-        // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
-        
-        // Retrieve the HTML generated in our twig file
         $html = $this->renderView('ct/pdfsaisie.html.twig', [
             'controle' => $controle
         ]);
-        
-        // Load HTML to Dompdf
         $dompdf->loadHtml($html);
-        
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
         $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
         $dompdf->render();
-
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
+        $fichier = $controle->getImmatriculation();
+        $dompdf->stream("Controle_".$fichier.".pdf", [
             "Attachment" => true
         ]);
 
