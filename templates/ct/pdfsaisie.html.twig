@@ -16,7 +16,7 @@
                     <br>-----------------------------<br>
                     DIRECTION DES OPERATIONS ROUTIERE
                     <br>--------------------------<br>
-                    SERVICE DES OPERATIONS ET CONTROLE ROUTIER
+                    SERVICE DES OPERATIONS ET CONTROLES ROUTIERS
                     <br>--------------------------<br>
                     ALAROBIA – BP.784<br><br>
                     <!--img src="/dist/images/logo_dgsr.png" alt="logo" width=50px height=50px type="images/png"-->
@@ -74,10 +74,10 @@
                     <td>{{ controle.telephone }}</td>
                 </tr>
                 <tr>
-                    <th width="300">Anomalies constatées sur le véhicule</th>
+                    <th width="300" valign="top">Anomalies constatées sur le véhicule</th>
                     <td>
                         {% for anomalies_collection in controle.getAnomaliesCollections %}
-                            {{ anomalies_collection }}
+                            {{ anomalies_collection.anomalie }}<br>
                         {% endfor %}
                     </td>
                 </tr>

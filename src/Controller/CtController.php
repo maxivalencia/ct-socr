@@ -80,7 +80,13 @@ class CtController extends AbstractController
                 $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
                 $verificateur = count($user);
                 $controle = new Controles();
-                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll(['CreatedAt' => '']);
+                $now = new \DateTime();
+                //list($annee, $mois, $jour) = explode('-', $now);
+                //$jour_supp = '7';
+                //$date = date("Y-m-d", mktime(0, 0, 0, $mois, $jour-$jour_supp, $annee));
+                $date = new \DateTime();
+                $date->add(new DateInterval(P1D));
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->getDays($now, $date);
                 $controlerealiser = count($controle);
                 $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
                 $papierrestant = count($controle);

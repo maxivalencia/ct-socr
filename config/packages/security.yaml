@@ -48,11 +48,16 @@ security:
         - { path: ^/provinces, roles: ROLE_ADMIN }
         - { path: ^/professions, roles: ROLE_ADMIN }
         - { path: ^/roles, roles: ROLE_ADMIN }
-        - { path: ^/centres, roles: ROLE_ADMIN }
+        - { path: ^/centres, roles: ROLE_ADMIN }        
+        - { path: ^/historique, roles: ROLE_ADMIN }
+        - { path: ^/papiers, roles: ROLE_ADMIN }
+        - { path: ^/anomalietype, roles: ROLE_ADMIN }
+        - { path: ^/anomalies, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/utilisations, roles: ROLE_ADMIN }
         - { path: ^/controles, roles: ROLE_SECRETAIRE }
         - { path: ^/profil, roles: ROLE_SECRETAIRE }
+        - { path: ^/statistique, roles: ROLE_SECRETAIRE }
 
     role_hierarchy:
         ROLE_SECRETAIRE: ROLE_USER

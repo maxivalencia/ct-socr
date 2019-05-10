@@ -19,6 +19,19 @@ class ControlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Controles::class);
     }
 
+    public function getDays(\DateTime $firstDateTime, \DateTime $lastDateTime)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder("c")
+            ->where('c.CreatedAt BETWEEN :firstDate AND :lastDate')
+            ->setParameter('firstDate', $firstDateTime)
+            ->setParameter('lastDate', $lastDateTime)
+        ;
+
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Controles[] Returns an array of Controles objects
     //  */
