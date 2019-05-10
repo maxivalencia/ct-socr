@@ -14,6 +14,7 @@ use App\Repository\ControlesRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Carbon\Carbon;
 
 class CtController extends AbstractController
 {
@@ -80,12 +81,8 @@ class CtController extends AbstractController
                 $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
                 $verificateur = count($user);
                 $controle = new Controles();
-                $now = new \DateTime();
-                //list($annee, $mois, $jour) = explode('-', $now);
-                //$jour_supp = '7';
-                //$date = date("Y-m-d", mktime(0, 0, 0, $mois, $jour-$jour_supp, $annee));
-                $date = new \DateTime();
-                $date->add(new DateInterval(P1D));
+                $now = Carbon::now();
+                $date = Carbon::now()->subWeek();
                 $controle = $this->getDoctrine()->getRepository(Controles::class)->getDays($now, $date);
                 $controlerealiser = count($controle);
                 $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
@@ -110,7 +107,9 @@ class CtController extends AbstractController
                 $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
                 $verificateur = count($user);
                 $controle = new Controles();
-                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
+                $now = new \DateTime();
+                $date = Carbon::now()->subMonth();;
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->getDays($now, $date);
                 $controlerealiser = count($controle);
                 $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
                 $papierrestant = count($controle);
@@ -134,7 +133,9 @@ class CtController extends AbstractController
                 $user = $this->getDoctrine()->getRepository(User::class)->findBy(['role' => $role_id]);
                 $verificateur = count($user);
                 $controle = new Controles();
-                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll();
+                $now = new \DateTime();
+                $date = Carbon::now()->subYear();;
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->getDays($now, $date);
                 $controlerealiser = count($controle);
                 $controle = $this->getDoctrine()->getRepository(Controles::class)->findBy(['retireur' => null]);
                 $papierrestant = count($controle);

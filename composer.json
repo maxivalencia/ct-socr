@@ -9,6 +9,7 @@
         "harvesthq/chosen": "^1.8",
         "knplabs/knp-paginator-bundle": "^3.0",
         "knplabs/knp-snappy-bundle": "^1.6",
+        "nesbot/carbon": "^2.17",
         "sensio/framework-extra-bundle": "^5.2",
         "snapappointments/bootstrap-select": "^1.13",
         "sonata-project/admin-bundle": "^3.48",

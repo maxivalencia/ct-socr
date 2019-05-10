@@ -21,7 +21,7 @@ class ControlesRepository extends ServiceEntityRepository
 
     public function getDays(\DateTime $firstDateTime, \DateTime $lastDateTime)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder("c")
+        $qb = $this->createQueryBuilder("c")
             ->where('c.CreatedAt BETWEEN :firstDate AND :lastDate')
             ->setParameter('firstDate', $firstDateTime)
             ->setParameter('lastDate', $lastDateTime)
