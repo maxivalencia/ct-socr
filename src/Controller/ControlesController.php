@@ -84,8 +84,8 @@ class ControlesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             //$anom = $_POST['anomalies[]'];
-            /*$form = $request->request->get('controles');
-            $datas = explode('\&', $form['anomalies']);
+            $form = $request->request->get('controles[anomalies_collections]', null, true);
+            $datas[] = $form['controles[anomalies_collections]'];
             foreach($datas as $data){
                 //if($data == "anomalies"){
                     $anomalies = $anomaliesRepository->findOneBy(['id' => $data]);
@@ -93,7 +93,7 @@ class ControlesController extends AbstractController
                         $controle->addAnomaliesCollection($anomalies);
                     }
                 //}
-            }*/
+            }
             /*$anom[] = $form['anomalies'];
             foreach($anom as $anomalie){
                 $anomalies = $anomaliesRepository->findOneBy(['id' => $anomalie]);

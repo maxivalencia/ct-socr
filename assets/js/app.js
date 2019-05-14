@@ -31,7 +31,11 @@ $(document).ready(function() {
     $('.multi').select2();
     $('.chzn').chosen();
     $('.essaye').append(new Option("teste", "valeur"));
-
+    /*
+    $( "#ajout_controle" ).click(function() {
+        alert( "Handler for .click() called." );
+    });
+    */
     /*$('.essaye').append($('<option>', {
         value: 1,
         text: 'My option'

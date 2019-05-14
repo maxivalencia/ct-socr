@@ -1,6 +1,7 @@
 <div class="form-horizontal">
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-success kl-bouton controles"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{ button_label|default('Ajouter') }}</button>
+    <button class="btn btn-success kl-bouton controles" id="ajout_controle"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{ button_label|default('Ajouter') }}</button>
+    {#<input class="btn btn-success kl-bouton controles" type="button" id="ajout_controle" value="Ajouter">#}
 {{ form_end(form) }}
 </div>
