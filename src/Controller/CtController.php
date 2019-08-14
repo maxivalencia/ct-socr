@@ -237,8 +237,10 @@ class CtController extends AbstractController
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         $dompdf = new Dompdf($pdfOptions);
+        $logo = $this->getParameter('image').'/logo_dgsr.png';
         $html = $this->renderView('ct/pdfsaisie.html.twig', [
-            'controle' => $controle
+            'controle' => $controle,
+            'logo' => $logo,
         ]);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
