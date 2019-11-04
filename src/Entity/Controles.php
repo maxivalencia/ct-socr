@@ -87,21 +87,25 @@ class Controles
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="controleajout")
+     * @ORM\JoinTable(name="thread_ajouteur")
      */
     private $ajouteur;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="controlesretire")
+     * @ORM\JoinTable(name="thread_retireur")
      */
     private $retireur;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Anomalies", inversedBy="controles", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="thread_anomalies")
      */
     private $anomalies_collections;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Papiers", inversedBy="controles", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="thread_papiers")
      */
     private $papiers_collection;
 
@@ -117,11 +121,13 @@ class Controles
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Anomalies", inversedBy="controles1")
+     * @ORM\JoinTable(name="thread_anom")
      */
     private $anom;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Papiers", inversedBy="controles1")
+     * @ORM\JoinTable(name="thread_pap")
      */
     private $pap;
 
