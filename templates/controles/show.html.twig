@@ -46,7 +46,7 @@
                     <th>Anomalies constatées sur le véhicule</th>
                     <td>
                         {% for anomalies_collection in controle.getAnomaliesCollections %}
-                            {{ anomalies_collection }}
+                            {{ anomalies_collection }} -
                         {% endfor %}
                     </td>
                 </tr>
@@ -58,7 +58,7 @@
                     <th>Papiers retirés concernant le véhicule</th>
                     <td>
                         {% for papier_collection in controle.getPapiersCollection %}
-                            {{ papier_collection }}
+                            {{ papier_collection }} -
                         {% endfor %}
                     </td>
                 </tr>

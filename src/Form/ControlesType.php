@@ -78,6 +78,8 @@ class ControlesType extends AbstractType
                 'data' => new \DateTime('now'),
                 'required'   => true,
             ])
+            //->add('anomalies_collections')
+            //->add('papiers_collection')
             //->add('papiers_retirers', CheckboxType::class, ['label' => 'Papiers retiré'])
             ->add('anomalies_collections', EntityType::class, [
                 'class' => Anomalies::class,

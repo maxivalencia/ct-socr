@@ -23,6 +23,7 @@
             <link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css" type="text/css" />
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+            
         {% endblock %}
     </head>
     <body class="kl-largeur-ecran">
@@ -49,11 +50,13 @@
             {{ encore_entry_script_tags('app') }}
             <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+        
             
             <script type="text/javascript">
                 $(document).ready(function() {
                     //$("#controles_anomalies_collections").multiSelect();
                     //$(".multi").select2();
+                    $("select").select2();
                 });
             </script>
         {% endblock %}

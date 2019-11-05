@@ -7,6 +7,7 @@ use App\Entity\Centres;
 use App\Entity\Anomalies;
 use App\Entity\Papiers;
 use App\Form\ControlesType;
+use App\Form\ContinoType;
 use App\Repository\ControlesRepository;
 use App\Repository\CentresRepository;
 use App\Repository\AnomaliesRepository;
@@ -73,7 +74,8 @@ class ControlesController extends AbstractController
         $anomalies = new Anomalies();
         $papiers = new Papiers();
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $form = $this->createForm(ControlesType::class, $controle);
+        //$form = $this->createForm(ControlesType::class, $controle);
+        $form = $this->createForm(ContinoType::class, $controle);
         $form->handleRequest($request);
         $user = $this->getUser();
         //$anoma = "";
@@ -84,8 +86,8 @@ class ControlesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             //$anom = $_POST['anomalies[]'];
-            $form = $request->request->get('controles[anomalies_collections]', null, true);
-            $datas[] = $form['controles[anomalies_collections]'];
+            //$form = $request->request->get('controles[anomalies_collections]', null, true);
+            /* $datas[] = $form['controles[anomalies_collections]'];
             foreach($datas as $data){
                 //if($data == "anomalies"){
                     $anomalies = $anomaliesRepository->findOneBy(['id' => $data]);
@@ -93,7 +95,7 @@ class ControlesController extends AbstractController
                         $controle->addAnomaliesCollection($anomalies);
                     }
                 //}
-            }
+            } */
             /*$anom[] = $form['anomalies'];
             foreach($anom as $anomalie){
                 $anomalies = $anomaliesRepository->findOneBy(['id' => $anomalie]);
