@@ -83,7 +83,7 @@
                 </tr>
                 <tr>
                     <th width="300">Date expiration de la dernière visite technique</th>
-                    <td>{{ controle.dateExpiration ? controle.dateExpiration|date('Y-m-d') : '' }}</td>
+                    <td>{{ controle.dateExpiration ? controle.dateExpiration|date('d m y') : '' }}</td>
                 </tr>
                 <tr>
                     <th width="300">Papiers retirés concernant le véhicule</th>
@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                     <th width="300">Date du contrôle inopiné effectué</th>
-                    <td>{{ controle.CreatedAt ? controle.CreatedAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ controle.CreatedAt ? controle.CreatedAt|date('d m Y') : '' }}</td>
                 </tr>
                 <tr>
                     <th width="300">Centre pour la récupération des papiers</th>
@@ -107,7 +107,7 @@
                 </tr>
                 <tr>
                     <th width="300">Date et heure de retrait du véhicule de la base de donnée</th>
-                    <td>{{ controle.getDateRetrait()|date('Y-m-d') }} {{ controle.getHeureRetrait()|date('H:m:s') }}</td>
+                    <td>{{ controle.getDateRetrait()|date('d m Y') }} {{ controle.getHeureRetrait()|date('H:m:s') }}</td>
                 </tr>
                 <tr>
                     <th width="300">Personnel ayant retirer ce véhicule de la base</th>

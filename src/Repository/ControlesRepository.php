@@ -32,6 +32,22 @@ class ControlesRepository extends ServiceEntityRepository
         return $result;
     }
 
+    /**
+     * @return Controles[] Returns an array of Controles objects
+     */    
+    public function findHebdoDate($value1, $value2)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.CreatedAt = :val')
+            ->setParameter('val', $value1)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Controles[] Returns an array of Controles objects
     //  */

@@ -1,0 +1,85 @@
+{# ./templates/ct/pdfsaisie.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contrôles inopiné</title>
+    </head>
+    <body>
+        <table style="font-size:10px">
+            <tr>
+                <td width="500" align="center">
+                    SECRETARIAT D’ETAT AU PRES DU MINISTERE DE LA<br>
+                    DEFENSE NATIONALE CHARGE DE LA GENDARMERIE
+                    <br>--------------------------<br>
+                    DIRECTION GENERALE DE LA SECURITE ROUTIERE
+                    <br>-----------------------------<br>
+                    DIRECTION DES OPERATIONS ROUTIERE
+                    <br>--------------------------<br>
+                    SERVICE DES OPERATIONS ET CONTROLES ROUTIERS
+                    <br>--------------------------<br>
+                    ALAROBIA – BP.784<br><br>
+                    <img src="{{ logo }}" alt="logo" width=50px height=50px type="images/png">
+                    <!-- fixer l'adresse du logo après déploiment -->
+                    <!-- img src="H:\socr\ct-socr\public\dist\images\logo_dgsr.png" alt="logo" width=30px height=30px type="images/png" -->
+                    <br>« LAHITOKANA NY AINA »
+                </td>
+                <td width="30">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td width="200" align="center" valign="top">
+                    REPOBLIKAN’I MADAGASIKARA<br>
+                    Fitiavana-Tanindrazana-Fandrosoana
+                    <br>--------------------------<br><br>
+                    Antananarivo, le {{ "now"|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}
+                </td>
+            </tr>
+        </table>
+        <p align="center"><u><H3>RAPPORT JOURNALIERE CONTROLE TECHNIQUE</H3></u></p>
+        <table class="table" style="font-size:12px; border-width:1px; border-style:solid; border-color:black; border-spacing: 0px;">
+            <thead>
+                <tr style="text-align:center;">
+                    <!--<th>Id</th>-->
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Immatriculation</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Usage</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Enregistrement</th>                    
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Vérificateur</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Propriétaire</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Anomalies</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">ajouteur</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">extracteur</th>
+                    <th cellspacing=0 style="font-weight:bold; border-width:1px; border-style:solid; border-color:black;">Papier</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for controle in controles %}
+                <tr>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.Immatriculation }}</td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.Usages }}</td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.Enregistrement }}</td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.verificateur }}</td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.proprietaire }}<br>{{ controle.adresse }}<br>{{ controle.telephone }}</td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">
+                        {% for anomalies_collection in controle.getAnomaliesCollections %}
+                            {{ anomalies_collection }}
+                        {% endfor %}
+                    </td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.ajouteur }}</td>                    
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">{{ controle.retireur }}</td>
+                    <td cellspacing=0 style="font-size:12px; border-width:1px; border-style:solid; border-color:black;">
+                        {% for papier_collection in controle.getPapiersCollection %}
+                            {{ papier_collection }}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11">Aucun enregistrement trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
