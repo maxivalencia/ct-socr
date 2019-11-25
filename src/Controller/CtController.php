@@ -89,7 +89,8 @@ class CtController extends AbstractController
                 $now = Carbon::now();
                 $date = Carbon::now()->subWeek();
                 //
-                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll(['centre' => $this->getUser()->getCentre()]);$controle = $this->getDoctrine()->getRepository(Controles::class)->getDays($now, $date);
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll(['centre' => $this->getUser()->getCentre()]);
+                $controle = $this->getDoctrine()->getRepository(Controles::class)->getDays($now, $date);
                 $controle = $this->getDoctrine()->getRepository(Controles::class)->findAll(['centre' => $this->getUser()->getCentre()]);
                 $controlerealiser = 0;
                 foreach($controle as $cont){
@@ -329,7 +330,7 @@ class CtController extends AbstractController
     /**
      * @Route("/{id}/pdf", name="pdf", methods={"GET"})
      */
-    public function pdf(Controles $controle): Response
+    public function pdf(Controles $controle)//: Response
     {
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -352,7 +353,7 @@ class CtController extends AbstractController
     /**
      * @Route("/pdfcontrole", name="pdfcontrole", methods={"GET"})
      */
-    public function pdfControle(Request $request): Response
+    public function pdfControle(Request $request)//: Response
     {
         $role = new Roles();
         $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
@@ -416,7 +417,7 @@ class CtController extends AbstractController
     /**
      * @Route("/pdfcontroleannuel", name="pdfcontroleannuel", methods={"GET"})
      */
-    public function pdfControleAnnuel(Request $request): Response
+    public function pdfControleAnnuel(Request $request)//: Response
     {
         $role = new Roles();
         $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
@@ -482,7 +483,7 @@ class CtController extends AbstractController
     /**
      * @Route("/pdfcontrolemensuel", name="pdfcontrolemensuel", methods={"GET"})
      */
-    public function pdfControleMensuel(Request $request): Response
+    public function pdfControleMensuel(Request $request)//: Response
     {
         $role = new Roles();
         $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
@@ -548,7 +549,7 @@ class CtController extends AbstractController
     /**
      * @Route("/pdfcontrolehebdomadaire", name="pdfcontrolehebdomadaire", methods={"GET"})
      */
-    public function pdfControleHebdomadaire(Request $request): Response
+    public function pdfControleHebdomadaire(Request $request)//: Response
     {
         $role = new Roles();
         $role = $this->getDoctrine()->getRepository(Roles::class)->findOneBy(['role' => 'VERIFICATEUR']);
@@ -614,7 +615,7 @@ class CtController extends AbstractController
     /**
      * @Route("/pdfhistorique", name="pdfhistorique", methods={"GET"})
      */
-    public function pdfHistorique(\App\Repository\ControlesRepository $controlesRepository, Request $request): Response
+    public function pdfHistorique(\App\Repository\ControlesRepository $controlesRepository, Request $request)//: Response
     {
         $recherche = $request->query->get('recherche');
         if($recherche){
