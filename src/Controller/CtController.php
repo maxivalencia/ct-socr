@@ -11,10 +11,15 @@ use App\Entity\Controles;
 use App\Entity\Roles;
 use App\Entity\Centres;
 use App\Repository\ControlesRepository;
+use App\Repository\AnomaliesRepository;
+use App\Repository\PapiersRepository;
+use App\Repository\UserRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class CtController extends AbstractController
 {

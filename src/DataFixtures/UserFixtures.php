@@ -22,10 +22,10 @@ class UserFixtures extends Fixture
         $user = new User();
         // $product = new Product();
         // $manager->persist($product);
-        $user->setUsername("superadmin@ct.mg");
+        $user->setUsername("superadmin@cr.mg");
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
-            'sitadmin19'
+            'sitadmin_20#'
         ));
         $user->setRoles(['ROLE_SUPERADMIN']);
 

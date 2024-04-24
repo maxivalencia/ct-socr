@@ -20,7 +20,7 @@ class Controles
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Immatriculation;
 
@@ -30,7 +30,7 @@ class Controles
     private $usages;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Enregistrement;
 
@@ -45,12 +45,12 @@ class Controles
     private $centre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $proprietaire;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresse;
 
@@ -59,19 +59,18 @@ class Controles
      */
     private $telephone;
 
-    
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $anomalies;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $papiers;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $date_expiration;
 
@@ -130,6 +129,51 @@ class Controles
      * @ORM\JoinTable(name="thread_pap")
      */
     private $pap;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $mise_en_fourriere;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom_chauffeur;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $contact_chauffeur;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $feuille_de_controle;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lieu_de_controle;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $code;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $time_created_at;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_debut;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="controles")
+     */
+    private $verificateur_contre;
 
     public function __construct()
     {
@@ -332,9 +376,9 @@ class Controles
     {
         return $this->anomalies_collections;
     }
-    
+
     public function setAnomaliesCollections(Anomalies $anomaliesCollection):self
-    {        
+    {
         if (!$this->anomalies_collections->contains($anomaliesCollection)) {
             $this->anomalies_collections[] = $anomaliesCollection;
         }
@@ -369,7 +413,7 @@ class Controles
     }
 
     public function setPapiersCollection(Papiers $papiersCollection):self
-    {        
+    {
         if (!$this->papiers_collection->contains($papiersCollection)) {
             $this->papiers_collection[] = $papiersCollection;
         }
@@ -467,6 +511,114 @@ class Controles
         if ($this->pap->contains($pap)) {
             $this->pap->removeElement($pap);
         }
+
+        return $this;
+    }
+
+    public function getMiseEnFourriere(): ?bool
+    {
+        return $this->mise_en_fourriere;
+    }
+
+    public function setMiseEnFourriere(bool $mise_en_fourriere): self
+    {
+        $this->mise_en_fourriere = $mise_en_fourriere;
+
+        return $this;
+    }
+
+    public function getVerificateurContre(): ?User
+    {
+        return $this->verificateur_contre;
+    }
+
+    public function setVerificateurContre(?User $verificateur_contre): self
+    {
+        $this->verificateur_contre = $verificateur_contre;
+
+        return $this;
+    }
+
+    public function getTimeCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->time_created_at;
+    }
+
+    public function setTimeCreatedAt(?\DateTimeInterface $time_created_at): self
+    {
+        $this->time_created_at = $time_created_at;
+
+        return $this;
+    }
+
+    public function setDateDebut(?\DateTimeInterface $date_debut): self
+    {
+        $this->date_debut = $date_debut;
+
+        return $this;
+    }
+
+    public function getDateDebut(): ?\DateTimeInterface
+    {
+        return $this->date_debut;
+    }
+
+    public function getNomChauffeur(): ?string
+    {
+        return $this->nom_chauffeur;
+    }
+
+    public function setNomChauffeur(string $nom_chauffeur): self
+    {
+        $this->nom_chauffeur = $nom_chauffeur;
+
+        return $this;
+    }
+
+    public function getContactChauffeur(): ?string
+    {
+        return $this->contact_chauffeur;
+    }
+
+    public function setContactChauffeur(string $contact_chauffeur): self
+    {
+        $this->contact_chauffeur = $contact_chauffeur;
+
+        return $this;
+    }
+
+    public function getFeuilleDeControle(): ?string
+    {
+        return $this->feuille_de_controle;
+    }
+
+    public function setFeuilleDeControle(string $feuille_de_controle): self
+    {
+        $this->feuille_de_controle = $feuille_de_controle;
+
+        return $this;
+    }
+
+    public function getLieuDeControle(): ?string
+    {
+        return $this->lieu_de_controle;
+    }
+
+    public function setLieuDeControle(string $lieu_de_controle): self
+    {
+        $this->lieu_de_controle = $lieu_de_controle;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }
