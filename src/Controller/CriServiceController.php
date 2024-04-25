@@ -12,6 +12,8 @@ use App\Repository\UserRepository;
 use App\Repository\AnomaliesRepository;
 use App\Repository\PapiersRepository;
 use App\Entity\User;
+use App\Entity\Controles;
+use App\Repository\ControlesRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -127,6 +129,85 @@ class CriServiceController extends AbstractController
             "message" => $message,
         ];
         $response = new JsonResponse($user_connected);
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/validation/service", name="validation_service", methods={"GET", "POST"})
+     */
+    public function ValidationService(Request $request, PapiersRepository $papiersRepository, AnomaliesRepository $anomaliesRepository, ControlesRepository $controlesRepository, UserRepository $userRepository)//: Response
+    {
+        $controle_validated = [
+            "id_controle" => 0,
+            "code" => 404,
+            "message" => "",
+            "nombre_photo" => 0,
+            "liste_photo" => "",
+        ];
+
+        $liste_photo = "Photo_face";
+
+        $id_user = $request->query->get("user_id");
+        $immatriculation = $request->query->get("immatriculation");
+        $nom_chauffeur = $request->query->get("nom_chauffeur");
+        $contact_chauffeur = $request->query->get("contact_chauffeur");
+        $feuille_de_controle = $request->query->get("feuille_de_controle");
+        $proprietaire = $request->query->get("proprietaire");
+        $contact_proprietaire = $request->query->get("contact_proprietaire");
+        $lieu_de_controle = $request->query->get("lieu_de_controle");
+        $anomalies = $request->query->get("anomalies");
+        $papiers = $request->query->get("papiers");
+        $date_recuperation = $request->query->get("date_recuperation");
+        $date_fin_recuperation = $request->query->get("date_fin_recuperation");
+        $mise_en_fourriere = $request->query->get("mise_en_fourriere");
+        
+        $controle = new Controles();
+
+        $user = $userRepository->findOneBy(["id" => $id_user]);
+        var_dump($anomalies);
+        $controle->setImmatriculation($immatriculation);
+        $controle->setVerificateur($user);
+        $controle->setCentre($user->getCentre());
+        $controle->setProprietaire($proprietaire);
+        $controle->setTelephone($contact_proprietaire);
+        $controle->setDateExpiration(new \DateTime($date_fin_recuperation));
+        $controle->setCreatedAt(new \DateTime());
+        $controle->setAjouteur($user);
+        $liste_anomalies = explode(',', $anomalies);
+        foreach($liste_anomalies as $num_anm){
+            $anm = $anomaliesRepository->findOneBy(["id" => $num_anm]);
+            $liste_photo .= ", Photo_".$anm->getCodeAnomalie();
+            $controle->addAnomaliesCollection($anm);
+        }
+        $liste_papiers = explode(',', $papiers);
+        foreach($liste_papiers as $num_pap){
+            $pap = $papiersRepository->findOneBy(["id" => $num_pap]);
+            $controle->addPapiersCollection($pap);
+        }
+        $controle->setMiseEnFourriere($mise_en_fourriere);
+        $controle->setDateDebut(new \DateTime($date_recuperation));
+        $controle->setNomChauffeur($nom_chauffeur);
+        $controle->setContactChauffeur($contact_chauffeur);
+        $controle->setFeuilleDeControle($feuille_de_controle);
+        $controle->setLieuDeControle($lieu_de_controle);
+
+        $controle->setPapiersRetirers($liste_papiers > 0 ? true : false);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($controle);
+        $entityManager->flush();
+
+        $controle_validated = [
+            "id_controle" => $controle->getId(),
+            "code" => 200,
+            "message" => "",
+            "nombre_photo" => count($liste_anomalies),
+            "liste_photo" => $liste_photo,
+        ];
+        $response = new JsonResponse($controle_validated);
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
 
