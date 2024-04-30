@@ -175,6 +175,11 @@ class Controles
      */
     private $verificateur_contre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="controle")
+     */
+    private $photos;
+
     public function __construct()
     {
         $this->anomalies_collections = new ArrayCollection();
@@ -182,6 +187,7 @@ class Controles
         $this->anom = new ArrayCollection();
         $this->pap = new ArrayCollection();
         $this->translations = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -619,6 +625,37 @@ class Controles
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setControle($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+            // set the owning side to null (unless already changed)
+            if ($photo->getControle() === $this) {
+                $photo->setControle(null);
+            }
+        }
 
         return $this;
     }
