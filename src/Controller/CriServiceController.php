@@ -152,7 +152,7 @@ class CriServiceController extends AbstractController
             "liste_photo" => "",
         ];
 
-        $liste_photo = "Photo_face";
+        $liste_photo = "face";
 
         $id_user = $request->query->get("user_id");
         $immatriculation = $request->query->get("immatriculation");
@@ -183,7 +183,7 @@ class CriServiceController extends AbstractController
         $liste_anomalies = explode(',', $anomalies);
         foreach($liste_anomalies as $num_anm){
             $anm = $anomaliesRepository->findOneBy(["id" => $num_anm]);
-            $liste_photo .= ",Photo_".$anm->getCodeAnomalie();
+            $liste_photo .= ",".$anm->getCodeAnomalie();
             $controle->addAnomaliesCollection($anm);
         }
         $liste_papiers = explode(',', $papiers);
@@ -233,21 +233,33 @@ class CriServiceController extends AbstractController
     /**
      * @Route("/upload_photo", name="upload_photo", methods={"GET","POST"})
      */
-    public function uploadPhoto(Request $request, ControlesRepository $controlesRepository): Response
+    public function uploadPhoto(Request $request, ControlesRepository $controlesRepository)//: Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $file = $request->files->get('photo');
-        $controle_id = $request->files->get('controle_id');
-        $photo_name = $request->files->get('photo_name');
+        /* $file = $request->query->get('photo');
+        $controle_id = $request->query->get('controle_id');
+        $photo_name = $request->query->get('photo_name'); */
+        //$file = $request->files->get('photo');
+        /* $file = $request->files->get('photo');
+        $controle_id = $request->request->get('controle_id');
+        $photo_name = $request->request->get('photo_name');
+        if($photo_name == null){
+            $file = $request->files->get('photo');
+            $controle_id = $request->query->get('controle_id');
+            $photo_name = $request->query->get('photo_name');
+            }
         $controle = $controlesRepository->findOneBy(["id" => $controle_id]);
-        //$fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-        /* if (!file_exists($this->getParameter('photo')) && !is_dir($this->getParameter('photo'))) {
+        $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+        if (!file_exists($this->getParameter('photo')) && !is_dir($this->getParameter('photo'))) {
             mkdir($this->getParameter('photo'), 0775, true);
-        } */
-        /* $file->move(
+        }
+        $file->move(
             $this->getParameter('photo'),
             $fileName
         ); */
+        $photo_name = "teste_app";
+        $fileName = "teste_app";
+        $controle = $controlesRepository->findOneBy(["id" => 1]);
         /* $daty   = new \DateTime(); //this returns the current date time
         $results = $daty->format('Y-m-d-H-i-s');
         $krr    = explode('-', $results);
@@ -257,10 +269,18 @@ class CriServiceController extends AbstractController
         //$photo->setNomPhoto($file->getClientOriginalName());
         //$photo->setFileName($fileName);
         $photo->setNomPhoto($photo_name);
-        $photo->setFileName($file);
+        $photo->setFileName($fileName);
         $photo->setControle($controle);
         $entityManager->persist($photo);
         $entityManager->flush();
-        return new JsonResponse(['code' => 200]);
+
+        $response = new JsonResponse(['code' => 200]);
+        $response->headers->set('Access-Control-Allow-Headers', '*');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+
+        return $response;
+        //return new JsonResponse(['code' => 200]);
     }
 }
