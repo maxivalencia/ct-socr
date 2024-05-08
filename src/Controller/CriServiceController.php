@@ -240,7 +240,7 @@ class CriServiceController extends AbstractController
         $controle_id = $request->query->get('controle_id');
         $photo_name = $request->query->get('photo_name'); */
         //$file = $request->files->get('photo');
-        /* $file = $request->files->get('photo');
+        $file = $request->files->get('file');
         $controle_id = $request->request->get('controle_id');
         $photo_name = $request->request->get('photo_name');
         if($photo_name == null){
@@ -256,10 +256,10 @@ class CriServiceController extends AbstractController
         $file->move(
             $this->getParameter('photo'),
             $fileName
-        ); */
-        $photo_name = "teste_app";
-        $fileName = "teste_app";
-        $controle = $controlesRepository->findOneBy(["id" => 1]);
+        );
+        //$photo_name = "teste_app";
+        //$fileName = "teste_app";
+        //$controle = $controlesRepository->findOneBy(["id" => 1]);
         /* $daty   = new \DateTime(); //this returns the current date time
         $results = $daty->format('Y-m-d-H-i-s');
         $krr    = explode('-', $results);

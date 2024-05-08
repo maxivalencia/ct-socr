@@ -22,7 +22,7 @@ class Photo
     private $nom_photo;
 
     /**
-     * @ORM\Column(type="blob", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $file_name;
 
