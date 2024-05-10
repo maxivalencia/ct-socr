@@ -43,7 +43,7 @@ class CriServiceController extends AbstractController
     }
 
     /**
-     * @Route("/anomalies", name="liste_anomalie", methods={"GET"})
+     * @Route("/anomalies", name="liste_anomalie", methods={"GET","POST"})
      */
     public function ListeAnomalies(AnomaliesRepository $anomaliesRepository)//: Response
     {
@@ -57,14 +57,16 @@ class CriServiceController extends AbstractController
             $liste_anomalies->add($anomalie);
         }
         $response = new JsonResponse($liste_anomalies->toArray());
+        $response->headers->set('Access-Control-Allow-Headers', '*');
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
 
         return $response;
     }
 
     /**
-     * @Route("/papiers", name="liste_papiers", methods={"GET"})
+     * @Route("/papiers", name="liste_papiers", methods={"GET","POST"})
      */
     public function ListePapiers(PapiersRepository $papiersRepository)//: Response
     {
@@ -78,8 +80,10 @@ class CriServiceController extends AbstractController
             $liste_papiers->add($papier);
         }
         $response = new JsonResponse($liste_papiers->toArray());
+        $response->headers->set('Access-Control-Allow-Headers', '*');
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
 
         return $response;
     }
@@ -183,13 +187,17 @@ class CriServiceController extends AbstractController
         $liste_anomalies = explode(',', $anomalies);
         foreach($liste_anomalies as $num_anm){
             $anm = $anomaliesRepository->findOneBy(["id" => $num_anm]);
-            $liste_photo .= ",".$anm->getCodeAnomalie();
-            $controle->addAnomaliesCollection($anm);
+            if($anm != null){
+                $liste_photo .= ",".$anm->getCodeAnomalie();
+                $controle->addAnomaliesCollection($anm);
+            }
         }
         $liste_papiers = explode(',', $papiers);
         foreach($liste_papiers as $num_pap){
             $pap = $papiersRepository->findOneBy(["id" => $num_pap]);
-            $controle->addPapiersCollection($pap);
+            if($pap != null){
+                $controle->addPapiersCollection($pap);
+            }
         }
         $controle->setMiseEnFourriere($mise_en_fourriere);
         $controle->setDateDebut(new \DateTime($date_recuperation));
@@ -282,5 +290,38 @@ class CriServiceController extends AbstractController
 
         return $response;
         //return new JsonResponse(['code' => 200]);
+    }
+
+    /**
+     * @Route("/recuperation_info", name="recuperation_info", methods={"GET","POST"})
+     */
+    public function RecuperationInfoCRI(Request $request, ControlesRepository $ControlesRepository)//: Response
+    {
+        $information_vehicule = [
+            "nom_chauffeur" => "",
+            "contact_chauffeur" => "",
+            "nom_proprietaire" => "",
+            "contact_proprietaire" => "",
+        ];
+        $immatriculation = $request->query->get('immatriculation');
+        $info = new Controles();
+        $liste_info = $ControlesRepository->findInfo($immatriculation);
+        if(count($liste_info) == 1){
+            foreach($liste_info as $lst_i){
+                $information_vehicule = [
+                    "nom_chauffeur" => $lst_i->getNomChauffeur(),
+                    "contact_chauffeur" => $lst_i->getContactChauffeur(),
+                    "nom_proprietaire" => $lst_i->getProprietaire(),
+                    "contact_proprietaire" => $lst_i->getTelephone(),
+                ];
+            }
+        }
+        $response = new JsonResponse($information_vehicule);
+        $response->headers->set('Access-Control-Allow-Headers', '*');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+
+        return $response;
     }
 }

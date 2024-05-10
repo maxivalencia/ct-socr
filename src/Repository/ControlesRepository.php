@@ -46,6 +46,22 @@ class ControlesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Controles[] Returns an array of Controles objects
+     */    
+    public function findInfo($value1)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.Immatriculation LIKE :val')
+            ->setParameter('val', $value1)
+            ->orderBy('c.id', 'ASC')
+            ->groupBy('c.Immatriculation')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     // /**
