@@ -18,6 +18,7 @@ use App\Entity\Photo;
 use App\Repository\ControlesRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+/* use Symfony\Contracts\HttpClient\HttpClientInterface; */
 
 /**
  * @Route("/cri")
@@ -295,7 +296,7 @@ class CriServiceController extends AbstractController
     /**
      * @Route("/recuperation_info", name="recuperation_info", methods={"GET","POST"})
      */
-    public function RecuperationInfoCRI(Request $request, ControlesRepository $ControlesRepository)//: Response
+    public function RecuperationInfoCRI(Request $request, ControlesRepository $ControlesRepository/* , HttpClientInterface $client */)//: Response
     {
         $information_vehicule = [
             "nom_chauffeur" => "",
@@ -315,6 +316,10 @@ class CriServiceController extends AbstractController
                     "contact_proprietaire" => $lst_i->getTelephone(),
                 ];
             }
+        }
+        else{
+            $information_vehicule = json_decode(file_get_contents('https://dgsrmada.com:2055/ct/service/mobile/recherche/proprietaire?immatriculation='.$immatriculation));
+            //return $response;
         }
         $response = new JsonResponse($information_vehicule);
         $response->headers->set('Access-Control-Allow-Headers', '*');
