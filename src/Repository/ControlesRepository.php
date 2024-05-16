@@ -56,7 +56,7 @@ class ControlesRepository extends ServiceEntityRepository
             ->andWhere('c.Immatriculation LIKE :val')
             ->setParameter('val', $value1)
             ->orderBy('c.id', 'DESC')
-            ->groupBy('c.Immatriculation')
+            //->groupBy('c.Immatriculation')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
