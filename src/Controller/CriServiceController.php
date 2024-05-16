@@ -304,7 +304,7 @@ class CriServiceController extends AbstractController
             "nom_proprietaire" => "",
             "contact_proprietaire" => "",
         ];
-        $immatriculation = $request->query->get('immatriculation');
+        $immatriculation = strtoupper($request->query->get('immatriculation'));
         $info = new Controles();
         $liste_info = $ControlesRepository->findInfo($immatriculation);
         if(count($liste_info) == 1){
