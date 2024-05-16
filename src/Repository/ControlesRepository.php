@@ -57,7 +57,7 @@ class ControlesRepository extends ServiceEntityRepository
             ->setParameter('val', $value1)
             ->orderBy('c.id', 'DESC')
             //->groupBy('c.Immatriculation')
-            ->setMaxResults(10)
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
