@@ -172,6 +172,10 @@ class CriServiceController extends AbstractController
         $date_recuperation = $request->query->get("date_recuperation");
         $date_fin_recuperation = $request->query->get("date_fin_recuperation");
         $mise_en_fourriere = $request->query->get("mise_en_fourriere");
+        $mef = true;
+        if($mise_en_fourriere == "1"){
+            $mef = true;
+        }
         
         $controle = new Controles();
 
@@ -201,7 +205,7 @@ class CriServiceController extends AbstractController
                 $controle->addPapiersCollection($pap);
             }
         }
-        $controle->setMiseEnFourriere($mise_en_fourriere);
+        $controle->setMiseEnFourriere($mef);
         $controle->setDateDebut(new \DateTime($date_recuperation));
         $controle->setNomChauffeur($nom_chauffeur);
         $controle->setContactChauffeur($contact_chauffeur);
