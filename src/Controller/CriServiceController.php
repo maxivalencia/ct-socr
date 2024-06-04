@@ -365,7 +365,7 @@ class CriServiceController extends AbstractController
                     if($photos_liste != ""){
                         $photos_liste += "-";
                     }
-                    $photos_liste += $photo->getFileName();
+                    $photos_liste .= $photo->getFileName();
                 }
                 $papiers = $lst_i->getPapiersCollection();
                 $papiers_liste = "";
@@ -373,13 +373,13 @@ class CriServiceController extends AbstractController
                     if($papiers_liste != ""){
                         $papiers_liste += "-";
                     }
-                    $papiers_liste += $papier->getPapier();
+                    $papiers_liste .= $papier->getPapier();
                 }
                 $anomalies = $lst_i->getAnomaliesCollections();
                 $anomalies_liste = "";
                 foreach($anomalies as $anomalie){
                     if($anomalies_liste != ""){
-                        $anomalies_liste += "-";
+                        $anomalies_liste .= "-";
                     }
                     $anomalies_liste += $anomalie->getCodeAnomalie();
                 }
