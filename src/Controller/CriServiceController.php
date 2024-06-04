@@ -360,7 +360,7 @@ class CriServiceController extends AbstractController
         if(count($liste_info) == 1){
             foreach($liste_info as $lst_i){
                 $photos = $photoRepository->findBy(["controle" => $lst_i]);
-                $photos_liste = "FACE";
+                $photos_liste = "";
                 foreach($photos as $photo){
                     if($photos_liste != ""){
                         $photos_liste .= "-";
