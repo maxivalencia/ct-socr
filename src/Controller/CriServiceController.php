@@ -184,6 +184,7 @@ class CriServiceController extends AbstractController
         $controle->setTelephone($contact_proprietaire);
         $controle->setDateExpiration(new \DateTime($date_fin_recuperation));
         $controle->setCreatedAt(new \DateTime());
+        $controle->setTimeCreatedAt(new \DateTime());
         $controle->setAjouteur($user);
         $liste_anomalies = explode(',', $anomalies);
         foreach($liste_anomalies as $num_anm){
@@ -256,7 +257,7 @@ class CriServiceController extends AbstractController
             $file = $request->files->get('photo');
             $controle_id = $request->query->get('controle_id');
             $photo_name = $request->query->get('photo_name');
-            }
+        }
         $controle = $controlesRepository->findOneBy(["id" => $controle_id]);
         $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
         if (!file_exists($this->getParameter('photo')) && !is_dir($this->getParameter('photo'))) {
@@ -294,7 +295,7 @@ class CriServiceController extends AbstractController
     }
 
     /**
-     * @Route("/recuperation_info", name="recuperation_info", methods={"GET","POST"})
+     * @Route("/recuperation/info", name="recuperation_info", methods={"GET","POST"})
      */
     public function RecuperationInfoCRI(Request $request, ControlesRepository $ControlesRepository/* , HttpClientInterface $client */)//: Response
     {
@@ -322,6 +323,127 @@ class CriServiceController extends AbstractController
             //return $response;
         }
         $response = new JsonResponse($information_vehicule);
+        $response->headers->set('Access-Control-Allow-Headers', '*');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/recuperation/Info/contre", name="recuperation_info_contre", methods={"GET", "POST"})
+     */
+    public function RecuperationInfoContre(Request $request, ControlesRepository $ControlesRepository, PhotoRepository $photoRepository/* , HttpClientInterface $client */)//: Response
+    {
+        $information_vehicule = [
+            "papier_retirer" => 0,
+            "nom_chauffeur" => "",
+            "contact_chauffeur" => "",
+            "nom_proprietaire" => "",
+            "contact_proprietaire" => "",
+            "lieu_controle" => "",
+            "numero_feuille" => "",
+            "anomalie_constater" => "",
+            "papier_retirer" => "",
+            "date_controle" => "",
+            "date_recuperation" => "",
+            "date_limite" => "",
+            "mise_en_fourriere" => "",
+            "photo" => "",
+            "verificateur" => "",
+            "centre" => "",
+        ];
+        $immatriculation = strtoupper($request->query->get('immatriculation'));
+        $info = new Controles();
+        $liste_info = $ControlesRepository->findInfo($immatriculation);
+        if(count($liste_info) == 1){
+            foreach($liste_info as $lst_i){
+                $photos = $photoRepository->findBy(["controle" => $lst_i]);
+                $photos_liste = "";
+                foreach($photos as $photo){
+                    if($photos_liste != ""){
+                        $photos_liste += "-";
+                    }
+                    $photos_liste += $photo->getFileName();
+                }
+                $papiers = $lst_i->getPapiersCollection();
+                $papiers_liste = "";
+                foreach($papiers as $papier){
+                    if($papiers_liste != ""){
+                        $papiers_liste += "-";
+                    }
+                    $papiers_liste += $papier->getPapier();
+                }
+                $anomalies = $lst_i->getAnomaliesCollections();
+                $anomalies_liste = "";
+                foreach($anomalies as $anomalie){
+                    if($anomalies_liste != ""){
+                        $anomalies_liste += "-";
+                    }
+                    $anomalies_liste += $anomalie->getCodeAnomalie();
+                }
+                $information_vehicule = [
+                    "papier_retirer" => $lst_i->getPapiersRetirers()?"Oui":"Non",
+                    "nom_chauffeur" => $lst_i->getNomChauffeur(),
+                    "contact_chauffeur" => $lst_i->getContactChauffeur(),
+                    "nom_proprietaire" => $lst_i->getProprietaire(),
+                    "contact_proprietaire" => $lst_i->getTelephone(),
+                    "lieu_controle" => $lst_i->getLieuDeControle(),
+                    "numero_feuille" => $lst_i->getFeuilleDeControle(),
+                    "anomalie_constater" => $anomalies_liste,
+                    "papier_retirer" => $papiers_liste,
+                    "date_controle" => $lst_i->getCreatedAt()->format("d/m/Y"),
+                    "date_recuperation" => $lst_i->getDateDebut()->format("d/m/Y"),
+                    "date_limite" => $lst_i->getDateExpiration()->format("d/m/Y"),
+                    "mise_en_fourriere" => $lst_i->getMiseEnFourriere()?"Oui":"Non",
+                    "photo" => $photos_liste,
+                    "verificateur" => $lst_i->getVerificateur(),
+                    "centre" => $lst_i->getCentre(),
+                ];
+            }
+        }
+        /* else{
+            $information_vehicule = json_decode(file_get_contents('https://dgsrmada.com:2055/ct/service/mobile/recherche/proprietaire?immatriculation='.$immatriculation));
+            //return $response;
+        } */
+        $response = new JsonResponse($information_vehicule);
+        $response->headers->set('Access-Control-Allow-Headers', '*');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+
+        return $response;
+    }
+    
+
+    /**
+     * @Route("/regulatisation/contre", name="regularisation_contre", methods={"GET","POST"})
+     */
+    public function RegularisationContre(Request $request, UserRepository $userRepository, ControlesRepository $ControlesRepository/* , HttpClientInterface $client */)//: Response
+    {
+        $id_user = $request->query->get("user_id");
+        $controle_id = $request->query->get("controle_id");
+        
+        $user = $userRepository->findOneBy(["id" => $id_user]);
+        $controle = $ControlesRepository->findOneBy(["id" => $controle_id]);
+
+        $controle->setVerificateurContre($user);
+        $controle->setRetireur($user);
+        $controle->setDateRetrait(new \DateTime());
+        $controle->getHeureRetrait(new \DateTime());
+        $controle->setPapiersRetirers(1);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($controle);
+        $entityManager->flush();
+
+        $controle_regularisation = [
+            "id_controle" => $controle_id,
+            "code" => 200,
+            "message" => "controle régulariser avec succès",
+        ];
+        $response = new JsonResponse($controle_regularisation);
         $response->headers->set('Access-Control-Allow-Headers', '*');
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
