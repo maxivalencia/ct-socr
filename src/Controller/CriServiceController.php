@@ -157,7 +157,7 @@ class CriServiceController extends AbstractController
             "liste_photo" => "",
         ];
 
-        $liste_photo = "face";
+        $liste_photo = "FACE";
 
         $id_user = $request->query->get("user_id");
         $immatriculation = $request->query->get("immatriculation");
@@ -360,7 +360,7 @@ class CriServiceController extends AbstractController
         if(count($liste_info) == 1){
             foreach($liste_info as $lst_i){
                 $photos = $photoRepository->findBy(["controle" => $lst_i]);
-                $photos_liste = "";
+                $photos_liste = "FACE";
                 foreach($photos as $photo){
                     if($photos_liste != ""){
                         $photos_liste .= "-";
