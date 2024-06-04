@@ -398,8 +398,8 @@ class CriServiceController extends AbstractController
                     "date_limite" => $lst_i->getDateExpiration()->format("d/m/Y"),
                     "mise_en_fourriere" => $lst_i->getMiseEnFourriere()?"Oui":"Non",
                     "photo" => $photos_liste,
-                    "verificateur" => $lst_i->getVerificateur(),
-                    "centre" => $lst_i->getCentre(),
+                    "verificateur" => $lst_i->getVerificateur()->getNom().' '.$lst_i->getVerificateur()->getPrenom(),
+                    "centre" => $lst_i->getCentre()->getCentre(),
                 ];
             }
         }
