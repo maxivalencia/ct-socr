@@ -387,7 +387,7 @@ class CriServiceController extends AbstractController
                 }
                 $information_vehicule = [
                     "id" => $lst_i->getId(),
-                    "papier_reguler" => $lst_i->getPapiersRetirers(),
+                    //"papier_reguler" => $lst_i->getPapiersRetirers(),
                     "nom_chauffeur" => $lst_i->getNomChauffeur(),
                     "contact_chauffeur" => $lst_i->getContactChauffeur(),
                     "nom_proprietaire" => $lst_i->getProprietaire(),
