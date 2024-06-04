@@ -390,7 +390,7 @@ class CriServiceController extends AbstractController
                     }
                     $anomalies_liste .= $anomalie->getCodeAnomalie();
                 }
-                if($lst_i->getDateRetrait() != null || $lst_i->getDateRetrait() != ''){
+                if($lst_i->getDateRetrait() != null){
                     $reguler = true;
                 }
                 $information_vehicule = [
