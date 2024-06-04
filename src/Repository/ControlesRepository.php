@@ -54,7 +54,7 @@ class ControlesRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.Immatriculation LIKE :val')
-            ->setParameter('val', '%'.$value1.'%')
+            ->setParameter('val', $value1)
             ->orderBy('c.id', 'DESC')
             //->groupBy('c.Immatriculation')
             ->setMaxResults(1)
