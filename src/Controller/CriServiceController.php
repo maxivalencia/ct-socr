@@ -357,10 +357,10 @@ class CriServiceController extends AbstractController
         ];
         $immatriculation = strtoupper($request->query->get('immatriculation'));
         $info = new Controles();
-        $liste_info = $ControlesRepository->findInfo($immatriculation);
-        //$liste_info = $ControlesRepository->findBy(["immatriculation" =>$immatriculation], ["id" => "DESC"]);
-        if(count($liste_info) == 1){
-            foreach($liste_info as $lst_i){
+        //$liste_info = $ControlesRepository->findInfo($immatriculation);
+        $lst_i = $ControlesRepository->findOneBy(["immatriculation" =>$immatriculation], ["id" => "DESC"]);
+        //if(count($liste_info) == 1){
+            //foreach($liste_info as $lst_i){
                 $photos = $photoRepository->findBy(["controle" => $lst_i]);
                 $photos_liste = "";
                 foreach($photos as $photo){
@@ -404,8 +404,8 @@ class CriServiceController extends AbstractController
                     "verificateur" => $lst_i->getVerificateur()->getNom().' '.$lst_i->getVerificateur()->getPrenom(),
                     "centre" => $lst_i->getCentre()->getCentre(),
                 ];
-            }
-        }
+            //}
+        //}
         /* else{
             $information_vehicule = json_decode(file_get_contents('https://dgsrmada.com:2055/ct/service/mobile/recherche/proprietaire?immatriculation='.$immatriculation));
             //return $response;
