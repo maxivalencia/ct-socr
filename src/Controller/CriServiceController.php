@@ -338,7 +338,7 @@ class CriServiceController extends AbstractController
     {
         $information_vehicule = [
             "id" => "",
-            "papier_reguler" => "Non",
+            "papier_reguler" => false,
             "nom_chauffeur" => "",
             "contact_chauffeur" => "",
             "nom_proprietaire" => "",
@@ -350,7 +350,7 @@ class CriServiceController extends AbstractController
             "date_controle" => "",
             "date_recuperation" => "",
             "date_limite" => "",
-            "mise_en_fourriere" => "",
+            "mise_en_fourriere" => false,
             "photo" => "",
             "verificateur" => "",
             "centre" => "",
