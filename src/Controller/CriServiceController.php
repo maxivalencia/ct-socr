@@ -358,7 +358,7 @@ class CriServiceController extends AbstractController
         $immatriculation = strtoupper($request->query->get('immatriculation'));
         $info = new Controles();
         //$liste_info = $ControlesRepository->findInfo($immatriculation);
-        $lst_i = $ControlesRepository->findOneBy(["immatriculation" =>$immatriculation], ["id" => "DESC"]);
+        $lst_i = $ControlesRepository->findOneBy(["Immatriculation" =>$immatriculation], ["id" => "DESC"]);
         //if(count($liste_info) == 1){
             //foreach($liste_info as $lst_i){
                 $photos = $photoRepository->findBy(["controle" => $lst_i]);
