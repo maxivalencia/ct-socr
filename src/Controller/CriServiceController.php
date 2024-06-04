@@ -337,7 +337,7 @@ class CriServiceController extends AbstractController
     public function RecuperationInfoContre(Request $request, ControlesRepository $ControlesRepository, PhotoRepository $photoRepository/* , HttpClientInterface $client */)//: Response
     {
         $information_vehicule = [
-            "papier_retirer" => 0,
+            "papier_reguler" => 0,
             "nom_chauffeur" => "",
             "contact_chauffeur" => "",
             "nom_proprietaire" => "",
@@ -384,7 +384,7 @@ class CriServiceController extends AbstractController
                     $anomalies_liste += $anomalie->getCodeAnomalie();
                 }
                 $information_vehicule = [
-                    "papier_retirer" => $lst_i->getPapiersRetirers()?"Oui":"Non",
+                    "papier_reguler" => $lst_i->getPapiersRetirers()?"Oui":"Non",
                     "nom_chauffeur" => $lst_i->getNomChauffeur(),
                     "contact_chauffeur" => $lst_i->getContactChauffeur(),
                     "nom_proprietaire" => $lst_i->getProprietaire(),
