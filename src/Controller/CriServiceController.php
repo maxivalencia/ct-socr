@@ -386,7 +386,7 @@ class CriServiceController extends AbstractController
                 }
                 $information_vehicule = [
                     "id" => $lst_i->getId(),
-                    "papier_reguler" => $lst_i->getPapiersRetirers()?"Oui":"Non",
+                    "papier_reguler" => $lst_i->getPapiersRetirers(),
                     "nom_chauffeur" => $lst_i->getNomChauffeur(),
                     "contact_chauffeur" => $lst_i->getContactChauffeur(),
                     "nom_proprietaire" => $lst_i->getProprietaire(),
@@ -398,7 +398,7 @@ class CriServiceController extends AbstractController
                     "date_controle" => $lst_i->getCreatedAt()->format("d/m/Y"),
                     "date_recuperation" => $lst_i->getDateDebut()->format("d/m/Y"),
                     "date_limite" => $lst_i->getDateExpiration()->format("d/m/Y"),
-                    "mise_en_fourriere" => $lst_i->getMiseEnFourriere()?"Oui":"Non",
+                    "mise_en_fourriere" => $lst_i->getMiseEnFourriere(),
                     "photo" => $photos_liste,
                     "verificateur" => $lst_i->getVerificateur()->getNom().' '.$lst_i->getVerificateur()->getPrenom(),
                     "centre" => $lst_i->getCentre()->getCentre(),
