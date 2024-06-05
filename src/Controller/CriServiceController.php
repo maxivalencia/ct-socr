@@ -98,6 +98,7 @@ class CriServiceController extends AbstractController
         $id_user = 0;
         $code = 0;
         $message = "";
+        $user_access_level = 10;
         if($request->query->get("username") && $request->query->get("password")){
             $username = $request->query->get("username");
             $password = $request->query->get("password");
@@ -108,6 +109,7 @@ class CriServiceController extends AbstractController
                     $password_hashed = $this->passwordEncoder->encodePassword($user, $password);
                     if($this->passwordEncoder->isPasswordValid($user, $password)){
                         $id_user = $user->getId();
+                        $user_access_level = $user->getRole()->getId();
                         $code = 200;
                         $message = "Utilisateur connecté";
                     } else{
@@ -134,6 +136,7 @@ class CriServiceController extends AbstractController
             "id_user" => $id_user,
             "code" => $code,
             "message" => $message,
+            "access_level" => $user_access_level
         ];
         $response = new JsonResponse($user_connected);
         $response->headers->set('Access-Control-Allow-Headers', '*');
