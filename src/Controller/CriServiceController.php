@@ -426,7 +426,6 @@ class CriServiceController extends AbstractController
 
         return $response;
     }
-    
 
     /**
      * @Route("/regulatisation/contre", name="regularisation_contre", methods={"GET","POST"})
@@ -455,6 +454,100 @@ class CriServiceController extends AbstractController
             "message" => "controle régulariser avec succès",
         ];
         $response = new JsonResponse($controle_regularisation);
+        $response->headers->set('Access-Control-Allow-Headers', '*');
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/recuperation/recapitulation", name="recuperation_recapitulation", methods={"GET", "POST"})
+     */
+    public function RecuperationRecapitulation(Request $request, ControlesRepository $ControlesRepository, PhotoRepository $photoRepository/* , HttpClientInterface $client */)//: Response
+    {
+        $reguler = false;
+        $information_vehicule = [
+            "id" => "",
+            "immatriculation" => "",
+            "papier_reguler" => false,
+            "nom_chauffeur" => "",
+            "contact_chauffeur" => "",
+            "nom_proprietaire" => "",
+            "contact_proprietaire" => "",
+            "lieu_controle" => "",
+            "numero_feuille" => "",
+            "anomalie_constater" => "",
+            "papier_retirer" => "",
+            "date_controle" => "",
+            "date_recuperation" => "",
+            "date_limite" => "",
+            "mise_en_fourriere" => false,
+            "photo" => "",
+            "verificateur" => "",
+            "centre" => "",
+        ];
+        $identification = strtoupper($request->query->get('id'));
+        $info = new Controles();
+        //$liste_info = $ControlesRepository->findInfo($immatriculation);
+        $lst_i = $ControlesRepository->findOneBy(["id" =>$identification], ["id" => "DESC"]);
+        //if(count($liste_info) == 1){
+            //foreach($liste_info as $lst_i){
+                $photos = $photoRepository->findBy(["controle" => $lst_i]);
+                $photos_liste = "";
+                foreach($photos as $photo){
+                    if($photos_liste != ""){
+                        $photos_liste .= "-";
+                    }
+                    $photos_liste .= $photo->getFileName();
+                }
+                $papiers = $lst_i->getPapiersCollection();
+                $papiers_liste = "";
+                foreach($papiers as $papier){
+                    if($papiers_liste != ""){
+                        $papiers_liste .= "-";
+                    }
+                    $papiers_liste .= $papier->getPapier();
+                }
+                $anomalies = $lst_i->getAnomaliesCollections();
+                $anomalies_liste = "";
+                foreach($anomalies as $anomalie){
+                    if($anomalies_liste != ""){
+                        $anomalies_liste .= "-";
+                    }
+                    $anomalies_liste .= $anomalie->getCodeAnomalie();
+                }
+                if($lst_i->getDateRetrait() != null){
+                    $reguler = true;
+                }
+                $information_vehicule = [
+                    "id" => $lst_i->getId(),
+                    "immatriculation" => $lst_i->getImmatriculation(),
+                    "papier_reguler" => $reguler,
+                    "nom_chauffeur" => $lst_i->getNomChauffeur(),
+                    "contact_chauffeur" => $lst_i->getContactChauffeur(),
+                    "nom_proprietaire" => $lst_i->getProprietaire(),
+                    "contact_proprietaire" => $lst_i->getTelephone(),
+                    "lieu_controle" => $lst_i->getLieuDeControle(),
+                    "numero_feuille" => $lst_i->getFeuilleDeControle(),
+                    "anomalie_constater" => $anomalies_liste,
+                    "papier_retirer" => $papiers_liste,
+                    "date_controle" => $lst_i->getCreatedAt()->format("d/m/Y"),
+                    "date_recuperation" => $lst_i->getDateDebut()->format("d/m/Y"),
+                    "date_limite" => $lst_i->getDateExpiration()->format("d/m/Y"),
+                    "mise_en_fourriere" => $lst_i->getMiseEnFourriere(),
+                    "photo" => $photos_liste,
+                    "verificateur" => $lst_i->getVerificateur()->getNom().' '.$lst_i->getVerificateur()->getPrenom(),
+                    "centre" => $lst_i->getCentre()->getCentre(),
+                ];
+            //}
+        //}
+        /* else{
+            $information_vehicule = json_decode(file_get_contents('https://dgsrmada.com:2055/ct/service/mobile/recherche/proprietaire?immatriculation='.$immatriculation));
+            //return $response;
+        } */
+        $response = new JsonResponse($information_vehicule);
         $response->headers->set('Access-Control-Allow-Headers', '*');
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
