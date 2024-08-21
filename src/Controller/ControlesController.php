@@ -36,7 +36,7 @@ class ControlesController extends AbstractController
             $nombre_page = (int)(ceil($papierrestant / $nb_ligne_page));
             $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
             return $this->render('controles/index.html.twig', [
-                'controles' => $controlesRepository->findBy(['Immatriculation' => strtoupper($recherche), 'retireur' => null], ['id' => 'DESC'], $nb_ligne_page*$numero_page, $numero_page-1),
+                'controles' => $controlesRepository->findBy(['Immatriculation' => strtoupper($recherche), 'retireur' => null], ['id' => 'DESC']),
                 'nombre_page' => $nombre_page,
                 'premiere_page' => 1,
                 'derniere_page' => $nombre_page,
@@ -53,7 +53,7 @@ class ControlesController extends AbstractController
             $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
             
             return $this->render('controles/index.html.twig', [
-                'controles' => $controlesRepository->findBy(['retireur' => null], ['id' => 'DESC'], $nb_ligne_page*$numero_page, $numero_page-1),
+                'controles' => $controlesRepository->findBy(['retireur' => null], ['id' => 'DESC']),
                 'nombre_page' => $nombre_page,
                 'premiere_page' => 1,
                 'derniere_page' => $nombre_page,

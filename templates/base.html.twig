@@ -23,6 +23,7 @@
             <link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css" type="text/css" />
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
             
         {% endblock %}
     </head>
@@ -34,6 +35,12 @@
                 </div>
             </div>
         </div>
+
+        <footer>
+            <!-- Contenu de votre footer -->
+            <p>© 2024 ANDRIANTSOA Husayn mozart.<br>Direction Générale de la Sécurité Routière(DGSR). Tous droits réservés.</p>
+        </footer>
+
         {% block javascripts %}
             <!--script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script-->
             <script src="/dist/js/jquery-1.12.4.min.js" type="text/javascript"></script>
@@ -58,6 +65,26 @@
                     //$(".multi").select2();
                     $("select").select2();
                 });
+            </script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+            <script>
+                $(document).ready( function () {
+                    $('#table_liste').DataTable({
+                        language: {
+                            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/fr-FR.json',
+                        },
+                    });
+                } );
+            </script>
+
+            <script>
+                $(document).ready( function () {
+                    $('.liste').DataTable({
+                        language: {
+                            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/fr-FR.json',
+                        },
+                    });
+                } );
             </script>
         {% endblock %}
     </body>

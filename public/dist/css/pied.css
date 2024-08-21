@@ -4,3 +4,31 @@
     margin: auto;
     padding: auto;
 }
+
+/* Assurez-vous que l'html et le body prennent toute la hauteur */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Le contenu principal prendra tout l'espace sauf celui nécessaire pour le footer */
+#content {
+    flex: 1;
+}
+
+/* Footer fixé en bas */
+footer {
+    position: sticky;
+    bottom: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

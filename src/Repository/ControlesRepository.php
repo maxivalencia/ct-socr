@@ -19,12 +19,41 @@ class ControlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Controles::class);
     }
 
+    public function getToday()
+    {
+        $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder("c")
+            ->where('c.CreatedAt LIKE :daty')
+            ->setParameter('daty', $today)
+            ->orderBy('c.id', 'ASC')
+        ;
+
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    public function getAnotherDay(\DateTime $firstDateTime)
+    {
+        $today = $firstDateTime->format('Y-m-d');
+        $qb = $this->createQueryBuilder("c")
+            ->where('c.CreatedAt LIKE :daty')
+            ->setParameter('daty', $today)
+            ->orderBy('c.id', 'ASC')
+        ;
+
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
     public function getDays(\DateTime $firstDateTime, \DateTime $lastDateTime)
     {
         $qb = $this->createQueryBuilder("c")
             ->where('c.CreatedAt BETWEEN :firstDate AND :lastDate')
             ->setParameter('firstDate', $firstDateTime)
             ->setParameter('lastDate', $lastDateTime)
+            ->orderBy('c.id', 'ASC')
         ;
 
         $result = $qb->getQuery()->getResult();
@@ -41,7 +70,7 @@ class ControlesRepository extends ServiceEntityRepository
             ->andWhere('c.CreatedAt = :val')
             ->setParameter('val', $value1)
             ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
