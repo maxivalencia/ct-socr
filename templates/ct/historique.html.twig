@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <table class="table">
+        <table id="table_liste" class="table">
             <thead>
                 <tr>
                     <!--<th>Id</th>-->
@@ -62,9 +62,9 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="row center text-center text-justify">
+        <!-- <div class="row center text-center text-justify">
             {% include "ct/page.html.twig" %}
-        </div>
+        </div> -->
 
         
         <a href="{{ path('pdfhistorique') }}" class="btn btn-primary kl-bouton"><i class="fas fa-print" aria-hidden="true"></i> Impr Journalière</a>

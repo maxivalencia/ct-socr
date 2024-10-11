@@ -293,8 +293,9 @@ class CtController extends AbstractController
             $nb_ligne_page = 20;
             $nombre_page = (int)(ceil($papierrestant / $nb_ligne_page));
             $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
+            $date = \DateTime::createFromFormat('Y-m-d', $recherche);
             return $this->render('ct/historique.html.twig', [
-                'controles' => $controlesRepository->findBy(['Immatriculation' => strtoupper($recherche)], ['id' => 'DESC'], $nb_ligne_page*$numero_page, $numero_page-1),
+                'controles' => $controlesRepository->getAnotherDay($date),
                 'nombre_page' => $nombre_page,
                 'premiere_page' => 1,
                 'derniere_page' => $nombre_page,
@@ -311,7 +312,7 @@ class CtController extends AbstractController
             $numero_page = $request->query->get('page')?(int)$request->query->get('page'):1;
             
             return $this->render('ct/historique.html.twig', [
-                'controles' => $controlesRepository->findAll(['id' => 'DESC'], $nb_ligne_page*$numero_page, $numero_page-1),
+                'controles' => $controlesRepository->getToday(['id' => 'DESC']),
                 'nombre_page' => $nombre_page,
                 'premiere_page' => 1,
                 'derniere_page' => $nombre_page,
