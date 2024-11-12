@@ -28,7 +28,7 @@
         {% endblock %}
     </head>
     <body class="kl-largeur-ecran">
-        <div class="container kl-ajustement kl-largeur-ecran mw-100 p-3">
+        <div class="container kl-bottom-space kl-ajustement kl-largeur-ecran mw-100 p-3">
             <div class="col-sm col-md col-xl">
                 <div class="row">
                     {% block body %}{% endblock %}
@@ -36,9 +36,9 @@
             </div>
         </div>
 
-        <footer>
+        <footer class="kl-footer">
             <!-- Contenu de votre footer -->
-            <p>© 2024 ANDRIANTSOA Husayn mozart.<br>Direction Générale de la Sécurité Routière(DGSR). Tous droits réservés.</p>
+            <p>© 2024 ANDRIANTSOA Husayn mozart. Direction Générale de la Sécurité Routière(DGSR). Tous droits réservés.</p>
         </footer>
 
         {% block javascripts %}
