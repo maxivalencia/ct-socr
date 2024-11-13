@@ -19,6 +19,20 @@ class AnomaliesRepository extends ServiceEntityRepository
         parent::__construct($registry, Anomalies::class);
     }
 
+    /* public function countAnomalieRepetition($value):array
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.id, a.code_anomalie, count(c.id)')
+            ->andWhere('a.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    } */
+   
+
     // /**
     //  * @return Anomalies[] Returns an array of Anomalies objects
     //  */

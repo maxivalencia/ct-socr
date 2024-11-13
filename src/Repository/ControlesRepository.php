@@ -19,10 +19,7 @@ class ControlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Controles::class);
     }
 
-    /**
-     * @return Controles[] Returns an array of Controles objects
-     */
-    public function countByDayLast30Days()
+    public function countByDayLast30Days() : array
     {
         /* $today = date("Y-m-d");
         $qb = $this->createQueryBuilder("c")
@@ -35,9 +32,9 @@ class ControlesRepository extends ServiceEntityRepository
         $today = $today->format("Y-m-d");
         $qb = $this->createQueryBuilder('e')
             ->select("DATE(e.createdAt) as date, COUNT(e.id) as total")
-            ->where("e.createdAt >= :date")
-            //->setParameter('date', new \DateTime('-30 days'))
-            ->setParameter('date', $today)
+            ->where("e.createdAt >= :daty")
+            //->setParameter('daty', new \DateTime('-30 days'))
+            ->setParameter('daty', $today)
             ->groupBy("date")
             ->orderBy("date", "ASC");
 
@@ -104,6 +101,19 @@ class ControlesRepository extends ServiceEntityRepository
             ->setParameter('fourriere', 1);
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countAnomalieRepetition($value):array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('a.code_anomalie, count(a.id) as total')
+            ->join('c.anomalies_collections', 'a')
+            ->groupBy('a.id')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
