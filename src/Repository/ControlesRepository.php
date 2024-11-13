@@ -19,6 +19,96 @@ class ControlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Controles::class);
     }
 
+    /**
+     * @return Controles[] Returns an array of Controles objects
+     */
+    public function countByDayLast30Days()
+    {
+        /* $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder("c")
+            ->where('c.CreatedAt LIKE :daty')
+            ->setParameter('daty', $today)
+            ->orderBy('c.id', 'ASC')
+        ; */
+        //$today = date("Y-m-d");
+        $today = new \DateTime('-30 days');
+        $today = $today->format("Y-m-d");
+        $qb = $this->createQueryBuilder('e')
+            ->select("DATE(e.createdAt) as date, COUNT(e.id) as total")
+            ->where("e.createdAt >= :date")
+            //->setParameter('date', new \DateTime('-30 days'))
+            ->setParameter('date', $today)
+            ->groupBy("date")
+            ->orderBy("date", "ASC");
+
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    public function countForToday(): int
+    {
+        $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder('e')
+            ->select("COUNT(e.id) as total")
+            ->where("DATE(e.createdAt) = :today")
+            //->setParameter('today', new \DateTime());
+            ->setParameter('today', $today);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countPapierRecupererForToday(): int
+    {
+        $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder('e')
+            ->select("COUNT(e.id) as total")
+            ->where("DATE(e.createdAt) = :today AND e.papiers_retirers = :papier")
+            //->setParameter('today', new \DateTime());
+            ->setParameter('today', $today)
+            ->setParameter('papier', 1);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countPapierRecuperer(): int
+    {
+        $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder('e')
+            ->select("COUNT(e.id) as total")
+            ->where("e.papiers_retirers = :papier")
+            ->setParameter('papier', 1);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countMiseEnFourierreForToday(): int
+    {
+        $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder('e')
+            ->select("COUNT(e.id) as total")
+            ->where("DATE(e.createdAt) = :today AND e.mise_en_fourriere = :fourriere")
+            //->setParameter('today', new \DateTime());
+            ->setParameter('today', $today)
+            ->setParameter('fourriere', 1);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countMiseEnFourierre(): int
+    {
+        $today = date("Y-m-d");
+        $qb = $this->createQueryBuilder('e')
+            ->select("COUNT(e.id) as total")
+            ->where("e.mise_en_fourriere = :fourriere")
+            ->setParameter('fourriere', 1);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return Controles[] Returns an array of Controles objects
+     */
     public function getToday()
     {
         $today = date("Y-m-d");
@@ -33,6 +123,9 @@ class ControlesRepository extends ServiceEntityRepository
         return $result;
     }
 
+    /**
+     * @return Controles[] Returns an array of Controles objects
+     */
     public function getAnotherDay(\DateTime $firstDateTime)
     {
         $today = $firstDateTime->format('Y-m-d');
@@ -47,6 +140,9 @@ class ControlesRepository extends ServiceEntityRepository
         return $result;
     }
 
+    /**
+     * @return Controles[] Returns an array of Controles objects
+     */
     public function getDays(\DateTime $firstDateTime, \DateTime $lastDateTime)
     {
         $qb = $this->createQueryBuilder("c")
